@@ -10,7 +10,7 @@ If you want to run these examples locally, all of the files mentioned are availa
 
 - Kubernetes 1.6+
 - `kubectl` configured
-  - If you need to configure `kubectl`, follow the instructions on [configuring credentials][configuring-credentials].
+  - If you need to configure `kubectl`, follow the instructions in [configuring `kubectl`][configuring-credentials].
 - An Elasticsearch cluster, or other log storage destination
   - See [customizing log destination][customizing-log-destination] for a list of available log destinations with pre-built images available.
 
@@ -87,7 +87,7 @@ If you would like to make customizations to your logging setup, view our doc on 
 
 [fluentd-config]: ../files/logging/fluentd-configmap.yaml
 [fluentd-ds]: ../files/logging/fluentd-ds.yaml
-[configuring-credentials]: ../tutorials/first-app.md#configuring-credentials
+[configuring-credentials]: ../tutorials/azure/first-app.md#configuring-kubectl
 [logging-config-files]: https://github.com/coreos/tectonic-docs/tree/master/Documentation/files/logging
 [prometheus-operator]: https://github.com/coreos/prometheus-operator
 [customizing-fluentd]: logging-customization.md

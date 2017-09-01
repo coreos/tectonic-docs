@@ -84,4 +84,4 @@ $ TERRAFORM_CONFIG=$(pwd)/.terraformrc terraform destroy --force
 [aws-install]: aws/index.md#step-2-install
 [bm-install]: bare-metal/index.md
 [dce-win]: https://store.docker.com/editions/community/docker-ce-desktop-windows
-[tut-firstapp]: ../tutorials/first-app.md
+[tut-firstapp]: ../tutorials/azure/first-app.md
