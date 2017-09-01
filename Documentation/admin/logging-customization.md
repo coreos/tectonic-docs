@@ -10,7 +10,7 @@ The [customizing log destination][customizing-log-destination] document explains
 
 To add additional filters or parsers, add them to the `extra.conf` section in the [fluentd-configmap.yaml][fluentd-config]. The `extra.conf` already has a very brief example of how to add an extra field to log entries, and a more detailed example is shown below.
 
-For details on Fluentd post-processing, check out the Fluentd [fliters][fluentd-docs-filter] and [parsers][fluentd-docs-parser] documents.
+For details on Fluentd post-processing, check out the Fluentd [filters][fluentd-docs-filter] and [parsers][fluentd-docs-parser] documents.
 
 ### Targeting a specific application's logs
 
@@ -69,5 +69,5 @@ Once your pods have restarted, any new logs being parsed should be using the new
 [fluentd-match]: http://docs.fluentd.org/v0.12/articles/config-file#2-ldquomatchrdquo-tell-fluentd-what-to-do
 [fluentd-docs-filter]: http://docs.fluentd.org/v0.12/articles/filter-plugin-overview
 [fluentd-docs-parser]: http://docs.fluentd.org/v0.12/articles/parser-plugin-overview
-[second-app]: ../tutorials/second-app.md
+[second-app]: ../tutorials/aws/second-app.md
 [customizing-log-destination]: logging-destination.md
