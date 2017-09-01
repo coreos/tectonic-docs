@@ -18,5 +18,5 @@ To learn more about how this process is executed, read about [Operators][operato
 If you'd like to preserve and restore etcd data to the new cluster, see the etcd [disaster recovery][etcd-disaster-recovery] guide.
 
 
-[operators]: ../tutorials/operators.md
+[operators]: https://coreos.com/operators/
 [etcd-disaster-recovery]: https://coreos.com/etcd/docs/latest/admin_guide.html#disaster-recovery
