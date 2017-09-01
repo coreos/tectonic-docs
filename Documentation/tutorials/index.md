@@ -25,8 +25,8 @@ Let's get started. Choose a provider from the list below:
 * [Azure][azure-tutorials]
 * [Sandbox][sandbox-tutorials]
 
-[create-acct]: https://account.coreos.com/signup/summary/tectonic-2016-12
 
-[aws-tutorials]: aws/index.md 
-[azure-tutorials]: azure/index.md 
-[sandbox-tutorials]: sandbox/index.md 
+[create-acct]: https://account.coreos.com/signup/summary/tectonic-2016-12
+[aws-tutorials]: aws/
+[azure-tutorials]: azure/
+[sandbox-tutorials]: sandbox/
