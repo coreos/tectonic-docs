@@ -6,7 +6,7 @@ This document describes how to troubleshoot issues encountered when upgrading to
 
 StatefulSet rolling updates may result in the following errors after upgrading to Kubernetes v1.7.x:
 
-* StatefulSet emits errors (seen in `kubectl describe`) containing "Forbidden: pod updates may not change fields other than...".
+* Calling `kubectl describe` on StatefulSets returns errors containing "Forbidden: pod updates may not change fields other than...".
 * StatefulSet Pod DNS entries stop resolving.
 
 To resolve these issues, delete each affected Pod and allow the StatefulSet to recreate it.
