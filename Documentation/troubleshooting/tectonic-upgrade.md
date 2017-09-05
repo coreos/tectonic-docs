@@ -1,6 +1,15 @@
 # Troubleshooting Tectonic upgrades
 
-This document describes how to troubleshoot issues encountered when upgrading to 1.7.1-tectonic.1.
+This document describes how to troubleshoot issues encountered when upgrading to Tectonic versions 1.7.1-tectonic.1 or greater.
+
+## Upgrading StatefulSets
+
+StatefulSet rolling updates may result in the following errors after upgrading to Kubernetes v1.7.x:
+
+* StatefulSet emits errors (seen in `kubectl describe`) containing "Forbidden: pod updates may not change fields other than...".
+* StatefulSet Pod DNS entries stop resolving.
+
+To resolve these issues, delete each affected Pod and allow the StatefulSet to recreate it.
 
 ## Upgrading to 1.7.1-tectonic.1
 
