@@ -73,9 +73,7 @@ There are several different Ingress Controllers available. [Nginx and haproxy][c
 When selecting Ingress Controller options, be certain to consider the following flags:
 
 * **Class** - The flag `--ingress-class=my-custom-ingress` allows for rules to target this ingress controller.
-
 * **Namespace** - The flag `--watch-namespace=example` will ensure that only a specific namespace is watched for ingress rules. This can prevent others from using your Ingress Controller.
-
 * **Service Account** - In your Ingress Controller definition, set the `serviceAccountName` parameter equal to a Service Account with the correct RBAC policy. Tectonic provides a role `ingress-controller` for this purpose. [Read more about service accounts][service-accounts].
 
 Here is a full example:
