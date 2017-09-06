@@ -121,10 +121,23 @@ Register for a [Tectonic Account][register], free for up to 10 nodes. The Tecton
 
 ### Download and extract Tectonic Installer
 
-Open a new terminal and run the following commands to download and extract Tectonic Installer:
+Open a new terminal and run the following command to download Tectonic Installer.
 
 ```bash
-$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.1.tar.gz
+$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.1.tar.gz # download
+```
+
+Verify the release has been signed by the [CoreOS App Signing Key][verification-key].
+
+```bash
+$ gpg2 --keyserver pgp.mit.edu --recv-key 18AD5014C99EF7E3BA5F6CE950BDD3E0FC8A365E
+$ gpg2 --verify tectonic-1.7.3-tectonic.1-tar-gz.asc tectonic-1.7.3-tectonic.1-tar.gz
+# gpg2: Good signature from "CoreOS Application Signing Key <security@coreos.com>"
+```
+
+Extract the tarball and navigate to the `tectonic` directory.
+
+```bash
 $ tar xzvf tectonic-1.7.3-tectonic.1.tar.gz
 $ cd tectonic
 ```
@@ -224,3 +237,4 @@ When `terraform apply` is complete, the Tectonic console will be available at `h
 [first-app]: first-app.md
 [register]: https://account.coreos.com/signup/summary/tectonic-2016-12
 [vars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/config.md
+[verification-key]: https://coreos.com/security/app-signing-key/
