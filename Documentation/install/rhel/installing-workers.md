@@ -127,11 +127,13 @@ Note: These settings may not be all inclusive and will not represent relative no
 
 ### Set SELinux to Permissive mode
 
-It is required to run SELinux in Permissive mode. Running in Enforcing mode will block permissions for worker nodes.
+It is required to run SELinux in Permissive mode. Running in Enforcing mode will block permissions for worker nodes. The following command will switch to Permissive mode until reboot.
 
 ```
-setenforce 0
+$ setenforce 0
 ```
+
+To boot into Permissive mode or with SELinux disabled completely, set `SELINUX=permissive` or `SELINUX=disabled` in `/etc/selinux/config`.
 
 ### Enable and start the service
 
