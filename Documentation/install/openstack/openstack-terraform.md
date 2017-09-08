@@ -21,11 +21,24 @@ Replace `<flavor>` with either option in the following commands. Now we're ready
 
 ### Download and extract Tectonic Installer
 
-Open a new terminal, and run the following commands to download and extract Tectonic Installer.
+Open a new terminal and run the following command to download Tectonic Installer.
 
 ```bash
 $ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.1.tar.gz # download
-$ tar xzvf tectonic-1.7.3-tectonic.1.tar.gz # extract the tarball
+```
+
+Verify the release has been signed by the [CoreOS App Signing Key][verification-key].
+
+```bash
+$ gpg2 --keyserver pgp.mit.edu --recv-key 18AD5014C99EF7E3BA5F6CE950BDD3E0FC8A365E
+$ gpg2 --verify tectonic-1.7.3-tectonic.1-tar-gz.asc tectonic-1.7.3-tectonic.1-tar.gz
+# gpg2: Good signature from "CoreOS Application Signing Key <security@coreos.com>"
+```
+
+Extract the tarball and navigate to the `tectonic` directory.
+
+```bash
+$ tar xzvf tectonic-1.7.3-tectonic.1.tar.gz
 $ cd tectonic
 ```
 
@@ -199,3 +212,4 @@ See the [troubleshooting][troubleshooting] document for workarounds for bugs tha
 [troubleshooting]: ../../troubleshooting/faq.md
 [openstack-neutron-vars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/openstack-neutron.md
 [release-notes]: https://coreos.com/tectonic/releases/
+[verification-key]: https://coreos.com/security/app-signing-key/
