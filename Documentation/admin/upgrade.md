@@ -11,6 +11,8 @@ Tectonic and Kubernetes can be automatically updated with controls in the Tecton
 
 During an update, the latest versions of the Tectonic and Kubernetes components are downloaded. A seamless rolling update will occur to install the latest versions. A cluster admin can pause the update at any time.
 
+Please note that the update payload process may affect any or all components in the tectonic- and kube- systems.
+
 To learn more about how this process is executed, read about [Operators][operators].
 
 ## Preserve &amp; Restore etcd
