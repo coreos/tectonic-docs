@@ -94,7 +94,7 @@ In this example, a Cluster Role Binding, `etcd-rolebinding` is created for the `
     - apiGroups:
       - etcd.coreos.com
       resources:
-      - clusters
+      - etcdClusters
       verbs:
       - "*"
     - apiGroups:
