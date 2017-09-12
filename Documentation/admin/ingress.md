@@ -150,8 +150,16 @@ metadata:
 
 When rules are defined and the Ingress Controller is running, traffic to your Service will be routed appropriately.
 
+### HTTP header limitations
+
+Using reverse proxies that limit HTTP headers to 4K may result in errors for large group counts. If using HTTP headers for large cookie replacement, set the 
+`large-client-header-buffers` flag to `4 64k` on the Ingress Configmap `tectonic-custom-error` to increase the limit in Ingress to EG 64k.
+
+For more information, see the nginx documentation on the [large-client-header-buffers flag][large-flag].
+
 
 [ingress-userguide]: https://kubernetes.io/docs/user-guide/ingress/
 [service-accounts]: onboard-service-account.md
 [controller-deployments]: https://github.com/kubernetes/ingress/tree/master/examples/deployment
 [nginx-ingress]: https://github.com/kubernetes/ingress/tree/master/controllers/nginx
+[large-flag]: http://nginx.org/en/docs/http/ngx_http_core_module.html#large_client_header_buffers.
