@@ -56,7 +56,7 @@ Before recovering a cluster, remove the docker state, etcd state, and active man
 
     1. Back up the associated data.
 
-       `$ sudo cp $(sudo find /var/etcd/ -iname db) /root/backup.db`
+       `$ sudo cp $(sudo find /var/etcd/ -iname db -exec ls -1t {} + | head -n1) /root/backup.db`
 
     2. Remove the data from the etcd directory:
 
