@@ -52,9 +52,9 @@ Static users are those defined directly in the Identity `ConfigMap`. Static user
       userID: "1d55c7c4-a76d-4d74-a257-31170f2c4845"
 ```
 
-A bcrypt encoded hash of the user's password can be generated using the using the [coreos/bcrypt-tool](https://github.com/coreos/bcrypt-tool/releases/tag/v1.0.0).
+A bcrypt encoded hash of the user's password can be generated using the [coreos/bcrypt-tool](https://github.com/coreos/bcrypt-tool/releases/tag/v1.0.0).
 
-When generating Tectonic Console passwords with `bcrypt-tool`, using values higher than the default of `-cost=10` may result in timeouts.
+When generating Tectonic Console passwords with `bcrypt-tool`, using values higher than the default of `-cost=10` may result in timeouts. bcrypt also imposes a maximum password length of 56 bytes.
 
 To ensure the static user has been added successfully try and log in with the new user from the Tectonic console.
 
