@@ -48,7 +48,7 @@ The `tectonic-release` RPM includes the repo definition for the Tectonic softwar
 Download the RPM from the CoreOS `yum` repository:
 
 ```
-$ curl -LJO http://yum.prod.coreos.systems/repo/tectonic-rhel/el7/x86_64/Packages/tectonic-release-7-2.el7.noarch.rpm
+$ curl -LJO https://yum.prod.coreos.systems/repo/tectonic-rhel/7Server/x86_64/Packages/tectonic-release-7-2.el7.noarch.rpm
 ```
 
 Verify the signature:
@@ -127,11 +127,13 @@ Note: These settings may not be all inclusive and will not represent relative no
 
 ### Set SELinux to Permissive mode
 
-It is required to run SELinux in Permissive mode. Running in Enforcing mode will block permissions for worker nodes.
+It is required to run SELinux in Permissive mode. Running in Enforcing mode will block permissions for worker nodes. The following command will switch to Permissive mode until reboot.
 
 ```
-setenforce 0
+$ setenforce 0
 ```
+
+To boot into Permissive mode or with SELinux disabled completely, set `SELINUX=permissive` or `SELINUX=disabled` in `/etc/selinux/config`.
 
 ### Enable and start the service
 
