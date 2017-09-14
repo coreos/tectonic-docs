@@ -31,7 +31,7 @@ Before recovering a cluster, remove the docker state, etcd state, and active man
 
 1. Back up `/var/log/containers` for later inspection:
 
-   `tar -cvzf /var/log/containers containerlogs.tgz`
+   `tar -hcvzf containerlogs.tgz /var/log/containers`
 
 2.  Stop the kubelet service:
 
