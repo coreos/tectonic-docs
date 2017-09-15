@@ -6,16 +6,17 @@ Generally, the VMware platform templates adhere to the standards defined by the 
 
 ## Prerequsities
 
-1. Download the latest Container Linux Stable OVA from; https://coreos.com/os/docs/latest/booting-on-vmware.html.
-1. Import `coreos_production_vmware_ova.ova` into vCenter. Generally, all settings can be kept as is. Consider "thin" provisioning and naming the template with CoreOS Container Linux Version.
-1. Resize the Virtual Machine Disk size to 30 GB or larger
-1. In the Virtual Machine Configuration View select "vApp Options" tab and un-check "Enable vApp Options".
+1. Download the latest Container Linux Stable OVA from  https://coreos.com/os/docs/latest/booting-on-vmware.html.
+1. Import `coreos_production_vmware_ova.ova` into vCenter. Most settings may be left at their default. Consider "thin" provisioning and naming the template with the CoreOS Container Linux version number.
+1. Resize the virtual machine disk size to 30GB or larger.
+1. In the *Virtual Machine Configuration* view select "vApp Options" tab and un-check "Enable vApp Options".
 1. Convert the Container Linux image into a Virtual Machine template.
-1. Pre-Allocated IP addresses for the cluster and pre-create DNS records
+1. Pre-allocate IP addresses for the cluster and pre-create DNS records.
+1. For production clusters configure a preexisting Load Balancer for Tectonic. For an example setup, see [Using F5 BIG-IP LTM with Tectonic][using-f5].
 
 ### DNS and IP address allocation
 
-Prior to the start of setup create required DNS records. Below is a sample table of 3 etcd nodes, 2 master nodes and 2 worker nodes. 
+Prior to the start of setup create required DNS records. The following table lists 3 etcd nodes, 2 master nodes and 2 worker nodes.
 
 | Record | Type | Value |
 |------|-------------|:-----:|
@@ -57,7 +58,7 @@ $ ssh-add -L
 Reference the absolute path of the **_public_** component of the SSH key in `tectonic_vmware_ssh_authorized_key`.
 
 Without this, terraform is not able to SSH copy the assets and start bootkube.
-Also make sure that the SSH known_hosts file doesn't have old records of the API DNS name (fingerprints will not match).
+Also make sure that the SSH `known_hosts` file doesn't have old records of the API DNS name (fingerprints will not match).
 
 ## Getting Started
 
@@ -111,12 +112,12 @@ Terraform will prompt for vSphere credentials:
 provider.vsphere.password
   The user password for vSphere API operations.
 
-  Enter a value: 
+  Enter a value:
 
 provider.vsphere.user
   The user name for vSphere API operations.
 
-  Enter a value: 
+  Enter a value:
 ```
 
 Next, deploy the cluster:
@@ -125,26 +126,24 @@ Next, deploy the cluster:
 $ terraform apply ../../platforms/vmware
 ```
 
-Wait for `terraform apply` until all tasks complete. Tectonic cluster should be ready upon completion of apply command. If any issues arrise please check the known issues and workarounds below.
+Wait for `terraform apply` to complete all tasks. The Tectonic cluster should be ready upon completion of the `apply` command. If any issues arise see the [troubleshooting][troubleshooting] guide.
 
 ## Access the cluster
 
-The Tectonic Console should be up and running after the containers have downloaded. Console can be access by the DNS name configured as `tectonic_vmware_ingress_domain` in the `terraform.tfvars` variables file.
+Tectonic Console will be up and running after the containers have downloaded. Console can be accessed by the DNS name configured as `tectonic_vmware_ingress_domain` in the `terraform.tfvars` variables file.
 
-Credentials and secrets for Tectonic can be found in `/generated` folder including the CA if generated, and a kubeconfig. Use the kubeconfig file to control the cluster with `kubectl`:
+Credentials and secrets for Tectonic can be found in the `/generated` folder, including the CA (if generated) and a kubeconfig. Use the kubeconfig file to control the cluster with `kubectl`:
 
 ```
 $ export KUBECONFIG=generated/auth/kubeconfig
 $ kubectl cluster-info
 ```
 
-## Working with the cluster
+## Scaling Tectonic VMware clusters
 
-### Scaling Tectonic VMware clusters
+Both master and worker nodes may be scaled on VMware using terraform.
 
-This document describes how to add cluster nodes to Tectonic clusters on VMware.
-
-#### Scaling worker nodes
+### Scaling worker nodes
 
 To scale worker nodes, adjust `tectonic_worker_count`, `tectonic_vmware_worker_hostnames` and `tectonic_vmware_worker_ip` variables in `terraform.tfvars` and run:
 
@@ -154,9 +153,9 @@ $ terraform plan \
 $ terraform apply \
   ../../platforms/vmware
 ```
-Shortly after running `terraform apply` new worker machines will appear on Tectonic console. This change may take several minutes.
+After running `terraform apply` new worker machines will appear in Tectonic Console. This change may take several minutes.
 
-#### Scaling master nodes
+### Scaling master nodes
 
 To scale master nodes, adjust `tectonic_master_count`, `tectonic_vmware_master_hostnames` and `tectonic_vmware_master_ip` variables in `terraform.tfvars` and run:
 
@@ -166,13 +165,13 @@ $ terraform plan \
 $ terraform apply \
   ../../platforms/vmware
 ```
-Shortly after running `terraform apply` master machines will appear on Tectonic console. This change may take several minutes.  
+After running `terraform apply` master machines will appear in Tectonic Console. This change may take several minutes.  
 
-Make sure to add the new Controller nodes' IP addresses in DNS for `tectonic_vmware_controller_domain` variable or update the Load balancer to include new Controller nodes.
+Make sure to add the new Controller nodes' IP addresses in DNS for `tectonic_vmware_controller_domain` variable or update the load balancer to include new Controller nodes.
 
 ## Known issues and workarounds
 
-See the [troubleshooting][troubleshooting] document for workarounds for bugs that are being tracked
+See the [troubleshooting][troubleshooting] document for workarounds for bugs that are being tracked.
 
 ## Delete the cluster
 
@@ -183,10 +182,11 @@ $ terraform destroy ../../platforms/vmware
 ```
 
 [register]: https://account.coreos.com
-[baremetaldns]: https://coreos.com/tectonic/docs/latest/install/bare-metal/#dns 
+[baremetaldns]: https://coreos.com/tectonic/docs/latest/install/bare-metal/#dns
 [conventions]: ../../conventions.md
 [generic]: ../../generic-platform.md
 [downloadterraform]: https://www.terraform.io/downloads.html
 [vmware]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/vmware.md
 [vars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/config.md
 [troubleshooting]: ../../troubleshooting/faq.md
+[using-f5]: ../../reference/f5-ltm-lb.md
