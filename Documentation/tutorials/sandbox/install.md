@@ -77,6 +77,14 @@ If not, check the Debugging section below.
 
 ## Debugging
 
+Q: How do I view the Console?
+
+A: Navigate to https://console.tectonicsandbox.com in your browser.
+
+Q: How do I log in to the Console?
+
+A: First, click through the "Your connection is not private" warning page. Click **Advanced**, and then **Proceed**. Then, enter user: “admin@example.com”, and password: “sandbox” to launch Tectonic Console.
+
 Q: My console doesn't work!
 
 A: There are a few common problems that might prevent Tectonic Console from launching. Use these suggestions to try and resolve the issue.
@@ -103,6 +111,22 @@ Q: It’s been 20 minutes and my cluster still isn't coming up!
 
 A: We know it is annoying but please wait 10 more minutes to file an issue. The installation must download 2GB+ of data between CoreOS Container Linux images and the required container images for Tectonic. A download of this size may take quite some time.
 
+Q: How do I use kubectl?
+
+A: To use kubectl with the cluster, set the environment variable listed at the end of the `vagrant up` instructions.
+
+On macOS or Linux, run:
+
+```
+export KUBECONFIG=$PWD/provisioning/etc/kubernetes/kubeconfig
+```
+
+On Windows, run:
+
+```
+$env:KUBECONFIG = "$PWD\provisioning\etc\kubernetes\kubeconfig"
+```
+
 Q: I got a configuration error regarding `VagrantPlugins::Ignition::Config:`
 
 A: You are running an older version of the vagrant-ignition plugin. Update the plugin using this command:
@@ -127,29 +151,12 @@ Then, remove the old boxes:
 vagrant box remove coreos-beta --all --provider=virtualbox
 ```
 
-Q: How do I view the Console?
+Q: I got this error: `Job for etcd-member.service failed because the control process exited with error code.``
 
-A: Navigate to https://console.tectonicsandbox.com in your browser.
+A: You may be running behind a corporate firewall or proxy. If so, you must enable Sandbox to run behind a proxy by modifying the Docker controller and worker files under the provisioning folder of the tectonic sandbox zip file. Then, use the Container Linux ct tool to update the ignite files.
 
-Q: How do I log in to the Console?
+For a complete set of instructions, see the [Tectonic Forum Issue #185][tectonic-185].
 
-A: First, click through the "Your connection is not private" warning page. Click **Advanced**, and then **Proceed**. Then, enter user: “admin@example.com”, and password: “sandbox” to launch Tectonic Console.
-
-Q: How do I use kubectl?
-
-A: To use kubectl with the cluster, set the environment variable listed at the end of the `vagrant up` instructions.
-
-On macOS or Linux, run:
-
-```
-export KUBECONFIG=$PWD/provisioning/etc/kubernetes/kubeconfig
-```
-
-On Windows, run:
-
-```
-$env:KUBECONFIG = "$PWD\provisioning\etc\kubernetes\kubeconfig"
-```
 
 [**NEXT:** Deploying an application on Tectonic][first-app]
 
@@ -158,3 +165,4 @@ $env:KUBECONFIG = "$PWD\provisioning\etc\kubernetes\kubeconfig"
 [virtualbox]: https://www.virtualbox.org/wiki/Downloads
 [sandbox-download-form]: https://coreos.com/tectonic/sandbox/
 [first-app]: first-app.md
+[tectonic-185]: https://github.com/coreos/tectonic-forum/issues/185
