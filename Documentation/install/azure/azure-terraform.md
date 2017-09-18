@@ -167,12 +167,13 @@ Edit the parameters in `build/$CLUSTER/terraform.tfvars` with the deployment's A
 
 ### Key values for basic Azure deployment
 
-These are the basic values that must be adjusted for each Tectonic deployment on Azure. See the details of each value in the `terraform.tfvars` file.
+These are the basic values that must be adjusted for each Tectonic deployment on Azure. See the details of each value in the [terraform.tfvars][terraform-tvars] file.
 
 * `tectonic_admin_email` - For the initial Console login
 * `tectonic_admin_password_hash` - Bcrypted value
 * `tectonic_azure_client_secret` - As in `ARM_CLIENT_SECRET` above
-* `tectonic_azure_ssh_key` - Full path the the public key part of the key added to `ssh-agent` above
+* `tectonic_azure_location` - Enter the region's Name (for example: `centralus`)
+* `tectonic_azure_ssh_key` - Full path to the public key part of the key added to `ssh-agent` above
 * `tectonic_base_domain` - The DNS domain or subdomain delegated to an Azure DNS zone above
 * `tectonic_azure_external_dns_zone_id` - Get with `az network dns zone list`
 * `tectonic_cluster_name` - Usually matches `$CLUSTER` as set above
@@ -287,6 +288,7 @@ See the [installer troubleshooting][troubleshooting] document for known problem 
 [plan-docs]: https://www.terraform.io/docs/commands/plan.html
 [register]: https://account.coreos.com/signup/summary/tectonic-2016-12
 [release-notes]: https://coreos.com/tectonic/releases/
+[terraform-tvars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/azure.md
 [troubleshooting]: ../../troubleshooting/installer-terraform.md
 [vars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/config.md
 [verification-key]: https://coreos.com/security/app-signing-key/ 
