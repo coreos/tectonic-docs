@@ -113,7 +113,7 @@ A: We know it is annoying but please wait 10 more minutes to file an issue. The 
 
 Q: How do I use kubectl?
 
-A: To use kubectl with the cluster, set the environment variable listed at the end of the `vagrant up` instructions.
+A: To use kubectl with the cluster, set the environment variable.
 
 On macOS or Linux, run:
 
@@ -165,4 +165,4 @@ For a complete set of instructions, see [Tectonic Forum Issue #185][tectonic-185
 [virtualbox]: https://www.virtualbox.org/wiki/Downloads
 [sandbox-download-form]: https://coreos.com/tectonic/sandbox/
 [first-app]: first-app.md
-[tectonic-185]: https://github.com/coreos/tectonic-forum/issues/185
+[tectonic-185]: https://github.com/coreos/tectonic-forum/issues/185#issuecomment-327855946
