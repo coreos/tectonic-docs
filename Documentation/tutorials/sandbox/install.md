@@ -151,11 +151,11 @@ Then, remove the old boxes:
 vagrant box remove coreos-beta --all --provider=virtualbox
 ```
 
-Q: I got this error: `Job for etcd-member.service failed because the control process exited with error code.``
+Q: Does the Sandbox support my corporate firewall or HTTP proxy?
 
-A: You may be running behind a corporate firewall or proxy. If so, you must enable Sandbox to run behind a proxy by modifying the Docker controller and worker files under the provisioning folder of the tectonic sandbox zip file. Then, use the Container Linux ct tool to update the ignite files.
+A: Yes, but you must enable Sandbox to run behind a proxy by modifying the Docker controller and worker files under the provisioning folder of the Tectonic Sandbox zip file. Then use the Container Linux ct tool to update the Ignition files.
 
-For a complete set of instructions, see the [Tectonic Forum Issue #185][tectonic-185].
+For a complete set of instructions, see [Tectonic Forum Issue #185][tectonic-185].
 
 
 [**NEXT:** Deploying an application on Tectonic][first-app]
