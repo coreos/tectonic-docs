@@ -2,7 +2,7 @@
 
 G-Suite supports setting up custom SAML applications for sign in with enterprise cloud applications. Tectonic Identity can make use of this feature.
 
-This document assumes the document [Set up your own custom SAML application][saml-google] document is being followed by a G-Suite administrator and a Tectonic cluster is deployed with the DNS name: tectonic.example.com
+This document assumes the document [Set up your own custom SAML application][saml-google] is being followed by a G-Suite administrator and a Tectonic cluster is deployed with the DNS name: tectonic.example.com
 
 When creating the SAML app be sure to copy the `SSO URL` and download the certificate when presented with Google IdP Information.
 
@@ -29,13 +29,17 @@ Below is a SAML configuration template for Tectonic Identity:
     usernameAttr:
     emailAttr:
     groupsAttr:
-    nameIDPolicyFormat: persistent
+    nameIDPolicyFormat:
 ```
 
 `ssoURL:` SSO URL from Google IdP Information
+
 `ssoIssuer`: SSO URL from Google IdP Information
+
 `redirectURI:` https://<cluster-dns>/identity/callback
+
 `entityIssuer:` https://<cluster-dns>/identity/callback
+
 `caData:` base64 encoded certificate from Google IdP information
 
 Run `base64 -w 0 GoogleIDPCertificate-example.com.pem` on the certificate downloaded from Google IdP Information.
