@@ -74,7 +74,23 @@ Final configuration for G-Suite SAML:
     nameIDPolicyFormat: persistent
 ```
 
+## Deploy to cluster
+
 Deploy this to Tectonic Identity by following the [Editing Tectonic Identity Configuration][edit-identity] documentation.
+
+## Turn on SSO to your new SAML app
+
+Instructions from the [G-Suite Custom SAML Application][saml-google]:
+
+```
+In your Google Admin console (at admin.google.com)...
+From the Admin console dashboard, go to Apps and then SAML Apps.
+Requires having Super Admin privileges, or ask another super administrator at example.com to do these steps for you.
+
+Select your new SAML app.
+At the top of the gray box, click More Settings and choose:
+On for everyone to turn on the service for all users (click again to confirm).
+```
 
 [saml-google]: https://support.google.com/a/answer/6087519
 [edit-identity]: https://coreos.com/tectonic/docs/latest/admin/saml-user-management.html#editing-tectonic-identity-configuration
