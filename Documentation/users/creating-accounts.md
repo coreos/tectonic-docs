@@ -1,98 +1,83 @@
 # Creating Tectonic accounts
 
-Use Tectonic Console to grant access rights to users using Role Bindings.
+This guide covers using the Tectonic Console to grant cluster-wide or namespace-specific access for human users. For programmatic access for your software, see [Creating Service Accounts][creating-service-accounts].
 
-First, create Roles. Then, associate users with defined Roles and cluster access using Role Bindings.
+First, create [Roles][creating-roles] which define rules of access. Then, associate users with Roles using "Role Bindings".
 
-Tectonic allows you to create user, group, and admin accounts for your clusters. Any of these three account types may be granted access to a cluster, or to a specific namespace within a cluster.
+## Users vs Groups
 
-Tectonic allows you to create both cluster wide and namespace specific user accounts.
+Role Bindings can be used to associate a single user with a Role, or a group of users with a Role.
 
-Grant access rights to users by creating Role Bindings. Role Bindings associate access permissions (cluster wide, or namespace specific) with [Roles][https://coreos.com/tectonic/docs/latest/admin/identity-management.html#default-roles-in-tectonic] and [Subjects][link to somewhere subjects are defined - user, group, or service account. (no admin subject?)]
-
-When removed from Tectonic Identity authentication (LDAP or SAML integration), users and groups are cached, and no longer granted the permissions created through Role Bindings.
-
-Use Role Bindings to create the following three user types:
-
-(note - i want to verify these definitions. they're inconsistent, so i'm not sure they are correct)
-
-* **Users:** have access to all common objects within a cluster, but do not have access to change RBAC policies.
-* **Groups:** grant defined access to multiple users. Logged in (authenticated) users are grouped according to their RBAC group memberships.
+* **Users:** match the email address (static users) or username (LDAP, SAML) used to log in.
+* **Groups:** match one or more group names from LDAP or SAML backends.
 
 Permissions granted an individual user are an aggregate of permissions for all roles assigned the user account, and all permissions granted the roles for all groups to which the user belongs.
 
 Individual users may be part of multiple groups.
 
-* **Admins:** have full control over all resources within their cluster or namespace.
-
 ##  Prerequisites
 
 User authentication must be enabled before defining user roles. Use Tectonic Identity to integrate with your existing authentication system. For more information, see:
 
-* [Static user management][user-management]
-* [LDAP user management][ldap-user-management]
-* [SAML user management][saml-user-management]
+* [Service accounts][service-accounts]
+* [LDAP integration][ldap-integration]
+* [SAML integration][saml-integration]
 
 ## Creating Role Bindings
 
-1. In Tectonic Console, go to *Administration > Role Bindings* and click *Create Binding* to open the *Create Role Binding* page.
+In Tectonic Console, go to *Administration > Role Bindings* and click *Create Binding* to open the *Create Role Binding* page.
 
-2. Select the access level for the Role Binding:
+1. Select the access level for the Role Binding:
  * *Namespace Role Bindings* grant access only within the listed namespace.
  * *Cluster-wide Role Bindings* grant access across the Tectonic cluster.
- While a Cluster Role can be bound down the hierarchy to a Namespace Role Binding, a Namespace Role can't be promoted up the hierarchy to be bound to a Cluster Role Binding.
- Namespace users and groups have read-access to Pods. Admins have full control over all resources. (is that true? read-only? - beth)
 
-3. Enter a *Name* for the Role Binding. This name will be used to xxx.
+2. Enter a *Name* for the Role Binding. Meaningful names are easy for others to audit.
 
-4. Select the Namespace to which the Role Binding grants access (if applicable).
+3. If creating a Namespace Role Binding, select the Namespace to which the Role Binding grants access.
 
 4. Select a *Role Name* for the binding.
-Roles are defined using the *Administration > Roles* page in Tectonic.
-For more information, see [Default Roles in Tectonic][identity-management].
-should be - for more info, see Creating Roles - beth
-Each role is made up of a set of rules, which defines the type of access and resources that are allowed to be manipulated.
+The Role must preexist in the Tectonic cluster. Use the *Administration > Roles* page to define Roles. For more information, see [Defining Tectonic user roles][creating-roles].
 
-5. Select a *Subject* for the Role Binding:
- * *User* grants permissions to a single user. Users must preexist in the console (right? )
- * *Group* grants permissions to a defined group. For more information, see [creating groups in tectonic][xx].
- * *Service Account* creates a service account, for use with xxx. For more information, see xxx
+5. Select the type of *Subject* for the Role Binding:
+ * *User* grants permissions to a single user. Users must exist in the authentication system configured with [Tectonic Identity][tectonic-identity-overview].
+ * *Group* grants permissions to a defined group.
+ * *Service Account* creates a service account, to allow software to use the Kubernetes API. For more information, see [Adding a service account to a Tectonic cluster][creating-service-accounts].
 
 6. Enter the *Subject Name* for the binding. The Name must exist in the Tectonic system, and may be one of the following three values (dependent on the Subject selected for the Binding):
-(User accounts are intended to be global. Names must be unique across all namespaces of a cluster, future user resource will not be namespaced. Service accounts are namespaced.)
-* For a User, enter an authenticated email address for a user
-* For a Group, enter a Group Name (as defined where?),
-* For a Service Account, enter a service account name (as defined where?)
+ * For a User, enter an email address (static users) or username (LDAP, SAML).
+ * For a Group, enter a Group Name from LDAP or SAML backends.
+ * For a Service Account, enter a service account name that exists in the cluster.
 
 7. Click *Create Binding* to create the binding, and open the *Role Bindings* page.
 
-
 ## Using kubectl to create ClusterRoleBindings
 
-`ClusterRoles` grant access to types of objects in any namespace in the cluster. Tectonic comes preloaded with three `ClusterRoles`:
+`ClusterRoles` grant access to objects in any namespace in the cluster. Tectonic offers four default `ClusterRoles`:
 
-1. user
-2. readonly
-3. admin
+* cluster-admin: Super-user access. When used in a ClusterRoleBinding, grants full control over every resource in the cluster and in all namespaces. When used in a RoleBinding, grants full control over every resource in the rolebinding's namespace, including the namespace itself.
+* admin: Admin access within a namespace.
+* edit: Read/write access to most objects in a namespace. It does not allow read/write access to roles or rolebindings.
+* view: Read-only access to most objects in a namespace.
 
-`ClusterRoles` are applied to a `User`, `Group` or `ServiceAccount` through a `ClusterRoleBinding`. A `ClusterRoleBinding` can be used to grant permissions to users in all namespaces across the entire cluster, where as a `RoleBinding` is used to grant namespace specific permissions. The following `ClusterRoleBinding` resource definition grants an existing user the admin role.
+For more information on these roles, see [Default Roles in Tectonic][default-roles] [User-facing Roles][user-facing] in the Kubernetes documentation.
+
+
+`ClusterRoles` are applied to a `User`, `Group` or `ServiceAccount` through a `ClusterRoleBinding`. A `ClusterRoleBinding` can be used to grant permissions to users in all namespaces across the entire cluster, whereas a `RoleBinding` is used to grant namespace specific permissions.
+
+The following `ClusterRoleBinding` resource definition grants an existing user the admin role.
 
 First, create a YAML file called `admin-test.yaml` with the following content:
 
 ```yaml
 kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1alpha1
+apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   name: admin-test
-# subjects holds references to the objects the role applies to.
-subjects:
-  # May be "User", "Group" or "ServiceAccount".
-  - kind: User
-    # Preexisting user's email
-    name: test1@example.com
-# roleRef contains information about the role being used.
-# It can only reference a ClusterRole in the global namespace.
-roleRef:
+subjects: # holds references to the objects the role applies to.
+  - kind: User # May be "User", "Group" or "ServiceAccount".
+    name: test1@example.com # Preexisting user's email
+roleRef: # contains information about the role being used.
+         # It can only reference a ClusterRole in the global namespace.
   kind: ClusterRole
   # name of an existing ClusterRole, either "readonly", "user", "admin",
   # or a custom defined role.
@@ -100,39 +85,38 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-Then, use kubectl to apply the `ClusterRoleBinding` RBAC resource definition:
+Then, use kubectl to apply the `ClusterRoleBinding` RBAC resource definition, and create the account:
 
 ```
-kubectl create -f admin-test.yaml
+$ kubectl create -f admin-test.yaml
+clusterrolebinding "admin-test" created
 ```
 
-The new `ClusterRoleBinding` can viewed in Tectonic Console under the Administration tab.
+In Tectonic Console, go to *Administration > Role Bindings* to view the new `ClusterRoleBinding`.
 
 The `ClusterRoleBinding` may be deleted to revoke users' permissions.
 
 ```
-kubectl delete -f admin-test.yaml
+$ kubectl delete -f admin-test.yaml
 ```
+
+## Removing Access
+
+Changes to a Role or Role Binding will take place immediately. Revoking access to a user may not be fully complete until the user's session token expires. The default expiration time is 24 hours.
+
+## More Info
 
 For more information see the [Kubernetes RBAC documentation][k8s-rbac].
 
 
-----------------  fodder ----------------------
-
-
-### Creating a Cluster user
-
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-1">
-    <a href="../img/cluster-user.png" class="co-m-screenshot">
-      <img src="../img/cluster-user.png">
-    </a>
-  </div>
-</div>
-
-
-
-[user-management]: user-management.md
-[ldap-user-management]: ldap-user-management.md
-[saml-user-management]: saml-user-management.md
-[identity-management]: identity-management.md#default-roles-in-tectonic
+[creating-service-accounts]: creating-service-accounts.md
+[creating-roles]: creating-roles.md
+[k8s-rbac]: https://kubernetes.io/docs/admin/authorization/rbac/
+[ldap-integration]: ldap-integration.md
+[saml-integration]: saml-integration.md
+[tectonic-identity-overview]: tectonic-identity-overview.md
+[service-accounts]: creating-service-accounts.md
+[ldap-integration]: ldap-integration.md
+[saml-integration]: saml-integration.md
+[user-facing]: https://kubernetes.io/docs/admin/authorization/rbac/#user-facing-roles
+[default-roles]: creating-roles.md/#default-roles-in-tectonic

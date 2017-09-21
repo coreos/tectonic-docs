@@ -1,133 +1,55 @@
-# Adding a service account to Tectonic cluster
+# Adding a Service Account to a Tectonic cluster
 
-Service accounts are API credentials stored in Kubernetes APIs and mounted onto pods as files, providing access-controlled identity to the services running on pods. In effect, any process running inside a pod uses a service account to authenticate itself to Kubernetes APIs from within a cluster. For example, when an ingress controller running in a cluster must read ingress resources, it loads service account secrets mounted into the pod at known locations to authenticate with the API server. The apps running on the clusters use the service account's secrets as a bearer token. Kubernetes automatically creates a `default` service account with relatively limited access in every namespace. If pods don't explicitly request a service account, they are assigned to this `default` account. However, creating an additional service account is permitted.
+Service Accounts are API credentials used by Pods to authenticate with the Kubernetes API. Use a Service Account for any non-human interaction with the cluster.
 
-Every service account has an associated username that can be granted RBAC roles, similar to other account types. Service accounts are tied to namespaces. Their usernames are derived from their namespace and name: `system:serviceaccount:<namespace>:<name>`. Because RBAC denies all requests unless explicitly allowed, service accounts, and the pods that use them, must be granted access through RBAC rules.
+For example, when an Ingress controller running in a cluster must read Ingress resources, it loads Service Account credentials mounted into the Pod, which are used to authenticate with the API server.
 
-service accounts may be cluster-wide or namespace specific.
-You cannot update the service account of an already created pod.
-user accounts are for people; service accounts are for processes, which run in pods.
-service accounts
-Service account creation is intended to be more lightweight, allowing cluster users to create service accounts for specific tasks (i.e. principle of least privilege).
+## Mechanics of using a Service Account
 
-Cluster Admin guide to Managing Service Accounts:https://kubernetes.io/docs/admin/service-accounts-admin/
+These credentials are mounted onto Pods as files, which is an easy format for any programming language to consume. This makes it easy to provide access-controlled identity for apps to talk to other cluster services.
 
-User Guide to Configure Service Accounts for Pods: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+When making API calls from within a Pod, the Service Account's credentials are presented as a bearer token on the API request. Their usernames are derived from their namespace and name: `system:serviceaccount:<namespace>:<name>`.
 
-## Creating a service account
+## Default Service Accounts
 
-To create a service account use `kubectl create` command or Tectonic Console.
+Kubernetes automatically creates a `default` service account with relatively limited access in every namespace. If Pods don't explicitly request a Service Account, they are assigned to this `default` account.
 
+Creating additional Service Accounts is recommended. Creation is intended to be lightweight, allowing cluster users to create service accounts for specific tasks (i.e. principle of least privilege).
 
-To use Tectonic Console to create Service Accounts, follow the directions to [Create Role Bindings][creating-accounts.md#creating-role-bindings] for a Tectonic user account.
+For more information, see the Kubernetes guides:
+* [Managing Service Accounts][manage-service]
+* [Configuring Service Accounts for Pods][configure-service]
 
-## Granting access rights to service account
+## Creating a Service Account
 
-Access rights are granted to a service account associated with a role by using a Role Binding. Do either of the following in Tectonic Console:
-
-* Use the *Role Bindings* option under *Administration*.  Create a *Role Binding*, then select a default Role. For example: `admin`.
-* Use the *Roles* option under *Administration*. Create a new role by using the YAML editor. Then use the *Role Bindings* option to create a type of Role Binding and bind to the new role.
-
-### Using Tectonic Console
-
-#### Granting a Cluster-wide role to service account
-
-i need to better understand the differences between how cluster-wide vs. namespace service accounts are defined and work. the information here and in the UI is contradictory. - beth
-
------------------ check if we want to keep this next bit or not. it was pulled from the doc that was called 'user-management.md' ---------------------
-
-### Using kubectl
-
-In this example, a Cluster Role Binding, `etcd-rolebinding`, is created for the `etcd-operator` role  using `kubectl`. This role will have read access over the ingress resources in the `tectonic-system` namespace.
-
-1. Create a YAML file `etcd-operator.yaml` to define the role:
+Specify a name and namespace for the service account:
 
 ```yaml
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRole
+apiVersion: v1
+kind: ServiceAccount
 metadata:
-  name: etcd-operator
-rules:
-- apiGroups:
-  - etcd.coreos.com
-  resources:
-  - clusters
-  verbs:
-  - "*"
-- apiGroups:
-  - extensions
-  resources:
-  - thirdpartyresources
-  verbs:
-  - "*"
-- apiGroups:
-  - storage.k8s.io
-  resources:
-  - storageclasses
-  verbs:
-  - "*"
-- apiGroups:
-  - ""
-  resources:
-  - pods
-  - services
-  - endpoints
-  - persistentvolumeclaims
-  - events
-  verbs:
-  - "*"
-- apiGroups:
-  - apps
-  resources:
-  - deployments
-  verbs:
-  - "*"
+  name: example
+  namespace: default
 ```
 
-2. Create a second YAML file, `etcdoperator.yaml`, to define a Cluster Role Binding which gives administrative privileges to the service account within the `tectonic-system` namespace:
+## Assigning Roles
+
+Every Service Account has an associated username that can be granted RBAC Roles, similar to users and groups. Service Accounts are tied to Namespaces, but can be use to access resources in other namespaces.
+
+In a Role Binding, use the *Subject* kind *Service Account*.
 
 ```yaml
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
- name: example-etcd-operator
-roleRef:
- apiGroup: rbac.authorization.k8s.io
- kind: ClusterRole
- name: admin
 subjects:
 - kind: ServiceAccount
- name: example etcd operator
- namespace: tectonic-system
-```
-3. Use `kubectl create` to create the service account:
-
-```
-kubectl create -f serviceaccount etcdoperator.yaml
+  name: example
+  namespace: default
 ```
 
-If creating the service account is successful, the following message is displayed:
+Service accounts are configured much like user accounts, in that first a [Role][creating-roles] is created, and then a [Role Binding][creating-accounts] is used to associate the Role with the Service Account.
 
-```
-serviceaccount "example-etcd-operator" created
-```
+### Mounting Service Accounts to Pods
 
-4. Verify once again by fetching the service accounts:
-
-```
-kubectl get serviceaccounts
-```
-
-Locate `example-etcd-operator` in the list of service accounts:
-
-```
-   NAME                     SECRETS    AGE
-   default                     1          1d
-   example-etcd-operator       1          5m
-   .....
- ```
-
-Give each application its own service account, rather than relying upon the default service account. A service account can be mounted onto a pod by specifying its name in the pod spec. For example:
+Give each application its own Service Account, rather than relying upon the default Service Account. A Service Account credentials can be mounted onto a pod by specifying its name in the pod spec. For example:
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -144,11 +66,11 @@ spec:
      containers:
      - name: nginx
        image: nginx:1.7.9
-     serviceAccountName: public-ingress # note the name of the service account for future reference
+     serviceAccountName: example # note the name of the service account for future reference
 ```
 
 
-[user-management]: user-management.md
-[ldap-user-management]: ldap-user-management.md
-[saml-user-management]: saml-user-management.md
-[identity-management]: identity-management.md#default-roles-in-tectonic
+[creating-accounts]: creating-accounts.md
+[creating-roles]: creating-roles.md
+[manage-service]: https://kubernetes.io/docs/admin/service-accounts-admin/
+[configure-service]: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/

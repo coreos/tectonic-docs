@@ -1,27 +1,43 @@
 # Role-Based Access Control
 
-Tectonic Identity uses Kubernetes' integrated Role-Based Access Control (RBAC) to manage user roles and permissions within Tectonic clusters.
+Tectonic Identity uses Kubernetes' integrated [Role-Based Access Control][kubernetes-rbac] (RBAC) to manage user roles and permissions within Tectonic clusters.
 
-Role-based access for users may be defined using Tectonic Console.
+Use Tectonic Console to define Roles which grant a set of permissions to Accounts through Role Bindings.
 
-For more information on User Authentication and access management, see
-[Creating Accounts][creating-accounts], and
-[Creating Roles][creating-roles]
+By default, Tectonic offers three account types, and two Role and Role Binding types:
 
-For more information on Kubernetes RBAC authorization API, see [Using RBAC Authorization][kubernetes-rbac].
+Account types:
+
+* User
+* Group
+* Service Account
+
+Role types:
+
+* Roles: Restrict associated rules to a namespace.
+* Cluster Roles: Grant associated Rules across a cluster.
+
+Role Binding types:
+
+* Namespace Role Binding: Defines namespace-specific permissions for users or a group of users.
+* Cluster-wide Role Binding: Defines cluster-wide permissions for users or a group of users.
+
+A Role Binding can reference both Roles and Cluster Roles to grant permissions to resources. This allows administrators to define a set of common Roles for the entire cluster, then reuse them within multiple namespaces.
+
+For example, creating a Role Binding in the `dev` namespace that binds a user to the `edit` Cluster Role won't have any impact outside of the `dev` namespace, even though it references a Cluster Role.
+
+An attempt to access a resource or perform a command not allowed by the user's defined permissions will be rejected by the API server.
+
+For more information on User Authentication and access management, see [Creating Accounts][creating-accounts], and [Creating Roles][creating-roles].
 
 ## Configuring RBAC
 
-RBAC may be configured using Tectonic Console or kubectl. The following example creates two YAML files to define a Role and a Role Binding for user Jane Doe.
+RBAC may be configured using Tectonic Console or kubectl. The following example creates two YAML files to define a Role and a Role Binding for user Jane Doe, which grants her basic access to the cluster.
 
-### An example configuration
-
-The following shows an example of granting user `jane.doe@example.org` basic access to the cluster.
-
-1. Add a role named `support-readonly` that can run commands `get`, `logs`, `list`, and `watch` for namespaces and pods:
+1. First, create a YAML file which defines the role `support-readonly` that can run commands `get`, `logs`, `list`, and `watch` for namespaces and pods:
 
 ```yaml
-apiVersion: rbac.authorization.k8s.io/v1alpha1
+apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
   name: support-readonly
@@ -41,11 +57,11 @@ rules:
   - watch
 ```
 
-2. Bind the role to `jane.doe`'s group `tstgrp`:
+2. Then, bind the role to `jane.doe`'s group `tstgrp`:
 
 ```yaml
 kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1alpha1
+apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   name: support-reader
   namespace: kube-system
@@ -59,43 +75,6 @@ roleRef:
 ```
 
 Tectonic Console and `kubectl` now reflect the updated role and binding:
-
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-1">
-    <a href="../img/ui-permission-granted.png" class="co-m-screenshot">
-      <img src="../img/ui-permission-granted.png">
-    </a>
-  </div>
-</div>
-
-3. Verify all pods are up and running:
-
-```bash
-$ kubectl --kubeconfig=janeDoeConfig --namespace=tectonic-system get pods
-
-NAME                                         READY     STATUS    RESTARTS   AGE
-default-http-backend-4080621718-f3gql        1/1       Running   0          2h
-kube-version-operator-2694564828-crpz4       1/1       Running   0          2h
-...
-```
-
-### Unauthorized access
-
-An attempt to access a resource or perform a command to which a user does not have access will be rejected by the API server:
-
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-1">
-    <a href="../img/ui-permission-notallowed.png" class="co-m-screenshot">
-      <img src="../img/ui-permission-notallowed.png">
-    </a>
-  </div>
-</div>
-
-```bash
-$ kubectl --kubeconfig=janeDoeConfig --namespace=tectonic-system get services
-
-Error from server (Forbidden): the server does not allow access to the requested resource (get services)
-```
 
 
 [creating-accounts]: creating-accounts.md
