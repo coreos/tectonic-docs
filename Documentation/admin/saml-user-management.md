@@ -142,70 +142,10 @@ To use kubectl as a SAML user:
     Until otherwise modified, you can still use your static account for further administrative setup.
 
 
-### Handling SAML authentication expiration 
+### Handling SAML authentication expiration
 
 Every twenty four hours, access tokens for the session will expire and a user will need to enter their credentials and log in again to regain access to the cluster.
 
-## Configuring RBAC
-
-Access configuration requires understanding Kubernetes Roles, RoleBindings, ClusterRoles, and ClusterRoleBindings. SAML-based users do not alter this model. SAML usernames and groups can be used with Kubernetes bindings; visit [the Kubernetes authorization docs][k8s-auth] to learn how to setup these configurations.
-
-### An example configuration
-
-The following shows an example of granting user `jane.doe@coreos.com` admin access to the cluster.
-
-1. Add a role binding named `jane-admin`:
-      ``` yaml
-              apiVersion: rbac.authorization.k8s.io/v1beta1
-              kind: ClusterRoleBinding
-              metadata:
-                name: jane-admin
-              roleRef:
-                apiGroup: rbac.authorization.k8s.io
-                kind: ClusterRole
-                name: cluster-admin
-              subjects:
-              - kind: User
-                name: jane.doe@coreos.com
-      ```
-  Tectonic Console and kubectl now reflect the updated role and binding.
-
-2. Log in to the Tectonic Console as `jane.doe`.
-3. Verify identity and download the `kubeconfig` file from the *My Account* page in the Tectonic Console.  
-4. Verify all pods are up and running:
-
-    `$ kubectl --kubeconfig=janeDoeConfig --namespace=tectonic-system get pods`
-
-    If successful, the following is displayed:
-
-    ```
-    tectonic-console-3077630014-gw253    1/1       Running   1          2h
-    tectonic-identity-2726305807-8lqkx   1/1       Running   6          1h```
-
-## Troubleshooting SAML user management
-
-To troubleshoot users and groups configuration, check the `tectonic-identity`'s logs to see what SAML query is being sent.
-
-Locate the Identity's pod name:
-
-```bash
-$ kubectl --namespace=tectonic-system get pods
-
-NAME                                         READY     STATUS    RESTARTS   AGE
-tectonic-console-3077630014-gw253            1/1       Running   0          2h
-tectonic-identity-2726305807-8lqkx           1/1       Running   0          1h
-tectonic-ingress-controller-99581103-rd0cj   1/1       Running   0          2h
-```
-
-Using `kubectl`, tail the logs for the identity pod:
-
-```bash
-$ kubectl --namespace=tectonic-system logs -f tectonic-identity-2726305807-8lqkx
-
-time="2017-05-08T22:37:02Z" level=error msg="Failed to authenticate: no attribute with name \"groups\": [name email]"
-```
-
-In the above example, the group attribute was not configured for `jane.doe@coreos.com` in the IdP.
 
 
 [k8s-auth]: https://kubernetes.io/docs/admin/authorization/#roles-rolesbindings-clusterroles-and-clusterrolebindings

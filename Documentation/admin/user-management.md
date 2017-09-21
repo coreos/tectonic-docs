@@ -1,14 +1,20 @@
 # User Management through Tectonic Identity
 
-## Overview
+Tectonic Identity is an authentication service for both Tectonic Console and `kubectl`, and allows these components to talk to the API server on an end user's behalf. All Tectonic clusters also enable Role-Based Access Control (RBAC) which uses the user information produced by Identity to enforce permissions.
 
-Tectonic Identity is an authentication service for both Tectonic Console and `kubectl` and allows these components to talk to the API server on an end user's behalf. All Tectonic clusters also enable Role Based Access Control (RBAC) which uses the user information produced by Identity to enforce permissions.
+This document describes using the Tectonic Identity config file to
+* Edit the Tectonic Identity config file
+* Create a static user
+* Create a Service Account to manage in-cluster API access
 
-This document describes managing users and access control in Tectonic.
+For information on creating other account types, see:
+* Creating user roles
+* Creating user accounts
+* Creating service accounts
 
 ## Identity Configuration
 
-Tectonic Identity pulls all its configuration options from a config file stored in a `ConfigMap`, which admins can view and edit using `kubectl`. As a precaution, it's recommended to use the administrative kubeconfig in their [downloaded `assets.zip`][assets-zip] when editing Identity's config in case of misconfiguration.
+Tectonic Identity pulls all its configuration options from a config file stored in a `ConfigMap`, which admins can view and edit using `kubectl`. As a precaution, use the administrative kubeconfig in the  [downloaded `assets.zip`][assets-zip] when editing Identity's config in case of misconfiguration.
 
 First, backup the existing config using `kubectl`:
 
@@ -30,7 +36,7 @@ kubectl patch deployment tectonic-identity \
     --namespace tectonic-system
 ```
 
-The update's success can then be inspecting by watching the pods in the `tectonic-system` namespace.
+The update's success can be inspected by watching the pods in the `tectonic-system` namespace.
 
 ```
 kubectl get pods --namespace=tectonic-system
@@ -38,17 +44,17 @@ kubectl get pods --namespace=tectonic-system
 
 ### Add static user
 
-Static users are those defined directly in the Identity `ConfigMap`. Static users are intended to be used for initial setup, and potentially for troubleshooting and recovery. A static user acts as a stand-in, authenticating users without a connection to a backend Identity provider. To add a new static user, update the tectonic-identity `ConfigMap` with a new `staticPasswords` entry.
+Static users are those defined directly in the Identity `ConfigMap`. Static users are intended to be used for initial setup, and may also be used for troubleshooting and recovery. A static user acts as a stand-in, authenticating users without a connection to a backend Identity provider. To add a new static user, update the tectonic-identity `ConfigMap` with a new `staticPasswords` entry.
 
 ```yaml
     staticPasswords:
-    # All the following fields are required.
+    # The following fields are required.
     - email: "test1@example.com"
-      # Bcrypt hash for string "password"
+      # bcrypt hash for string "password"
       hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
       # username to display. NOT used during login.
       username: "test1"
-      # Randomly generated using uuidgen.
+      # randomly generated using uuidgen.
       userID: "1d55c7c4-a76d-4d74-a257-31170f2c4845"
 ```
 
@@ -56,11 +62,11 @@ A bcrypt encoded hash of the user's password can be generated using the [coreos/
 
 When generating Tectonic Console passwords with `bcrypt-tool`, using values higher than the default of `-cost=10` may result in timeouts. bcrypt also imposes a maximum password length of 56 bytes.
 
-To ensure the static user has been added successfully try and log in with the new user from the Tectonic console.
+To ensure the static user has been added successfully, Log in to Tectonic Console using the static user's username and password.
 
 ### Change Password for Static User
 
-To change the password of an exisiting user, generate a bcrypt hash for the new password (using [coreos/bcrypt-tool](https://github.com/coreos/bcrypt-tool/releases/tag/v1.0.0)) and plug in this value into the tectonic-identity `ConfigMap` for the selected user.
+To change the password of an existing user, generate a bcrypt hash for the new password (using [coreos/bcrypt-tool](https://github.com/coreos/bcrypt-tool/releases/tag/v1.0.0)) and plug in this value into the tectonic-identity `ConfigMap` for the selected user.
 
 ```yaml
     staticPasswords:
@@ -74,60 +80,13 @@ To change the password of an exisiting user, generate a bcrypt hash for the new 
 
 After the config changes are applied, the user can log in to the console using the new password.
 
-### Add ClusterRoleBindings with Role Based Access Control (RBAC)
-
-`ClusterRoles` grant access to types of objects in any namespace in the cluster. Tectonic comes preloaded with three `ClusterRoles`:
-
-1. user
-2. readonly
-3. admin
-
-`ClusterRoles` are applied to a `User`, `Group` or `ServiceAccount` via a `ClusterRoleBinding`. A `ClusterRoleBinding` can be used to grant permissions to users in all namespaces across the entire cluster, where as a `RoleBinding` is used to grant namespace specific permissions. The following `ClusterRoleBinding` resource definition adds an exisiting user to the admin role.
-
-```yaml
-kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1alpha1
-metadata:
-  name: admin-test
-# subjects holds references to the objects the role applies to.
-subjects:
-  # May be "User", "Group" or "ServiceAccount".
-  - kind: User
-    # Preexisting user's email
-    name: test1@example.com
-# roleRef contains information about the role being used.
-# It can only reference a ClusterRole in the global namespace.
-roleRef:
-  kind: ClusterRole
-  # name of an existing ClusterRole, either "readonly", "user", "admin",
-  # or a custom defined role.
-  name: admin
-  apiGroup: rbac.authorization.k8s.io
-```
-
-The above `ClusterRoleBinding` RBAC resource definition can be applied through `kubectl`.
-
-```
-kubectl create -f admin-test.yaml
-```
-
-The new `ClusterRoleBinding` can viewed on the Tectonic Console under the Administration tab.
-
-The `ClusterRoleBinding` can be deleted to revoke users' permissions.
-
-```
-kubectl delete -f admin-test.yaml
-```
-
-For additional details see the [Kubernetes RBAC documentation][k8s-rbac].
-
 ### Managing in-cluster API access
 
-Pods use service accounts to authenticate against Kubernetes API from within the cluster. Service accounts are API credentials stored in the Kubernetes API and mounted into pods at well known paths, giving the pod an identity which can be access controlled. If an app uses `kubectl` or the official Kubernetes Go client within a pod to talk to the API, these credentials are loaded automatically.
+Pods use service accounts to authenticate against the Kubernetes API from within the cluster. Service accounts are API credentials stored in the Kubernetes API and mounted into pods at well known paths, giving the pod an identity which can be access-controlled. If an app uses `kubectl` or the official Kubernetes Go client within a pod to talk to the API, these credentials are loaded automatically.
 
-Since RBAC denys all requests unless explicitly allowed, service accounts, and the pods that use them, must be granted access through RBAC rules.
+Because RBAC denies all requests unless explicitly allowed, service accounts, and the pods that use them, must be granted access through RBAC rules.
 
-Kubernetes automatically creates a "default" service account in every namespace. If pods don't explicitly request a service account, they're assigned to this "default" one.
+Kubernetes automatically creates a "default" service account in every namespace. If pods don't explicitly request a service account, they're assigned to this "default" account.
 
 ```
 $ kubectl get serviceaccounts
@@ -140,7 +99,7 @@ NAME                     READY     STATUS    RESTARTS   AGE
 nginx-3121059884-x7btf   1/1       Running   0          20s
 ```
 
-If we inspect the `spec` of the pod, we'll see that the pod of the deployment has been assigned the "default" service account:
+Inspect the `spec` of the pod to see that the pod of the deployment has been assigned the "default" service account:
 
 ```
 $ kubectl get pod nginx-3121059884-x7btf -o yaml
@@ -163,7 +122,7 @@ spec:
 # ...
 ```
 
-To allow the pod to talk to the API server, create a `Role` for the account, then use a RoleBinding to grant the service account the role's powers. For example, if the pod needs to be able to read `ingress` resources:
+To allow the pod to talk to the API server, create a `Role` for the account, then use a RoleBinding to grant the service account the role's powers. For example, if the pod must be able to read `ingress` resources:
 
 ```yaml
 kind: Role
