@@ -7,7 +7,7 @@ To help you get up and running with Kubernetes and Tectonic, we have designed th
 * [Getting started][getting-started]
 * [Setting up kubectl][configure-kubectl]
 * [Inspecting the control plane][deploy-master]
-* [Inspecting a Kubernetes worker node][deploy-workers]
+* [Inspecting a worker node][deploy-workers]
 * [Breaking the system locally and watching recovery][watch-recovery]
 
 <a href="getting-started.md" class="btn btn-primary btn-lg">Let's Get Started</a>
