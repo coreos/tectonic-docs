@@ -127,17 +127,17 @@ Installing the x-pack plugin on your Elasticsearch nodes enables authentication 
 
 ### AWS Elasticsearch
 
-AWS Elasticsearch Service to quickly and easily run logging aggregation infrastructure with minimal overhead. Let's walk through the steps we're going to take to do this is to setup our Elasticsearch Service on AWS.
+Use AWS Elasticsearch Service with minimal overhead. Let's walk through the steps we're going to take to do this is to set up an Elasticsearch Service on AWS.
   		  
- - Log on to the AWS console and click Elasticsearch service.
+ - Log in to the AWS console and click Elasticsearch service.
  - Click "Create a new domain".
- - Configure your instance type, disk, and permissions. We'll be using IAM based credentials for security. If you're not familiar with IAM users, you can read more about it [here](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html). Here's an example config that I made specifically for this purpose. 
+ - Configure the instance type, disk, and permissions. Use IAM based credentials for security. If you're not familiar with IAM users, you can read more about it [here](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html). Here's an example config that I made specifically for this purpose. 
 
 If you do not wish to use credentials in your configuration via the `access_key_id` and `secret_access_key` options you should use IAM policies.
 
-The first step is to assign an IAM instance role `ROLE` to your EC2 instances. Name it appropriately. The role should contain no policy: we're using the possession of the role as the authenticating factor and placing the policy against the ES cluster.
+First, assign an IAM instance role `ROLE` to your EC2 instances, and name it appropriately. Do not include a policy in the role. The possession of the role will be used as the authenticating factor, and to place the policy against the ES cluster.
 
-You should then configure a policy for the ES cluster policy thus, with appropriate substitutions for the capitalized terms:
+Then, configure a policy for the ES cluster. Replace capitalized terms in the following example with the appropriate values for the cluster.
  
 ```
 {
@@ -166,11 +166,10 @@ You should then configure a policy for the ES cluster policy thus, with appropri
      }
    ]
 }
- 
 ```
-This will allow your fluentd hosts (by virtue of the possession of the role) and any traffic coming from the specified IP addresses (you querying Kibana) to access the various endpoints. Whilst not ideally secure (both the fluentd and Kibana boxes should ideally be restricted to the verbs they require) it should allow you to get up and ingesting logs without anything getting in your way, before you tighten down the policy.
+This will allow fluentd hosts (by virtue of the possession of the role) and any traffic coming from the specified IP addresses (queries to Kibana) to access the listed endpoints. For greatest security, both the fluentd and Kibana boxes should be restricted to the verbs they require. This less secure example allows the cluster to begin ingesting logs before the policy is fully secured.
 
-Additionally, you can use an STS assumed role as the authenticating factor and instruct the plugin to assume this role. This is useful for cross-account access and when assigning a standard role is not possible. The endpoint configuration looks like:
+Additionally, you may also use an STS assumed role as the authenticating factor and instruct the plugin to assume this role. This is useful for cross-account access and when assigning a standard role is not possible. The endpoint configuration looks like:
 
  ```
   <endpoint>
@@ -178,11 +177,10 @@ Additionally, you can use an STS assumed role as the authenticating factor and i
      region eu-east-1
      assume_role_arn arn:aws:sts::ACCOUNT:assumed-role/ROLE
      assume_role_session_name SESSION_ID # Defaults to fluentd if omitted
-  </endpoint>
-   
-   ```
+  </endpoint>  
+ ```
  
- The policy attached to your AWS Elasticsearch cluster then becomes something like:
+Define the policy attached to the AWS Elasticsearch cluster with the following format:
  
  ```
  {
@@ -198,10 +196,9 @@ Additionally, you can use an STS assumed role as the authenticating factor and i
      }
    ]
  }
- 
  ```
  
-You'll need to ensure that the environment in which the fluentd plugin runs has the capability to assume this role, by attaching a policy something like this to the instance profile:
+Attach a policy to the instance profile to ensure that the environment in which the fluentd plugin runs has the ability to assume the STS role. For example:
  
  ```
  {
@@ -212,10 +209,9 @@ You'll need to ensure that the environment in which the fluentd plugin runs has 
          "Resource": "arn:aws:iam::ACCOUNT:role/ROLE"
      }
  }
- 
  ```
  
-Next, we're going to configure Fluentd to gather the logs that we're interested in looking at and deliver them to our brand  new ElasticSearch machine. All of this is configured through the [td-agent configuration file](https://docs.treasuredata.com/articles/td-agent). We're going to add the below configuration in the Kubernetes repository for the [fluentd plugin](https://github.com/kubernetes/kubernetes/blob/7e1b9dfd0fc75311ff6339f19b514e8caaebeafd/cluster/addons/fluentd-elasticsearch/fluentd-es-image/td-agent.conf).
+Next, configure fluentd to gather the selected logs and deliver them to the Elasticsearch machine. Use the [td-agent configuration file](https://docs.treasuredata.com/articles/td-agent). We're going to add the below configuration in the Kubernetes repository for the [fluentd plugin](https://github.com/kubernetes/kubernetes/blob/7e1b9dfd0fc75311ff6339f19b514e8caaebeafd/cluster/addons/fluentd-elasticsearch/fluentd-es-image/td-agent.conf).
  
  ```
  <match **>
