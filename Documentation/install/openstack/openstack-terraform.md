@@ -44,24 +44,16 @@ $ cd tectonic
 
 ### Initialize and configure Terraform
 
-Start by setting the `INSTALLER_PATH` to the location of your platform's Tectonic installer. The platform should be `darwin` or `linux`.
+We need to add the `terraform` binary to our `PATH`. The platform should be `darwin` or `linux`.
 
 ```bash
-$ export INSTALLER_PATH=$(pwd)/tectonic-installer/linux/installer # Edit the platform name.
 $ export PATH=$PATH:$(pwd)/tectonic-installer/linux # Put the `terraform` binary in our PATH
 ```
 
-Make a copy of the Terraform configuration file for our system. Do not share this configuration file as it is specific to your machine.
+Download the Tectonic Terraform modules.
 
 ```bash
-$ sed "s|<PATH_TO_INSTALLER>|$INSTALLER_PATH|g" terraformrc.example > .terraformrc
-$ export TERRAFORM_CONFIG=$(pwd)/.terraformrc
-```
-
-Next, get the modules that Terraform will use to create the cluster resources:
-
-```
-$ terraform get platforms/openstack/<flavor>
+$ terraform init platforms/openstack/<flavor>
 ```
 
 Configure your AWS credentials for setting up Route 53 DNS record entries. See the [AWS docs][env] for details.
