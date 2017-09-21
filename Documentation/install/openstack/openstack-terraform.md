@@ -4,7 +4,7 @@ Following this guide will deploy a Tectonic cluster within your OpenStack accoun
 
 Generally, the OpenStack platform templates adhere to the standards defined by the project [conventions][conventions] and [generic platform requirements][generic]. This document aims to document the implementation details specific to the OpenStack platform.
 
-<p style="background:#d9edf7; padding: 10px;" class="text-info"><strong>Alpha:</strong> These modules and instructions are currently considered alpha. See the <a href="../../platform-lifecycle.md">platform life cycle</a> for more details.</p>
+<p style="background:#d9edf7; padding: 10px;" class="text-info"><strong>Pre-Alpha:</strong> These modules and instructions are currently considered pre-alpha. See the <a href="../../platform-lifecycle.md">platform life cycle</a> for more details.</p>
 
 ## Prerequsities
 
@@ -137,7 +137,7 @@ $ kubectl cluster-info
 
 To scale worker nodes, adjust `tectonic_worker_count` in `terraform.tfvars`.
 
-Use the `plan` command to check your syntax: 
+Use the `plan` command to check your syntax:
 
 ```
 $ terraform plan \

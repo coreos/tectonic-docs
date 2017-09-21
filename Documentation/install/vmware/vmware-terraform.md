@@ -4,6 +4,8 @@ Following this guide will deploy a Tectonic cluster within a VMware vSphere infr
 
 Generally, the VMware platform templates adhere to the standards defined by the project [conventions][conventions] and [generic platform requirements][generic]. This document aims to document the implementation details specific to the VMware platform.
 
+<p style="background:#d9edf7; padding: 10px;" class="text-info"><strong>Pre-Alpha:</strong> These modules and instructions are currently considered pre-alpha. See the <a href="../../platform-lifecycle.md">platform life cycle</a> for more details.</p>
+
 ## Prerequsities
 
 1. Download the latest Container Linux Stable OVA from; https://coreos.com/os/docs/latest/booting-on-vmware.html.
@@ -15,7 +17,7 @@ Generally, the VMware platform templates adhere to the standards defined by the 
 
 ### DNS and IP address allocation
 
-Prior to the start of setup create required DNS records. Below is a sample table of 3 etcd nodes, 2 master nodes and 2 worker nodes. 
+Prior to the start of setup create required DNS records. Below is a sample table of 3 etcd nodes, 2 master nodes and 2 worker nodes.
 
 | Record | Type | Value |
 |------|-------------|:-----:|
@@ -124,12 +126,12 @@ Terraform will prompt for vSphere credentials:
 provider.vsphere.password
   The user password for vSphere API operations.
 
-  Enter a value: 
+  Enter a value:
 
 provider.vsphere.user
   The user name for vSphere API operations.
 
-  Enter a value: 
+  Enter a value:
 ```
 
 Next, deploy the cluster:
@@ -196,7 +198,7 @@ $ terraform destroy ../../platforms/vmware
 ```
 
 [register]: https://account.coreos.com
-[baremetaldns]: https://coreos.com/tectonic/docs/latest/install/bare-metal/#dns 
+[baremetaldns]: https://coreos.com/tectonic/docs/latest/install/bare-metal/#dns
 [conventions]: ../../conventions.md
 [generic]: ../../generic-platform.md
 [downloadterraform]: https://www.terraform.io/downloads.html
