@@ -80,7 +80,7 @@ Customizations should be made to `build/${CLUSTER}/terraform.tfvars`. Edit the f
 * `tectonic_matchbox_rpc_endpoint`
 * `tectonic_matchbox_client_cert`
 * `tectonic_matchbox_client_key`
-* `tectonic_matchboc_ca`
+* `tectonic_matchbox_ca`
 
 Edit additional variables to specify DNS records, list machines, and set an SSH key and Tectonic Console email and password.
 
