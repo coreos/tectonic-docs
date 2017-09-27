@@ -31,21 +31,21 @@ To clear the error and proceed with the update, reset the ThirdPartyResource whi
 
 First, use `kubectl replace` to reset to the desired version:
 
-```
-cat<<EOF | kubectl replace -f -
+```sh
+kubectl replace -f - <<EOF
 apiVersion: coreos.com/v1
 kind: AppVersion
 metadata:
-name: tectonic-cluster
-namespace: tectonic-system
-labels:
-managed-by-channel-operator: "true"
+  name: tectonic-cluster
+  namespace: tectonic-system
+  labels:
+    managed-by-channel-operator: "true"
 status:
-currentVersion: 1.6.7-tectonic.1
-paused: false
+  currentVersion: 1.6.7-tectonic.1
+  paused: false
 spec:
-desiredVersion: 1.6.7-tectonic.1
-paused: false
+  desiredVersion: 1.6.7-tectonic.1
+  paused: false
 EOF
 ```
 Then, use Tectonic Console to switch the channel back to `Tectonic-1.6`. Click `Check for Updates`, then click `Start Upgrade`.
