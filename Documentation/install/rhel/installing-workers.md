@@ -94,7 +94,7 @@ $ yum install tectonic-worker
 This will download the relevant dependencies and then prompt to validate the
 GPG key installed by the `tectonic-release` RPM.
 
-It is important to keep the Kubelet version in sync with the cluster's Tectonic version. To prevent incorrect `yum update` commands from updating the version, disable the Tectonic repo by writing `enabled=0` into:
+The Kubelet version must be kept in sync with the cluster's Tectonic version. To prevent incorrect `yum update` commands from updating the version, disable the Tectonic repo by writing `enabled=0` into:
 
 ```
 /etc/yum.repos.d/tectonic.repo
@@ -133,9 +133,9 @@ Note: These settings may not be all inclusive and will not represent relative no
 
 ### Set SELinux to Permissive mode
 
-It is required to run SELinux in Permissive mode. Running in Enforcing mode will block permissions for worker nodes. Execute the following commands will enable permissive mode:
+SELinux must be run in Permissive mode. Running in Enforcing mode will block permissions for worker nodes. Execute the following commands to enable Permissive mode:
 
-1. Change the mode right for the current session: `setenforce 0`
+1. Change the permissions mode for the current session: `setenforce 0`
 2. Set `SELINUX=permissive` in `/etc/selinux/config`
 
 ### Set up and enable NTP
