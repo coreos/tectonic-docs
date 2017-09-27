@@ -138,6 +138,10 @@ It is required to run SELinux in Permissive mode. Running in Enforcing mode will
 1. Change the mode right for the current session: `setenforce 0`
 2. Set `SELINUX=permissive` in `/etc/selinux/config`
 
+### Set up and enable NTP
+
+Clock synchronization is important for Tectonic, as it relies heavily on TLS certificates for communication between components. Enable and configure the NTP service with your organization's time servers.
+
 ### Enable and start the service
 
 This process is the same as with all systemd hosts. The service as installed by the `tectonic-worker` RPM is called `kubelet`. It can be started with the command:
