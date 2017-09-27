@@ -13,7 +13,6 @@ Tectonic Sandbox is not meant for production use cases. It's designed to be a si
 * A current version of Google Chrome, Internet Explorer, or Mozilla Firefox installed and running.
 * 8 GB of RAM
 
-
 1. Ensure that the latest versions of Vagrant and VirtualBox are installed on your local machine.
 2. [Download Tectonic Sandbox][sandbox-download-form].
 
@@ -37,7 +36,10 @@ Then, configure Vagrant to use VirtualBox to power Tectonic Sandbox. Navigate to
 vagrant up --provider=virtualbox
 ```
 
-Tectonic Sandbox will install and power up. Follow the instructions at the bottom of the terminal to launch Tectonic Console, and use kubectl with the cluster.
+Watch Sandbox install and the cluster spin up. This should take 20-40 minutes, depending on your connection. Follow the instructions at the bottom of the terminal to launch Tectonic Console, and to use kubectl with the cluster.
+
+* Log in to your cluster using the Console URL displayed in the terminal. If you see an error that the connection is not private (because the TLS certificate is self-signed), click **Advanced**, then **Proceed** to log in.
+* Enter the username and password provided, then click **Log In**.
 
 To re-enable Hyper-V after exploring Tectonic Sandbox, run:
 
