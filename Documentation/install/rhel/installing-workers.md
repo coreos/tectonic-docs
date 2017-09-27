@@ -94,6 +94,12 @@ $ yum install tectonic-worker
 This will download the relevant dependencies and then prompt to validate the
 GPG key installed by the `tectonic-release` RPM.
 
+It is important to keep the Kubelet version in sync with the cluster's Tectonic version. To prevent incorrect `yum update` commands from updating the version, disable the Tectonic repo by writing `enabled=0` into:
+
+```
+/etc/yum.repos.d/tectonic.repo
+```
+
 ### Copy the kubeconfig file from the Tectonic Installer to the host
 
 The [Tectonic installer][tectonic-installer] generates a `kubeconfig` file which is used by all Tectonic workers to authenticate to the API server. Because this file is identical on all hosts, it can be retrieved from an existing worker, a node in the control plane, or from the assets bundle created by the installer.
