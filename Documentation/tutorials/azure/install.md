@@ -176,7 +176,13 @@ These are the basic values that must be adjusted for each Tectonic deployment on
 
 ## Deploy the cluster
 
-Validate the plan before deploying:
+First, initialize Terraform:
+
+```
+$ terraform init platforms/azure
+```
+
+Then, validate the plan before deploying:
 
 ```
 $ terraform plan -var-file=build/${CLUSTER}/terraform.tfvars platforms/azure
