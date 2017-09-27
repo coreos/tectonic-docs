@@ -28,7 +28,7 @@ Then, disable Hyper-V. Open a powershell and run:
 bcdedit /set hypervisorlaunchtype off
 ```
 
-Once Hyper-V is disabled, download and unzip [Tectonic Sandbox][sandbox-download].
+Once Hyper-V is disabled, download and unzip [Tectonic Sandbox][sandbox-download-form].
 
 Then, configure Vagrant to use VirtualBox to power Tectonic Sandbox. Navigate to within the Tectonic Sandbox directory and run:
 
@@ -49,7 +49,7 @@ bcdedit /set hypervisorlaunchtype auto
 
 ## OSX Installation
 
-Download and unzip [Tectonic Sandbox][sandbox-download].
+Download and unzip [Tectonic Sandbox][sandbox-download-form].
 
 Navigate to within the Tectonic Sandbox directory and run:
 
@@ -63,7 +63,7 @@ Watch Sandbox install, and spin up your cluster. This should take 20-40 minutes,
 
 ## Linux Installation
 
-Download and unzip [Tectonic Sandbox][sandbox-download].
+Download and unzip [Tectonic Sandbox][sandbox-download-form].
 
 Navigate to within the Tectonic Sandbox directory and run:
 
