@@ -36,9 +36,10 @@ Then, configure Vagrant to use VirtualBox to power Tectonic Sandbox. Navigate to
 vagrant up --provider=virtualbox
 ```
 
-Watch Sandbox install, and spin up your cluster. This should take 20-40 minutes, depending on your connection. Follow the instructions at the bottom of the terminal to launch Tectonic Console, and use kubectl with the cluster.
-* Log in to your cluster using the Console URL displayed in the terminal. If you receive an error page saying that the connection is not private, click **Advanced**, then **Proceed** to log in.
-* Enter the username and password provided, and click **Log In**.
+Watch Sandbox install and the cluster spin up. This should take 20-40 minutes, depending on your connection. Follow the instructions at the bottom of the terminal to launch Tectonic Console, and to use kubectl with the cluster.
+
+* Log in to your cluster using the Console URL displayed in the terminal. If you see an error that the connection is not private (because the TLS certificate is self-signed), click **Advanced**, then **Proceed** to log in.
+* Enter the username and password provided, then click **Log In**.
 
 To re-enable Hyper-V after exploring Tectonic Sandbox, run:
 
