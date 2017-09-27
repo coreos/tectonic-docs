@@ -85,33 +85,16 @@ $ cd tectonic
 
 ### Initialize and configure Terraform
 
-#### Set INSTALLER_PATH
-
-Start by setting `INSTALLER_PATH` to the location of the installation host's Tectonic installer platform. The platform should be one of `darwin` or `linux`.
+Add the `terraform` binary to the `PATH`. The platform should be `darwin` or `linux`.
 
 ```bash
-$ export INSTALLER_PATH=$(pwd)/tectonic-installer/darwin/installer # Edit the platform name.
 $ export PATH=$PATH:$(pwd)/tectonic-installer/darwin # Put the `terraform` binary on PATH
 ```
 
-#### Copy and configure .terraformrc
-
-Make a copy of the Terraform configuration file. Do not share this configuration file as it is specific to the install host.
+Initialize the Tectonic Terraform modules.
 
 ```bash
-$ sed "s|<PATH_TO_INSTALLER>|$INSTALLER_PATH|g" terraformrc.example > .terraformrc
-$ export TERRAFORM_CONFIG=$(pwd)/.terraformrc
-```
-
-#### Get Terraform's Azure modules
-
-Next, get the modules for the Azure platform that Terraform will use to create cluster resources:
-
-```
-$ terraform get platforms/azure
-Get: file:///Users/tectonic-installer/modules/azure/vnet
-Get: file:///Users/tectonic-installer/modules/azure/etcd
-...
+$ terraform init platforms/azure
 ```
 
 ### Generate credentials with Azure CLI
