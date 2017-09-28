@@ -94,6 +94,12 @@ $ yum install tectonic-worker
 This will download the relevant dependencies and then prompt to validate the
 GPG key installed by the `tectonic-release` RPM.
 
+The Kubelet version must be kept in sync with the cluster's Tectonic version. To prevent incorrect `yum update` commands from updating the version, disable the Tectonic repo by writing `enabled=0` into:
+
+```
+/etc/yum.repos.d/tectonic.repo
+```
+
 ### Copy the kubeconfig file from the Tectonic Installer to the host
 
 The [Tectonic installer][tectonic-installer] generates a `kubeconfig` file which is used by all Tectonic workers to authenticate to the API server. Because this file is identical on all hosts, it can be retrieved from an existing worker, a node in the control plane, or from the assets bundle created by the installer.
@@ -127,13 +133,14 @@ Note: These settings may not be all inclusive and will not represent relative no
 
 ### Set SELinux to Permissive mode
 
-It is required to run SELinux in Permissive mode. Running in Enforcing mode will block permissions for worker nodes. The following command will switch to Permissive mode until reboot.
+SELinux must be run in Permissive mode. Running in Enforcing mode will block permissions for worker nodes. Execute the following commands to enable Permissive mode:
 
-```
-$ setenforce 0
-```
+1. Change the permissions mode for the current session: `setenforce 0`
+2. Set `SELINUX=permissive` in `/etc/selinux/config`
 
-To boot into Permissive mode or with SELinux disabled completely, set `SELINUX=permissive` or `SELINUX=disabled` in `/etc/selinux/config`.
+### Set up and enable NTP
+
+Clock synchronization is important for Tectonic, as it relies heavily on TLS certificates for communication between components. Enable and configure the NTP service with your organization's time servers.
 
 ### Enable and start the service
 
