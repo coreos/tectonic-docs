@@ -12,7 +12,7 @@ Installation requires the following items, which are discussed in more detail be
 * Machines with BIOS options set to boot from disk normally, but PXE prior to installation. `ipmitool` or `virt-install` will be used to actually boot the machines.
 * Machines with known MAC addresses and stable domain names.
 * A SSH keypair whose private key is present in your system's [ssh-agent][ssh-agent].
-* Production clusters require a preexisting Load Balancer, configured for Tectonic. For an example setup, see [Using F5 BIG-IP LTM with Tectonic][using-f5].
+* Production clusters require an existing Load Balancer, configured for Tectonic. For an example setup, see [Using F5 BIG-IP LTM with Tectonic][using-f5].
 
 ## Tectonic Installer
 

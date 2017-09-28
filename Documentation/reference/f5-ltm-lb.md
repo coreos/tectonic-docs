@@ -1,8 +1,8 @@
 # Using F5 BIG-IP LTM with Tectonic
 
-Installing Tectonic on bare metal or VMWare requires a master DNS (which resolves to any master node in the cluster), and a worker DNS (which resolves to any worker nodes for Ingress). Evaluation clusters may be set up using a DNS entry that points to each node, but production clusters require the use of a load balancer.
+Installing Tectonic on bare metal or VMWare requires a master DNS record that resolves to any master node(s) in the cluster, and a worker DNS record which resolves to any worker nodes for Ingress. Evaluation clusters may be set up using a DNS entry that points to each node, but production clusters require the use of a load balancer.
 
-When installing on cloud providers such as AWS, Tectonic automatically creates a load balancer (such as AWS ELB). When installing Tectonic on bare metal or VMWare, you must provide your own load balancer.
+When installing on cloud providers such as AWS, Tectonic automatically creates a load balancer (such as an [ELB on AWS][aws-elb]). When installing Tectonic on bare metal or VMWare, you must provide your own load balancer.
 
 This document describes setting up F5 BIG-IP LTM for use as a load balancer with Tectonic.
 
@@ -39,16 +39,16 @@ First, use the F5 web console to create two LTM pools for directing traffic to T
 
 Create an F5 LTM Pool for the API Server:
 1. Log in to F5 BIG-IP LTM web console as an admin user.
-1. From the *Main* tab, select *Local Traffic > Pools*, and click *Create*.
-1. Enter *Name: tectonic_api_443*.
-1. Under *New Members* add the IP address of all MASTER nodes (for example: `192.168.1.110` and `192.168.1.111`) and set *Service Port* to *443 / HTTPS*.
-1. Click *Finish* (leaving the rest of the settings at their default).
+2. From the *Main* tab, select *Local Traffic > Pools*, and click *Create*.
+3. Enter *Name: tectonic_api_443*.
+4. Under *New Members* add the IP address of all MASTER nodes (for example: `192.168.1.110` and `192.168.1.111`) and set *Service Port* to *443 / HTTPS*.
+5. Click *Finish* (leaving the rest of the settings at their default).
 
 Create an F5 LTM Pool for Tectonic console:
 1. From *Local Traffic > Pools*, click *Create*.
-1. Enter *Name: tectonic_console_443*.
-1. Under *New Members* add the IP address of all WORKER nodes (for example: `192.168.1.112` and `192.168.1.113`) and set *Service Port* to *443 / HTTPS*.
-1. Click *Finish* (leaving the rest of the settings at their default).
+2. Enter *Name: tectonic_console_443*.
+3. Under *New Members* add the IP address of all WORKER nodes (for example: `192.168.1.112` and `192.168.1.113`) and set *Service Port* to *443 / HTTPS*.
+4. Click *Finish* (leaving the rest of the settings at their default).
 
 ## Create F5 Virtual Servers
 
@@ -56,21 +56,21 @@ Next, create two Virtual Servers which use the Pools just created.
 
 Create an F5 LTM Virtual Service for the API Server:
 1. From the *Main* tab, select *Local Traffic > Virtual Servers*, and click *Create*.
-1. Under *General Properties*, enter *Name: VS-Tectonic-API*.
-1. From *Destination* select *Type: Host* and enter an address that matches the DNS entry for the API (for example: `api.example.net / 192.168.1.92`).
-1. Select *State: Enabled*.
-1. From *Configuration*, select *Type: Performance (Layer 4)*, *Protocol: TCP*, and *SNAT Pool: Auto Map*.
-1. Under *Resources*, select *Default Pool: select tectonic_api_443*.
-1. Click *Finish* (leaving the rest of the settings at their default).
+2. Under *General Properties*, enter *Name: VS-Tectonic-API*.
+3. From *Destination* select *Type: Host* and enter an address that matches the DNS entry for the API (for example: `api.example.net / 192.168.1.92`).
+4. Select *State: Enabled*.
+5. From *Configuration*, select *Type: Performance (Layer 4)*, *Protocol: TCP*, and *SNAT Pool: Auto Map*.
+6. Under *Resources*, select *Default Pool: select tectonic_api_443*.
+7. Click *Finish* (leaving the rest of the settings at their default).
 
 Create an F5 LTM Virtual Service for Tectonic Console:
 1. Click *Create*.
-1. Under *General Properties*, enter *Name: VS-Tectonic-Console*.
-1. From *Destination* select *Type: Host* and enter an address that matches the DNS entry for Tectonic (for example: `tectonic.example.net / 192.168.1.91`).
-1. Select *State: Enabled*.
-1. From *Configuration*, select *Type: Performance (Layer 4)*,  *Protocol: TCP*, and *SNAT Pool: Auto Map*.
-1. Under *Resources*, select *Default Pool: select tectonic_console_443*.
-1. Click *Finish* (leaving the rest of the settings at their default).
+2. Under *General Properties*, enter *Name: VS-Tectonic-Console*.
+3. From *Destination* select *Type: Host* and enter an address that matches the DNS entry for Tectonic (for example: `tectonic.example.net / 192.168.1.91`).
+4. Select *State: Enabled*.
+5. From *Configuration*, select *Type: Performance (Layer 4)*,  *Protocol: TCP*, and *SNAT Pool: Auto Map*.
+6. Under *Resources*, select *Default Pool: select tectonic_console_443*.
+7. Click *Finish* (leaving the rest of the settings at their default).
 
 ## Creating Virtual Service and Pools via CLI
 
@@ -90,3 +90,6 @@ Note: The IP addresses used in the CLI example correspond to the IP allocation e
 ## Install Tectonic
 
 Once configured, install Tectonic using the Master DNS and Tectonic DNS defined here to direct traffic through the F5 load balancer.
+
+
+[aws-elb]: https://aws.amazon.com/elasticloadbalancing/
