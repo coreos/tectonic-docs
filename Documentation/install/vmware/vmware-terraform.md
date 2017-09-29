@@ -8,16 +8,18 @@ Generally, the VMware platform templates adhere to the standards defined by the 
 
 ## Prerequsities
 
-1. Download the latest Container Linux Stable OVA from; https://coreos.com/os/docs/latest/booting-on-vmware.html.
-1. Import `coreos_production_vmware_ova.ova` into vCenter. Generally, all settings can be kept as is. Consider "thin" provisioning and naming the template with CoreOS Container Linux Version.
-1. Resize the Virtual Machine Disk size to 30 GB or larger
-1. In the Virtual Machine Configuration View select "vApp Options" tab and un-check "Enable vApp Options".
-1. Convert the Container Linux image into a Virtual Machine template.
-1. Pre-Allocated IP addresses for the cluster and pre-create DNS records
+1. Download the latest Container Linux Stable OVA from  [https://coreos.com/os/docs/latest/booting-on-vmware.html][boot-vm].
+2. Import `coreos_production_vmware_ova.ova` into vCenter. Most settings may be left at their default. Consider "thin" provisioning and naming the template with the CoreOS Container Linux version number.
+3. Resize the virtual machine disk size to 30GB or larger.
+4. In the *Virtual Machine Configuration* view select "vApp Options" tab and un-check "Enable vApp Options".
+5. Convert the Container Linux image into a Virtual Machine template.
+6. Pre-allocate IP addresses for the cluster and create DNS records.
+7. For production clusters, configure an existing Load Balancer for Tectonic. For an example setup, see [Using F5 BIG-IP LTM with Tectonic][using-f5].
 
 ### DNS and IP address allocation
 
-Prior to the start of setup create required DNS records. Below is a sample table of 3 etcd nodes, 2 master nodes and 2 worker nodes.
+Create required DNS records before beginning setup. The following table lists 3 etcd nodes, 2 master nodes and 2 worker nodes.
+
 
 | Record | Type | Value |
 |------|-------------|:-----:|
@@ -59,7 +61,7 @@ $ ssh-add -L
 Reference the absolute path of the **_public_** component of the SSH key in `tectonic_vmware_ssh_authorized_key`.
 
 Without this, terraform is not able to SSH copy the assets and start bootkube.
-Also make sure that the SSH known_hosts file doesn't have old records of the API DNS name (fingerprints will not match).
+Ensure the SSH known_hosts file does not contain old records for the API DNS name to avoid a key fingerprint mismatch.
 
 ## Getting Started
 
@@ -140,26 +142,24 @@ Next, deploy the cluster:
 $ terraform apply ../../platforms/vmware
 ```
 
-Wait for `terraform apply` until all tasks complete. Tectonic cluster should be ready upon completion of apply command. If any issues arrise please check the known issues and workarounds below.
+Wait for `terraform apply` to complete all tasks. The Tectonic cluster should be ready upon completion of the `apply` command. See the [troubleshooting][troubleshooting] guide if problems occur.
 
 ## Access the cluster
 
-The Tectonic Console should be up and running after the containers have downloaded. Console can be access by the DNS name configured as `tectonic_vmware_ingress_domain` in the `terraform.tfvars` variables file.
+Tectonic Console will be up and running after the containers have downloaded. Console can be accessed by the DNS name configured as `tectonic_vmware_ingress_domain` in the `terraform.tfvars` variables file.
 
-Credentials and secrets for Tectonic can be found in `/generated` folder including the CA if generated, and a kubeconfig. Use the kubeconfig file to control the cluster with `kubectl`:
+Credentials and secrets for Tectonic can be found in the `/generated` folder, including the CA (if generated) and a kubeconfig. Use the kubeconfig file to control the cluster with `kubectl`:
 
 ```
 $ export KUBECONFIG=generated/auth/kubeconfig
 $ kubectl cluster-info
 ```
 
-## Working with the cluster
+## Scaling Tectonic VMware clusters
 
-### Scaling Tectonic VMware clusters
+Both master and worker nodes may be scaled on VMware using terraform.
 
-This document describes how to add cluster nodes to Tectonic clusters on VMware.
-
-#### Scaling worker nodes
+### Scaling worker nodes
 
 To scale worker nodes, adjust `tectonic_worker_count`, `tectonic_vmware_worker_hostnames` and `tectonic_vmware_worker_ip` variables in `terraform.tfvars` and run:
 
@@ -169,9 +169,9 @@ $ terraform plan \
 $ terraform apply \
   ../../platforms/vmware
 ```
-Shortly after running `terraform apply` new worker machines will appear on Tectonic console. This change may take several minutes.
+After running `terraform apply` new worker machines will appear in Tectonic Console. This change may take several minutes.
 
-#### Scaling master nodes
+### Scaling master nodes
 
 To scale master nodes, adjust `tectonic_master_count`, `tectonic_vmware_master_hostnames` and `tectonic_vmware_master_ip` variables in `terraform.tfvars` and run:
 
@@ -181,13 +181,13 @@ $ terraform plan \
 $ terraform apply \
   ../../platforms/vmware
 ```
-Shortly after running `terraform apply` master machines will appear on Tectonic console. This change may take several minutes.  
+After running `terraform apply` master machines will appear in Tectonic Console. This change may take several minutes.  
 
-Make sure to add the new Controller nodes' IP addresses in DNS for `tectonic_vmware_controller_domain` variable or update the Load balancer to include new Controller nodes.
+Add the new controller nodes' IP address to the DNS record for the name set in the tectonic_vmware_controller_domain variable, or update the load balancer configuration with the new controller nodes.
 
 ## Known issues and workarounds
 
-See the [troubleshooting][troubleshooting] document for workarounds for bugs that are being tracked
+See the [troubleshooting][troubleshooting] document for known issues and workarounds.
 
 ## Delete the cluster
 
@@ -197,6 +197,7 @@ To delete Tectonic cluster, run:
 $ terraform destroy ../../platforms/vmware
 ```
 
+[boot-vm]: https://coreos.com/os/docs/latest/booting-on-vmware.html
 [register]: https://account.coreos.com
 [baremetaldns]: https://coreos.com/tectonic/docs/latest/install/bare-metal/#dns
 [conventions]: ../../conventions.md
@@ -205,4 +206,5 @@ $ terraform destroy ../../platforms/vmware
 [vmware]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/vmware.md
 [vars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/config.md
 [troubleshooting]: ../../troubleshooting/faq.md
+[using-f5]: ../../reference/f5-ltm-lb.md
 [verification-key]: https://coreos.com/security/app-signing-key/
