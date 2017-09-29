@@ -24,5 +24,5 @@ If you haven’t already done so, [create a Tectonic account now][create-acct]. 
 [create-acct]: https://account.coreos.com/signup/summary/tectonic-2016-12
 [aws-tutorials]: aws/index.md
 [azure-tutorials]: azure/index.md
-[kubernetes-tutorials]: index.md
+[kubernetes-tutorials]: kubernetes/index.md
 [sandbox-tutorials]: sandbox/index.md
