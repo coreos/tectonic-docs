@@ -19,11 +19,24 @@ For a complete list of requirements, see [Bare Metal Installation requirements][
 
 ### Download and extract Tectonic Installer
 
-Open a new terminal, and run the following commands to download and extract Tectonic Installer.
+Open a new terminal and run the following command to download Tectonic Installer.
 
 ```bash
-$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.1.tar.gz
-$ tar xzvf tectonic-1.7.3-tectonic.1.tar.gz
+$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.2.tar.gz # download
+```
+
+Verify the release has been signed by the [CoreOS App Signing Key][verification-key].
+
+```bash
+$ gpg2 --keyserver pgp.mit.edu --recv-key 18AD5014C99EF7E3BA5F6CE950BDD3E0FC8A365E
+$ gpg2 --verify tectonic-1.7.3-tectonic.2-tar-gz.asc tectonic-1.7.3-tectonic.2-tar.gz
+# gpg2: Good signature from "CoreOS Application Signing Key <security@coreos.com>"
+```
+
+Extract the tarball and navigate to the `tectonic` directory.
+
+```bash
+$ tar xzvf tectonic-1.7.3-tectonic.2.tar.gz
 $ cd tectonic
 ```
 
@@ -36,17 +49,10 @@ $ export INSTALLER_PATH=$(pwd)/tectonic-installer/linux/installer
 $ export PATH=$PATH:$(pwd)/tectonic-installer/linux
 ```
 
-Make a copy of the Terraform configuration file for our system. Do not share this configuration file as it is specific to your machine.
-
-```bash
-$ sed "s|<PATH_TO_INSTALLER>|$INSTALLER_PATH|g" terraformrc.example > .terraformrc
-$ export TERRAFORM_CONFIG=$(pwd)/.terraformrc
-```
-
 Next, get the modules that Terraform will use to create the cluster resources:
 
 ```bash
-$ terraform get ./platforms/metal
+$ terraform init ./platforms/metal
 ```
 
 Now, specify the cluster configuration.
@@ -67,7 +73,7 @@ Customizations should be made to `build/${CLUSTER}/terraform.tfvars`. Edit the f
 * `tectonic_matchbox_rpc_endpoint`
 * `tectonic_matchbox_client_cert`
 * `tectonic_matchbox_client_key`
-* `tectonic_matchboc_ca`
+* `tectonic_matchbox_ca`
 
 Edit additional variables to specify DNS records, list machines, and set an SSH key and Tectonic Console email and password.
 
@@ -137,3 +143,4 @@ For more information on working with installed clusters, see [Scaling Tectonic b
 [network-setup]: https://coreos.com/matchbox/docs/latest/network-setup.html
 [matchbox-latest]: https://coreos.com/matchbox/docs/latest/
 [dns]: index.md#dns
+[verification-key]: https://coreos.com/security/app-signing-key/ 

@@ -14,34 +14,39 @@ Generally, the AWS platform templates adhere to the standards defined by the pro
 
 ### Download and extract Tectonic Installer
 
-Open a new terminal, and run the following commands to download and extract Tectonic Installer.
+Open a new terminal and run the following command to download Tectonic Installer.
 
 ```bash
-$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.1.tar.gz # download
-$ tar xzvf tectonic-1.7.3-tectonic.1.tar.gz # extract the tarball
+$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.2.tar.gz # download
+```
+
+Verify the release has been signed by the [CoreOS App Signing Key][verification-key].
+
+```bash
+$ gpg2 --keyserver pgp.mit.edu --recv-key 18AD5014C99EF7E3BA5F6CE950BDD3E0FC8A365E
+$ gpg2 --verify tectonic-1.7.3-tectonic.2.tar.gz.asc tectonic-1.7.3-tectonic.2.tar.gz
+# gpg2: Good signature from "CoreOS Application Signing Key <security@coreos.com>"
+```
+
+Extract the tarball and navigate to the `tectonic` directory.
+
+```bash
+$ tar xzvf tectonic-1.7.3-tectonic.2.tar.gz
 $ cd tectonic
 ```
 
 ### Initialize and configure Terraform
 
-Start by setting the `INSTALLER_PATH` to the location of your platform's Tectonic installer. The platform should be `darwin` or `linux`. We also need to add the `terraform` binary to our `PATH`.
+We need to add the `terraform` binary to our `PATH`. The platform should be `darwin` or `linux`.
 
 ```bash
-$ export INSTALLER_PATH=$(pwd)/tectonic-installer/darwin/installer # Edit the platform name.
 $ export PATH=$PATH:$(pwd)/tectonic-installer/darwin # Put the `terraform` binary in the PATH
 ```
 
-Make a copy of the Terraform configuration file for the system. Do not share this configuration file as it is specific to the machine.
+Download the Tectonic Terraform modules.
 
 ```bash
-$ sed "s|<PATH_TO_INSTALLER>|$INSTALLER_PATH|g" terraformrc.example > .terraformrc
-$ export TERRAFORM_CONFIG=$(pwd)/.terraformrc
-```
-
-Next, get the modules that Terraform will use to create the cluster resources:
-
-```bash
-$ terraform get platforms/aws
+$ terraform init platforms/aws
 ```
 
 Configure your AWS credentials. See the [AWS docs][env] for details.
@@ -125,3 +130,4 @@ See the [troubleshooting][troubleshooting] document for workarounds for bugs tha
 [uninstall]: uninstall.md
 [scale-aws]: ../../admin/aws-scale.md
 [release-notes]: https://coreos.com/tectonic/releases/
+[verification-key]: https://coreos.com/security/app-signing-key/

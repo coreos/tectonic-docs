@@ -62,43 +62,39 @@ Also ensure the SSH known_hosts file doesn't have old records for the API DNS na
 
 ### Download and extract Tectonic Installer
 
-Open a new terminal and run the following commands to download and extract Tectonic Installer:
+Open a new terminal and run the following command to download Tectonic Installer.
 
 ```bash
-$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.1.tar.gz # download
-$ tar xzvf tectonic-1.7.3-tectonic.1.tar.gz # extract the tarball
+$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.2.tar.gz # download
+```
+
+Verify the release has been signed by the [CoreOS App Signing Key][verification-key].
+
+```bash
+$ gpg2 --keyserver pgp.mit.edu --recv-key 18AD5014C99EF7E3BA5F6CE950BDD3E0FC8A365E
+$ gpg2 --verify tectonic-1.7.3-tectonic.2-tar-gz.asc tectonic-1.7.3-tectonic.2-tar.gz
+# gpg2: Good signature from "CoreOS Application Signing Key <security@coreos.com>"
+```
+
+Extract the tarball and navigate to the `tectonic` directory.
+
+```bash
+$ tar xzvf tectonic-1.7.3-tectonic.2.tar.gz
 $ cd tectonic
 ```
 
 ### Initialize and configure Terraform
 
-#### Set INSTALLER_PATH
-
-Start by setting `INSTALLER_PATH` to the location of the installation host's Tectonic installer platform. The platform should be one of `darwin` or `linux`.
+Add the `terraform` binary to the `PATH`. The platform should be `darwin` or `linux`.
 
 ```bash
-$ export INSTALLER_PATH=$(pwd)/tectonic-installer/darwin/installer # Edit the platform name.
 $ export PATH=$PATH:$(pwd)/tectonic-installer/darwin # Put the `terraform` binary on PATH
 ```
 
-#### Copy and configure .terraformrc
-
-Make a copy of the Terraform configuration file. Do not share this configuration file as it is specific to the install host.
+Initialize the Tectonic Terraform modules.
 
 ```bash
-$ sed "s|<PATH_TO_INSTALLER>|$INSTALLER_PATH|g" terraformrc.example > .terraformrc
-$ export TERRAFORM_CONFIG=$(pwd)/.terraformrc
-```
-
-#### Get Terraform's Azure modules
-
-Next, get the modules for the Azure platform that Terraform will use to create cluster resources:
-
-```
-$ terraform get platforms/azure
-Get: file:///Users/tectonic-installer/modules/azure/vnet
-Get: file:///Users/tectonic-installer/modules/azure/etcd
-...
+$ terraform init platforms/azure
 ```
 
 ### Generate credentials with Azure CLI
@@ -154,12 +150,13 @@ Edit the parameters in `build/$CLUSTER/terraform.tfvars` with the deployment's A
 
 ### Key values for basic Azure deployment
 
-These are the basic values that must be adjusted for each Tectonic deployment on Azure. See the details of each value in the `terraform.tfvars` file.
+These are the basic values that must be adjusted for each Tectonic deployment on Azure. See the details of each value in the [terraform.tfvars][terraform-tvars] file.
 
 * `tectonic_admin_email` - For the initial Console login
 * `tectonic_admin_password_hash` - Bcrypted value
 * `tectonic_azure_client_secret` - As in `ARM_CLIENT_SECRET` above
-* `tectonic_azure_ssh_key` - Full path the the public key part of the key added to `ssh-agent` above
+* `tectonic_azure_location` - Enter the region's Name (for example: `centralus`)
+* `tectonic_azure_ssh_key` - Full path to the public key part of the key added to `ssh-agent` above
 * `tectonic_base_domain` - The DNS domain or subdomain delegated to an Azure DNS zone above
 * `tectonic_azure_external_dns_zone_id` - Get with `az network dns zone list`
 * `tectonic_cluster_name` - Usually matches `$CLUSTER` as set above
@@ -274,5 +271,7 @@ See the [installer troubleshooting][troubleshooting] document for known problem 
 [plan-docs]: https://www.terraform.io/docs/commands/plan.html
 [register]: https://account.coreos.com/signup/summary/tectonic-2016-12
 [release-notes]: https://coreos.com/tectonic/releases/
+[terraform-tvars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/azure.md
 [troubleshooting]: ../../troubleshooting/installer-terraform.md
 [vars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/config.md
+[verification-key]: https://coreos.com/security/app-signing-key/ 

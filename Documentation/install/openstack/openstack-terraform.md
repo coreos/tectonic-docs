@@ -4,7 +4,7 @@ Following this guide will deploy a Tectonic cluster within your OpenStack accoun
 
 Generally, the OpenStack platform templates adhere to the standards defined by the project [conventions][conventions] and [generic platform requirements][generic]. This document aims to document the implementation details specific to the OpenStack platform.
 
-<p style="background:#d9edf7; padding: 10px;" class="text-info"><strong>Alpha:</strong> These modules and instructions are currently considered alpha. See the <a href="../../platform-lifecycle.md">platform life cycle</a> for more details.</p>
+<p style="background:#d9edf7; padding: 10px;" class="text-info"><strong>Pre-Alpha:</strong> These modules and instructions are currently considered pre-alpha. See the <a href="../../platform-lifecycle.md">platform life cycle</a> for more details.</p>
 
 ## Prerequsities
 
@@ -21,34 +21,39 @@ Replace `<flavor>` with either option in the following commands. Now we're ready
 
 ### Download and extract Tectonic Installer
 
-Open a new terminal, and run the following commands to download and extract Tectonic Installer.
+Open a new terminal and run the following command to download Tectonic Installer.
 
 ```bash
-$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.1.tar.gz # download
-$ tar xzvf tectonic-1.7.3-tectonic.1.tar.gz # extract the tarball
+$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.2.tar.gz # download
+```
+
+Verify the release has been signed by the [CoreOS App Signing Key][verification-key].
+
+```bash
+$ gpg2 --keyserver pgp.mit.edu --recv-key 18AD5014C99EF7E3BA5F6CE950BDD3E0FC8A365E
+$ gpg2 --verify tectonic-1.7.3-tectonic.2-tar-gz.asc tectonic-1.7.3-tectonic.2-tar.gz
+# gpg2: Good signature from "CoreOS Application Signing Key <security@coreos.com>"
+```
+
+Extract the tarball and navigate to the `tectonic` directory.
+
+```bash
+$ tar xzvf tectonic-1.7.3-tectonic.2.tar.gz
 $ cd tectonic
 ```
 
 ### Initialize and configure Terraform
 
-Start by setting the `INSTALLER_PATH` to the location of your platform's Tectonic installer. The platform should be `darwin` or `linux`.
+We need to add the `terraform` binary to our `PATH`. The platform should be `darwin` or `linux`.
 
 ```bash
-$ export INSTALLER_PATH=$(pwd)/tectonic-installer/linux/installer # Edit the platform name.
 $ export PATH=$PATH:$(pwd)/tectonic-installer/linux # Put the `terraform` binary in our PATH
 ```
 
-Make a copy of the Terraform configuration file for our system. Do not share this configuration file as it is specific to your machine.
+Download the Tectonic Terraform modules.
 
 ```bash
-$ sed "s|<PATH_TO_INSTALLER>|$INSTALLER_PATH|g" terraformrc.example > .terraformrc
-$ export TERRAFORM_CONFIG=$(pwd)/.terraformrc
-```
-
-Next, get the modules that Terraform will use to create the cluster resources:
-
-```
-$ terraform get platforms/openstack/<flavor>
+$ terraform init platforms/openstack/<flavor>
 ```
 
 Configure your AWS credentials for setting up Route 53 DNS record entries. See the [AWS docs][env] for details.
@@ -124,7 +129,7 @@ $ kubectl cluster-info
 
 To scale worker nodes, adjust `tectonic_worker_count` in `terraform.tfvars`.
 
-Use the `plan` command to check your syntax: 
+Use the `plan` command to check your syntax:
 
 ```
 $ terraform plan \
@@ -199,3 +204,4 @@ See the [troubleshooting][troubleshooting] document for workarounds for bugs tha
 [troubleshooting]: ../../troubleshooting/faq.md
 [openstack-neutron-vars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/openstack-neutron.md
 [release-notes]: https://coreos.com/tectonic/releases/
+[verification-key]: https://coreos.com/security/app-signing-key/

@@ -4,6 +4,8 @@ Following this guide will deploy a Tectonic cluster within a VMware vSphere infr
 
 Generally, the VMware platform templates adhere to the standards defined by the project [conventions][conventions] and [generic platform requirements][generic]. This document aims to document the implementation details specific to the VMware platform.
 
+<p style="background:#d9edf7; padding: 10px;" class="text-info"><strong>Pre-Alpha:</strong> These modules and instructions are currently considered pre-alpha. See the <a href="../../platform-lifecycle.md">platform life cycle</a> for more details.</p>
+
 ## Prerequsities
 
 1. Download the latest Container Linux Stable OVA from  [https://coreos.com/os/docs/latest/booting-on-vmware.html][boot-vm].
@@ -17,6 +19,7 @@ Generally, the VMware platform templates adhere to the standards defined by the 
 ### DNS and IP address allocation
 
 Create required DNS records before beginning setup. The following table lists 3 etcd nodes, 2 master nodes and 2 worker nodes.
+
 
 | Record | Type | Value |
 |------|-------------|:-----:|
@@ -66,11 +69,24 @@ The following steps must be executed on a machine that has network connectivity 
 
 ### Download and extract Tectonic Installer
 
-Open a new terminal, and run the following commands to download and extract Tectonic Installer.
+Open a new terminal and run the following command to download Tectonic Installer.
 
 ```bash
-$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.1.tar.gz # download
-$ tar xzvf tectonic-1.7.3-tectonic.1.tar.gz # extract the tarball
+$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.2.tar.gz # download
+```
+
+Verify the release has been signed by the [CoreOS App Signing Key][verification-key].
+
+```bash
+$ gpg2 --keyserver pgp.mit.edu --recv-key 18AD5014C99EF7E3BA5F6CE950BDD3E0FC8A365E
+$ gpg2 --verify tectonic-1.7.3-tectonic.2-tar-gz.asc tectonic-1.7.3-tectonic.2-tar.gz
+# gpg2: Good signature from "CoreOS Application Signing Key <security@coreos.com>"
+```
+
+Extract the tarball and navigate to the `tectonic` directory.
+
+```bash
+$ tar xzvf tectonic-1.7.3-tectonic.2.tar.gz
 $ cd tectonic
 ```
 
@@ -191,3 +207,4 @@ $ terraform destroy ../../platforms/vmware
 [vars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/config.md
 [troubleshooting]: ../../troubleshooting/faq.md
 [using-f5]: ../../reference/f5-ltm-lb.md
+[verification-key]: https://coreos.com/security/app-signing-key/

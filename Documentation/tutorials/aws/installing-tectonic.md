@@ -41,20 +41,28 @@ Having completed the AWS installation requirements, you are now ready to downloa
 
 Make sure a current version of either the Google Chrome or Mozilla Firefox browser is set as the default on the workstation where the installer will run.
 
-1. Download and run the Tectonic installer by opening a new terminal, and running the following command:
+1. Download and run the Tectonic installer by opening a new terminal and running the following command:
 ```
-$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.1.tar.gz
+$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.2.tar.gz
 ```
 
-2. Double click the tarball to extract it, then navigate to the tectonic/tectonic-installer folder.
-3. Double click the folder for your operating system.
-4. Double click the installer to launch it.
+2. Verify the release has been signed by the [CoreOS App Signing Key][verification-key].
+
+```bash
+$ gpg2 --keyserver pgp.mit.edu --recv-key 18AD5014C99EF7E3BA5F6CE950BDD3E0FC8A365E
+$ gpg2 --verify tectonic-1.7.3-tectonic.2-tar-gz.asc tectonic-1.7.3-tectonic.2-tar.gz
+# gpg2: Good signature from "CoreOS Application Signing Key <security@coreos.com>"
+```
+
+3. Double click the tarball to extract it, then navigate to the tectonic/tectonic-installer folder.
+4. Double click the folder for your operating system.
+5. Double click the installer to launch it.
 
 A browser window will open the Tectonic Installer to walk you through the setup process and provision your cluster.
 
 If you prefer to work within the terminal, extract and launch the Installer using:
 ```bash
-tar xzvf tectonic-1.7.3-tectonic.1.tar.gz # to extract the tarball
+tar xzvf tectonic-1.7.3-tectonic.2.tar.gz # to extract the tarball
 $ cd tectonic/tectonic-installer # to change to the previously untarred directory
 $ ./$PLATFORM/installer # to run the Tectonic Installer
 ```
@@ -177,3 +185,4 @@ Click *Configure kubectl* or *Deploy Application* to open CoreOS tutorials for t
 [first-app]: first-app.md
 [creating-aws]: creating-aws.md
 [aws-troubleshooting]: ../../install/aws/troubleshooting.md
+[verification-key]: https://coreos.com/security/app-signing-key/

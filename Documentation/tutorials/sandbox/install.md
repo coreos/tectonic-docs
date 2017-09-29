@@ -13,7 +13,6 @@ Tectonic Sandbox is not meant for production use cases. It's designed to be a si
 * A current version of Google Chrome, Internet Explorer, or Mozilla Firefox installed and running.
 * 8 GB of RAM
 
-
 1. Ensure that the latest versions of Vagrant and VirtualBox are installed on your local machine.
 2. [Download Tectonic Sandbox][sandbox-download-form].
 
@@ -29,7 +28,7 @@ Then, disable Hyper-V. Open a powershell and run:
 bcdedit /set hypervisorlaunchtype off
 ```
 
-Once Hyper-V is disabled, download and unzip [Tectonic Sandbox][sandbox-download].
+Once Hyper-V is disabled, download and unzip [Tectonic Sandbox][sandbox-download-form].
 
 Then, configure Vagrant to use VirtualBox to power Tectonic Sandbox. Navigate to within the Tectonic Sandbox directory and run:
 
@@ -37,7 +36,10 @@ Then, configure Vagrant to use VirtualBox to power Tectonic Sandbox. Navigate to
 vagrant up --provider=virtualbox
 ```
 
-Tectonic Sandbox will install and power up. Follow the instructions at the bottom of the terminal to launch Tectonic Console, and use kubectl with the cluster.
+Watch Sandbox install and the cluster spin up. This should take 20-40 minutes, depending on your connection. Follow the instructions at the bottom of the terminal to launch Tectonic Console, and to use kubectl with the cluster.
+
+* Log in to your cluster using the Console URL displayed in the terminal. If you see an error that the connection is not private (because the TLS certificate is self-signed), click **Advanced**, then **Proceed** to log in.
+* Enter the username and password provided, then click **Log In**.
 
 To re-enable Hyper-V after exploring Tectonic Sandbox, run:
 
@@ -47,7 +49,7 @@ bcdedit /set hypervisorlaunchtype auto
 
 ## OSX Installation
 
-Download and unzip [Tectonic Sandbox][sandbox-download].
+Download and unzip [Tectonic Sandbox][sandbox-download-form].
 
 Navigate to within the Tectonic Sandbox directory and run:
 
@@ -61,7 +63,7 @@ Watch Sandbox install, and spin up your cluster. This should take 20-40 minutes,
 
 ## Linux Installation
 
-Download and unzip [Tectonic Sandbox][sandbox-download].
+Download and unzip [Tectonic Sandbox][sandbox-download-form].
 
 Navigate to within the Tectonic Sandbox directory and run:
 
@@ -76,6 +78,14 @@ If your installation was successful, proceed to the tutorial for [installing you
 If not, check the Debugging section below.
 
 ## Debugging
+
+Q: How do I view the Console?
+
+A: Navigate to https://console.tectonicsandbox.com in your browser.
+
+Q: How do I log in to the Console?
+
+A: First, click through the "Your connection is not private" warning page. Click **Advanced**, and then **Proceed**. Then, enter user: “admin@example.com”, and password: “sandbox” to launch Tectonic Console.
 
 Q: My console doesn't work!
 
@@ -103,6 +113,22 @@ Q: It’s been 20 minutes and my cluster still isn't coming up!
 
 A: We know it is annoying but please wait 10 more minutes to file an issue. The installation must download 2GB+ of data between CoreOS Container Linux images and the required container images for Tectonic. A download of this size may take quite some time.
 
+Q: How do I use kubectl?
+
+A: To use kubectl with the cluster, set the environment variable.
+
+On macOS or Linux, run:
+
+```
+export KUBECONFIG=$PWD/provisioning/etc/kubernetes/kubeconfig
+```
+
+On Windows, run:
+
+```
+$env:KUBECONFIG = "$PWD\provisioning\etc\kubernetes\kubeconfig"
+```
+
 Q: I got a configuration error regarding `VagrantPlugins::Ignition::Config:`
 
 A: You are running an older version of the vagrant-ignition plugin. Update the plugin using this command:
@@ -127,29 +153,12 @@ Then, remove the old boxes:
 vagrant box remove coreos-beta --all --provider=virtualbox
 ```
 
-Q: How do I view the Console?
+Q: Does the Sandbox support my corporate firewall or HTTP proxy?
 
-A: Navigate to https://console.tectonicsandbox.com in your browser.
+A: Yes, but you must enable Sandbox to run behind a proxy by modifying the Docker controller and worker files under the provisioning folder of the Tectonic Sandbox zip file. Then use the Container Linux ct tool to update the Ignition files.
 
-Q: How do I log in to the Console?
+For a complete set of instructions, see [Tectonic Forum Issue #185][tectonic-185].
 
-A: First, click through the "Your connection is not private" warning page. Click **Advanced**, and then **Proceed**. Then, enter user: “admin@example.com”, and password: “sandbox” to launch Tectonic Console.
-
-Q: How do I use kubectl?
-
-A: To use kubectl with the cluster, set the environment variable listed at the end of the `vagrant up` instructions.
-
-On macOS or Linux, run:
-
-```
-export KUBECONFIG=$PWD/provisioning/etc/kubernetes/kubeconfig
-```
-
-On Windows, run:
-
-```
-$env:KUBECONFIG = "$PWD\provisioning\etc\kubernetes\kubeconfig"
-```
 
 [**NEXT:** Deploying an application on Tectonic][first-app]
 
@@ -158,3 +167,4 @@ $env:KUBECONFIG = "$PWD\provisioning\etc\kubernetes\kubeconfig"
 [virtualbox]: https://www.virtualbox.org/wiki/Downloads
 [sandbox-download-form]: https://coreos.com/tectonic/sandbox/
 [first-app]: first-app.md
+[tectonic-185]: https://github.com/coreos/tectonic-forum/issues/185#issuecomment-327855946

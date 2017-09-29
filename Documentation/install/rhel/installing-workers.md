@@ -48,24 +48,24 @@ The `tectonic-release` RPM includes the repo definition for the Tectonic softwar
 Download the RPM from the CoreOS `yum` repository:
 
 ```
-$ curl -LJO http://yum.prod.coreos.systems/repo/tectonic-rhel/el7/x86_64/Packages/tectonic-release-7-1.el7.noarch.rpm
+$ curl -LJO https://yum.prod.coreos.systems/repo/tectonic-rhel/7Server/x86_64/Packages/tectonic-release-7-2.el7.noarch.rpm
 ```
 
 Verify the signature:
 
 ```
-$ rpm -qip tectonic-release-7-1.el7.noarch.rpm
+$ rpm -qip tectonic-release-7-2.el7.noarch.rpm
 Name        : tectonic-release
 Version     : 7
-Release     : 1.el7
+Release     : 2.el7
 Architecture: noarch
 Install Date: (not installed)
 Group       : System Environment/Base
-Size        : 21966
+Size        : 13332
 License     : ASL 2.0
-Signature   : RSA/SHA256, Wed 16 Aug 2017 12:33:05 PM PDT, Key ID cf866cfe16431e6a
-Source RPM  : tectonic-release-7-1.el7.src.rpm
-Build Date  : Wed 16 Aug 2017 11:45:18 AM PDT
+Signature   : RSA/SHA256, Sat Sep  2 02:28:11 2017, Key ID cf866cfe16431e6a
+Source RPM  : tectonic-release-7-2.el7.src.rpm
+Build Date  : Sat Sep  2 01:59:11 2017
 Build Host  : buildhost.tectonic.coreos.systems
 Relocations : (not relocatable)
 URL         : https://coreos.com/tectonic
@@ -80,7 +80,7 @@ Confirm that the signature on the RPM matches the last 16 characters of the fing
 After verifying the signature, install the `tectonic-release` RPM:
 
 ```
-$ yum localinstall tectonic-release-7-1.el7.noarch.rpm
+$ yum localinstall tectonic-release-7-2.el7.noarch.rpm
 ```
 
 ### Install the tectonic-worker RPM
@@ -93,6 +93,12 @@ $ yum install tectonic-worker
 
 This will download the relevant dependencies and then prompt to validate the
 GPG key installed by the `tectonic-release` RPM.
+
+The Kubelet version must be kept in sync with the cluster's Tectonic version. To prevent incorrect `yum update` commands from updating the version, disable the Tectonic repo by writing `enabled=0` into:
+
+```
+/etc/yum.repos.d/tectonic.repo
+```
 
 ### Copy the kubeconfig file from the Tectonic Installer to the host
 
@@ -127,11 +133,14 @@ Note: These settings may not be all inclusive and will not represent relative no
 
 ### Set SELinux to Permissive mode
 
-It is required to run SELinux in Permissive mode. Running in Enforcing mode will block permissions for worker nodes.
+SELinux must be run in Permissive mode. Running in Enforcing mode will block permissions for worker nodes. Execute the following commands to enable Permissive mode:
 
-```
-setenforce 0
-```
+1. Change the permissions mode for the current session: `setenforce 0`
+2. Set `SELINUX=permissive` in `/etc/selinux/config`
+
+### Set up and enable NTP
+
+Clock synchronization is important for Tectonic, as it relies heavily on TLS certificates for communication between components. Enable and configure the NTP service with your organization's time servers.
 
 ### Enable and start the service
 

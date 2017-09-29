@@ -50,6 +50,7 @@
                 "ec2:DescribeVpcAttribute",
                 "ec2:DescribeVolumes",
                 "ec2:DescribeVpcClassicLink",
+                "ec2:DescribeVpcClassicLinkDnsSupport",
                 "ec2:ModifyInstanceAttribute",
                 "ec2:ModifySubnetAttribute",
                 "ec2:ModifyVpcAttribute",

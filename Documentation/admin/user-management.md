@@ -52,7 +52,9 @@ Static users are those defined directly in the Identity `ConfigMap`. Static user
       userID: "1d55c7c4-a76d-4d74-a257-31170f2c4845"
 ```
 
-A Bcrypt encoded hash of the user's password can be generated using the using the [coreos/bcrypt-tool](https://github.com/coreos/bcrypt-tool/releases/tag/v1.0.0).
+A bcrypt encoded hash of the user's password can be generated using the [coreos/bcrypt-tool](https://github.com/coreos/bcrypt-tool/releases/tag/v1.0.0).
+
+When generating Tectonic Console passwords with `bcrypt-tool`, using values higher than the default of `-cost=10` may result in timeouts. bcrypt also imposes a maximum password length of 56 bytes.
 
 To ensure the static user has been added successfully try and log in with the new user from the Tectonic console.
 
@@ -64,7 +66,7 @@ To change the password of an exisiting user, generate a bcrypt hash for the new 
     staticPasswords:
     # Existing user entry.
     - email: "test1@example.com"
-      # Newly generated Bcrypt hash
+      # Newly generated bcrypt hash
       hash: "$2a$10$TcWtvcw0N8.xK8nKdBw80uzYij6cJwuQhtfYnEf/hEC9bRTzlWdIq"
       username: "test1"
       userID: "1d55c7c4-a76d-4d74-a257-31170f2c4845"
@@ -223,7 +225,8 @@ spec:
 
 The `RoleBinding` would then reference the custom service account name instead of "default".
 
-Note that because service account credentials are stored in secrets, any clients with the ability to read secrets can extract the bearer token and act on behalf of that service account. It's recommended to be cautious when giving service accounts powers or clients the ability to read secrets.
+Note that because service account credentials are stored in secrets, any clients with the ability to read secrets can extract the bearer token and act on behalf of that service account. Be cautious when giving service accounts powers or clients the ability to read secrets.
+
 
 [assets-zip]: assets-zip.md
 [k8s-rbac]: http://kubernetes.io/docs/admin/authorization/#rbac-mode
