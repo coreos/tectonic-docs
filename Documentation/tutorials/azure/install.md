@@ -142,38 +142,7 @@ $ tar xzvf tectonic-1.7.3-tectonic.2.tar.gz
 $ cd tectonic
 ```
 
-### Initialize and configure Installer and Terraform
-
-#### Set INSTALLER_PATH
-
-Start by setting `INSTALLER_PATH` to the location of the installation host's Tectonic installer platform. The platform should be one of `darwin` or `linux`.
-
-```bash
-$ export INSTALLER_PATH=$(pwd)/tectonic-installer/linux/installer # Edit for linux or darwin
-$ export PATH=$PATH:$(pwd)/tectonic-installer/linux
-```
-
-#### Copy and configure .terraformrc
-
-Make a copy of the Terraform configuration file. Do not share this configuration file as it is specific to the install host.
-
-```bash
-$ sed "s|<PATH_TO_INSTALLER>|$INSTALLER_PATH|g" terraformrc.example > .terraformrc
-$ export TERRAFORM_CONFIG=$(pwd)/.terraformrc
-```
-
-#### Get Terraform's Azure modules
-
-Next, get the modules for the Azure platform that Terraform will use to create cluster resources:
-
-```
-$ terraform get platforms/azure
-Get: file:///Users/tectonic-installer/modules/azure/vnet
-Get: file:///Users/tectonic-installer/modules/azure/etcd
-...
-```
-
-#### Create a cluster build directory
+### Create a cluster build directory
 
 Choose a cluster name to identify the cluster. Export an environment variable with the chosen cluster name. In this tutorial, `my-cluster` is used.
 
@@ -207,7 +176,13 @@ These are the basic values that must be adjusted for each Tectonic deployment on
 
 ## Deploy the cluster
 
-Validate the plan before deploying:
+First, initialize Terraform:
+
+```
+$ terraform init platforms/azure
+```
+
+Then, validate the plan before deploying:
 
 ```
 $ terraform plan -var-file=build/${CLUSTER}/terraform.tfvars platforms/azure
