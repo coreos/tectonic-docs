@@ -49,17 +49,10 @@ $ export INSTALLER_PATH=$(pwd)/tectonic-installer/linux/installer
 $ export PATH=$PATH:$(pwd)/tectonic-installer/linux
 ```
 
-Make a copy of the Terraform configuration file for our system. Do not share this configuration file as it is specific to your machine.
-
-```bash
-$ sed "s|<PATH_TO_INSTALLER>|$INSTALLER_PATH|g" terraformrc.example > .terraformrc
-$ export TERRAFORM_CONFIG=$(pwd)/.terraformrc
-```
-
 Next, get the modules that Terraform will use to create the cluster resources:
 
 ```bash
-$ terraform get ./platforms/metal
+$ terraform init ./platforms/metal
 ```
 
 Now, specify the cluster configuration.
