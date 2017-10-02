@@ -41,11 +41,14 @@ Test this by killing the active containers running the Kubernetes API server on 
 
 From one of the masters, get the IDs of the containers running the API Server:
 
+{% raw %}
 ```
 $ docker ps -f 'name=.*kube-apiserver.*' --format "{{.ID}}"
 4ae686927f22
 06bb5ba95034
 ```
+{% endraw %}
+
 Then, kill the listed containers:
 
 ```
@@ -54,11 +57,13 @@ $ docker kill 4ae686927f22 06bb5ba95034
 
 Within a few seconds the kubelet will notice that the API server Pod is no longer running, and will relaunch under a new ID:
 
+{% raw %}
 ```
 $ docker ps -f 'name=.*kube-apiserver.*' --format "{{.ID}}"
 f4a262619d1d
 d964fa94c69b
 ```
+{% endraw %}
 
 In the Console, watch the list of API servers to see that one is disabled, and a new one is launched. Note that the Tectonic Console session offers continuous feedback because the API is configured with High Availability. This is the same Kubernetes feature that enables your apps to remain up and running without constant developer monitoring and interaction.
 
