@@ -10,7 +10,7 @@ Generally, the OpenStack platform templates adhere to the standards defined by t
 
 * **Terraform**: Tectonic Installer includes and requires a specific version of Terraform. This is included in the Tectonic Installer tarball. See the [Tectonic Installer release notes][release-notes] for information about which Terraform versions are compatible.
 * **CoreOS Container Linux**: The latest Container Linux Beta (1353.2.0 or later) [uploaded into Glance](https://coreos.com/os/docs/latest/booting-on-openstack.html) and its OpenStack image ID.
-* **CoreOS Tectonic account**: Register for a [CoreOS Tectonic account][account-login], which is free for up to 10 nodes. You must provide the account's License and Pull Secret during installation.
+* **CoreOS Tectonic account**: A [CoreOS Tectonic account][account-login]. You must provide the account's License and Pull Secret during installation.
 
 ## Getting Started
 OpenStack is a highly customizable environment where different components can be enabled/disabled. The installer currently supports only one flavor:

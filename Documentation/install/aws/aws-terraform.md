@@ -6,9 +6,10 @@ Generally, the AWS platform templates adhere to the standards defined by the pro
 
 ## Prerequsities
 
+* **CoreOS Account**: Register for a [CoreOS Account][account-login], which provides free access for up to 10 nodes on Tectonic. You must provide the account's License and Pull Secret (available from the account Overview page) during installation.
 * **Terraform**: Tectonic Installer includes and requires a specific version of Terraform. This is included in the Tectonic Installer tarball. See the [Tectonic Installer release notes][release-notes] for information about which Terraform versions are compatible.
 * **DNS**: Ensure that the DNS zone is already created and available in Route 53 for the account. For example if the `tectonic_base_domain` is set to `kube.example.com` a Route 53 zone must exist for this domain and the AWS nameservers must be configured for the domain.
-* **CoreOS Account**: Register for a [CoreOS Account][account-login], which provides free access for up to 10 nodes on Tectonic. You must provide the account's License and Pull Secret (available from the account Overview page) during installation.
+
 
 ## Getting Started
 

@@ -1,8 +1,8 @@
 # AWS: Installation requirements
 
-The following tools and access rights are required to use Tectonic Installer with and Amazon Web Services (AWS) account.
+The following tools and access rights are required to use Tectonic Installer with an Amazon Web Services (AWS) account.
 
-* Tectonic License and Pull Secret
+* [CoreOS Tectonic account][account-login] License and Pull Secret
 * A public AWS Route 53 Hosted Zone identifier. Public Route 53 DNS resolution is a requirement for controller-worker TLS communication. Choose a domain or subdomain and [configure it for name service at Route 53][aws-r53-doc]. Tectonic will create 2 subdomains in this Hosted Zone during provisioning.
 * An EC2 Region and Availability Zone
 * An EC2 SSH Key pair in that region

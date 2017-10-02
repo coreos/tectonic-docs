@@ -4,6 +4,17 @@ This guide steps through installing a Tectonic enterprise-ready Kubernetes clust
 
 ## Prerequisites
 
+### CoreOS account
+
+First, sign up for a CoreOS account, which provides up to 10 free nodes of production quality Tectonic. Once completed, log in to the account to obtain the License and Pull Secret required for installation.
+
+1. Go to [https://account.coreos.com/login][account-login].
+2. Click *Sign Up* and create an account using either your Google account or another email address.
+3. Enter your contact information, and click *Get License* for 10 nodes.
+4. Agree to the license terms.
+
+Check your inbox for a confirmation email. Once confirmed, log in to display the account's *Overview* page, from which the License and Pull Secret required for installation may be copied or downloaded.
+
 ### Azure account
 
 Before beginning, create an [Azure account][azure-home] with a valid credit card.
@@ -114,17 +125,6 @@ $ ssh-add -L
 ```
 
 ## Tectonic Installer
-
-### Create a CoreOS Tectonic account
-
-First, sign up for a CoreOS account, which provides up to 10 free nodes of production quality Tectonic. Once completed, log in to the account to obtain the License and Pull Secret required for installation.
-
-1. Go to [https://account.coreos.com/login][account-login].
-2. Click *Sign Up* and create an account using either your Google account or another email address.
-3. Enter your contact information, and click *Get License* for 10 nodes.
-4. Agree to the license terms.
-
-Check your inbox for a confirmation email. Once confirmed, log in to display the account's *Overview* page, from which the License and Pull Secret required for installation may be copied or downloaded.
 
 ### Download and extract Tectonic Installer
 

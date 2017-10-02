@@ -2,7 +2,7 @@
 
 This guide will use Tectonic Installer to deploy a Kubernetes cluster on Amazon AWS, then part it out, break the system, and watch it rebuild automatically.
 
-These instructions require an AWS account. See [Creating an AWS account][creating-aws] for more information.
+These instructions require a CoreOS account, and an AWS account. See [Downloading and installing Tectonic on AWS][account-login] and [Creating an AWS account][creating-aws] for more information.
 
 ## Cluster overview
 
@@ -28,6 +28,7 @@ Then, follow these guides to analyze, break, and watch your cluster rebuild.
 * [Break system locally and watch recovery][watch-recovery]
 
 
+[account-login]: https://account.coreos.com/login
 [creating-aws]: ../aws/creating-aws.html
 [aws-terraform]: ../../install/aws/aws-terraform.html
 [aws-installer]: ../../install/aws/index.html

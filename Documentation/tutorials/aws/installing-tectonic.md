@@ -9,8 +9,6 @@ Once your AWS account is activated, create a CoreOS Tectonic account, and prepar
 
 ## Creating your CoreOS account
 
-To create your CoreOS Tectonic account:
-
 First, sign up for a CoreOS account, which provides up to 10 free nodes of production quality Tectonic. Once completed, log in to the account to obtain the License and Pull Secret required for installation.
 
 1. Go to [https://account.coreos.com/login][account-login].

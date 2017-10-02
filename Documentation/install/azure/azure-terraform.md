@@ -8,7 +8,7 @@ The Azure platform templates generally adhere to the standards defined by the pr
 
 ### CoreOS account
 
-Tectonic Installer requires the License and Pull Secret provided with a CoreOS account. To obtain this information and up to 10 free nodes, first create a CoreOS account.
+Tectonic Installer requires the License and Pull Secret provided with a CoreOS account. To obtain this information and up to 10 free nodes, create a CoreOS account.
 
 1. Go to [https://account.coreos.com/login][account-login].
 2. Click *Sign Up* and create an account using either your Google account or another email address.
