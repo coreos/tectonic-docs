@@ -115,9 +115,16 @@ $ ssh-add -L
 
 ## Tectonic Installer
 
-### Register for Tectonic
+### Create a CoreOS Tectonic account
 
-Register for a [Tectonic Account][register], free for up to 10 nodes. The Tectonic license and container registry pull secret are required during installation. Download these credentials as the files `license.txt` and `config.json` from your Tectonic Account.
+First, sign up for a CoreOS account, which provides up to 10 free nodes of production quality Tectonic. Once completed, log in to the account to obtain the License and Pull Secret required for installation.
+
+1. Go to [https://account.coreos.com/login][account-login].
+2. Click *Sign Up* and create an account using either your Google account or another email address.
+3. Enter your contact information, and click *Get License* for 10 nodes.
+4. Agree to the license terms.
+
+Check your inbox for a confirmation email. Once confirmed, log in to display the account's *Overview* page, from which the License and Pull Secret required for installation may be copied or downloaded.
 
 ### Download and extract Tectonic Installer
 
@@ -210,6 +217,6 @@ When `terraform apply` is complete, the Tectonic console will be available at `h
 [azure-vars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/azure.md
 [bcrypt-tool]: https://github.com/coreos/bcrypt-tool/releases
 [first-app]: first-app.md
-[register]: https://account.coreos.com/signup/summary/tectonic-2016-12
+[account-login]: https://account.coreos.com/login
 [vars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/config.md
 [verification-key]: https://coreos.com/security/app-signing-key/

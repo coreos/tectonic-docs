@@ -37,9 +37,16 @@ Create required DNS records before beginning setup. The following table lists 3 
 
 See [Tectonic on Baremetal DNS documentation][baremetaldns] for general DNS Requirements.
 
-### Tectonic Account
+### Sign up for a CoreOS account
 
-Register for a [Tectonic Account][register], which is free for up to 10 nodes. You must provide the cluster license and pull secret during installation.
+First, sign up for a CoreOS account, which provides up to 10 free nodes of production quality Tectonic. Once completed, log in to the account to obtain the License and Pull Secret required for installation.
+
+1. Go to [https://account.coreos.com/login][account-login].
+2. Click *Sign Up* and create an account using either your Google account or another email address.
+3. Enter your contact information, and click *Get License* for 10 nodes.
+4. Agree to the license terms.
+
+Check your inbox for a confirmation email. Once confirmed, log in to display the account's *Overview* page, from which the License and Pull Secret required for installation may be copied or downloaded.
 
 ### ssh-agent
 
@@ -208,3 +215,4 @@ $ terraform destroy ../../platforms/vmware
 [troubleshooting]: ../../troubleshooting/faq.md
 [using-f5]: ../../reference/f5-ltm-lb.md
 [verification-key]: https://coreos.com/security/app-signing-key/
+[account-login]: https://account.coreos.com/login

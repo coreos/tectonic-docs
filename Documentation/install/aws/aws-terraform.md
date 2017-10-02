@@ -8,9 +8,20 @@ Generally, the AWS platform templates adhere to the standards defined by the pro
 
 * **Terraform**: Tectonic Installer includes and requires a specific version of Terraform. This is included in the Tectonic Installer tarball. See the [Tectonic Installer release notes][release-notes] for information about which Terraform versions are compatible.
 * **DNS**: Ensure that the DNS zone is already created and available in Route 53 for the account. For example if the `tectonic_base_domain` is set to `kube.example.com` a Route 53 zone must exist for this domain and the AWS nameservers must be configured for the domain.
-* **Tectonic Account**: Register for a [Tectonic Account][register], which is free for up to 10 nodes. You must provide the cluster license and pull secret during installation.
+* **CoreOS Account**: Register for a [CoreOS Account][account-login], which provides free access for up to 10 nodes on Tectonic. You must provide the account's License and Pull Secret (available from the account Overview page) during installation.
 
 ## Getting Started
+
+### Sign up for a CoreOS account
+
+First, sign up for a CoreOS account, which provides up to 10 free nodes of production quality Tectonic. Once completed, log in to the account to obtain the License and Pull Secret required for installation.
+
+1. Go to [https://account.coreos.com/login][account-login].
+2. Click *Sign Up* and create an account using either your Google account or another email address.
+3. Enter your contact information, and click *Get License* for 10 nodes.
+4. Agree to the license terms.
+
+Check your inbox for a confirmation email. Once confirmed, log in to display the account's *Overview* page, from which the License and Pull Secret required for installation may be copied or downloaded.
 
 ### Download and extract Tectonic Installer
 
@@ -37,7 +48,7 @@ $ cd tectonic
 
 ### Initialize and configure Terraform
 
-We need to add the `terraform` binary to our `PATH`. The platform should be `darwin` or `linux`.
+Add the `terraform` binary to our `PATH`. The platform should be `darwin` or `linux`.
 
 ```bash
 $ export PATH=$PATH:$(pwd)/tectonic-installer/darwin # Put the `terraform` binary in the PATH
@@ -95,13 +106,13 @@ Next, deploy the cluster:
 $ terraform apply -var-file=build/${CLUSTER}/terraform.tfvars platforms/aws
 ```
 
-This should run for a little bit, and when complete, your Tectonic cluster should be ready.
+This will run for a little bit. When complete, your Tectonic cluster will be ready.
 
 ## Access the cluster
 
-The Tectonic Console should be up and running after the containers have downloaded. You can access it at the DNS name configured in your variables file.
+The Tectonic Console will be up and running after the containers have downloaded. Access it at the DNS name configured in your variables file.
 
-Inside of the `/generated` folder you should find any credentials, including the CA if generated, and a `kubeconfig`. You can use this to control the cluster with `kubectl`:
+Inside of the `/generated` folder you should find any credentials, including the CA if generated, and a `kubeconfig`. Use these credentials to control the cluster with `kubectl`:
 
 ```bash
 $ export KUBECONFIG=generated/auth/kubeconfig
@@ -120,8 +131,6 @@ See the [troubleshooting][troubleshooting] document for workarounds for bugs tha
 [conventions]: ../../conventions.md
 [generic]: ../../generic-platform.md
 [env]: http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-environment
-[register]: https://account.coreos.com/signup/summary/tectonic-2016-12
-[account]: https://account.coreos.com
 [vars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/config.md
 [troubleshooting]: ../../troubleshooting/faq.md
 [aws-vars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/aws.md
@@ -131,3 +140,4 @@ See the [troubleshooting][troubleshooting] document for workarounds for bugs tha
 [scale-aws]: ../../admin/aws-scale.md
 [release-notes]: https://coreos.com/tectonic/releases/
 [verification-key]: https://coreos.com/security/app-signing-key/
+[account-login]: https://account.coreos.com/login

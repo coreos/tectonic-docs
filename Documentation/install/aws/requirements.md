@@ -11,6 +11,10 @@ The following tools and access rights are required to use Tectonic Installer wit
 * Access to a minimum of 30GB of storage for each node.
 * A current version of the Google Chrome or Mozilla Firefox web browser to run Tectonic Installer.
 
+## Tectonic License and Pull Secret
+
+To obtain the License and Pull Secret required during Tectonic installation, go to [https://account.coreos.com/login][account-login] and sign up for a CoreOS account. This account will entitle you to up to 10 free nodes on a production ready Tectonic cluster.
+
 ## Privileges
 
 The AWS credentials you provide require access to the following AWS services:
@@ -180,3 +184,4 @@ When using an existing VPC, tag AWS VPC subnets with the `kubernetes.io/cluster/
 [tectonic-installer-aws-policy]: ../../files/aws-policy.json
 [aws-vpc-dns-hostnames]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-hostnames
 [aws-internal-troubleshooting]: ./troubleshooting.md#internal-vpc-elb-andor-hosted-zone
+[account-login]: https://account.coreos.com/login

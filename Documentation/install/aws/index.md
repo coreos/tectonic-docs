@@ -4,14 +4,26 @@
 
 Check the [requirements doc][install-aws-requirements] to see what's needed. The short version:
 
+* a CoreOS account
 * an IAM account
 * an [associated SSH key][ssh-key-req]
 * a domain or subdomain with [DNS name service at AWS Route53][aws-r53-doc].
 * Tectonic will create a new AWS Virtual Private Cloud (VPC), or you can select an existing VPC. To use an existing VPC, see the [existing VPC requirements][install-aws-requirements-evpc].
 
-## Step 1: Download and run Tectonic Installer
+## Step 1: Create a CoreOS account
 
-Make sure a current version of either the Google Chrome or Mozilla Firefox web browser is set as the default browser on the workstation where Installer will run.
+Go to [https://account.coreos.com/login][account-login] to create and enable a CoreOS account. Once created, you will have access to 10 free nodes on Tectonic.
+
+1. Go to [https://account.coreos.com/login][account-login].
+2. Click *Sign Up* and create an account using either your Google account or another email address.
+3. Enter your contact information, and click *Get License* for 10 nodes.
+4. Agree to the license terms.
+
+Check your inbox for a confirmation email. Once confirmed, log in to display the account's *Overview* page, from which the License and Pull Secret required for installation may be copied or downloaded.
+
+## Step 2: Download and run Tectonic Installer
+
+Make sure a current version of either Google Chrome or Mozilla Firefox is set as the default browser on the workstation where Installer will run.
 
 Download the [Tectonic installer][latest-tectonic-release].
 
@@ -46,7 +58,7 @@ A browser window will open to begin the GUI installation process.
   </div>
 </div>
 
-## Step 2: Install
+## Step 3: Install
 
 Be sure to read the [installation requirements][install-aws-requirements], which include a section on [privileges for your AWS credentials][install-aws-requirements-creds], as well as the [known issues section in the Troubleshooting guide][install-aws-troubleshooting] before you install.
 
@@ -58,7 +70,7 @@ Once complete click *Go to my Tectonic Console* to launch the Console, and begin
 
 If you encounter any errors check the [troubleshooting][install-aws-troubleshooting] documentation.
 
-## Step 3: Tectonic Console
+## Step 4: Tectonic Console
 
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 co-m-screenshot">
@@ -82,3 +94,4 @@ For those new to Tectonic and Kubernetes, the [Tectonic Tutorials][tutorials] pr
 [install-aws-troubleshooting]: ../../troubleshooting/faq.md
 [tf-state]: https://www.terraform.io/docs/state/
 [install-windows]: ../installer-windows.md
+[account-login]: https://account.coreos.com/login
