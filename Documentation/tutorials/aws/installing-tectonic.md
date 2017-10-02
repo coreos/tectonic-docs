@@ -43,7 +43,7 @@ Make sure a current version of either the Google Chrome or Mozilla Firefox brows
 
 1. Download and run the Tectonic installer by opening a new terminal and running the following command:
 ```
-$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.2.tar.gz
+$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.3-tectonic.3.tar.gz
 ```
 
 2. Verify the release has been signed by the [CoreOS App Signing Key][verification-key].

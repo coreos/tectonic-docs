@@ -72,7 +72,7 @@ The following steps must be executed on a machine that has network connectivity 
 Open a new terminal and run the following command to download Tectonic Installer.
 
 ```bash
-$ curl -O https://releases.tectonic.com/tectonic-1.7.3-tectonic.2.tar.gz # download
+$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.3-tectonic.3.tar.gz # download
 ```
 
 Verify the release has been signed by the [CoreOS App Signing Key][verification-key].
