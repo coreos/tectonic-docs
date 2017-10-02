@@ -41,13 +41,13 @@ Test this by killing the active containers running the Kubernetes API server on 
 
 From one of the masters, get the IDs of the containers running the API Server:
 
-{% raw %}
+<!-- {% raw %} -->
 ```
 $ docker ps -f 'name=.*kube-apiserver.*' --format "{{.ID}}"
 4ae686927f22
 06bb5ba95034
 ```
-{% endraw %}
+<!-- {% endraw %} -->
 
 Then, kill the listed containers:
 
