@@ -19,7 +19,7 @@ Go to [https://account.coreos.com/login][account-login] to create and enable a C
 3. Enter your contact information, and click *Get License* for 10 nodes.
 4. Agree to the license terms.
 
-Check your inbox for a confirmation email. Once confirmed, log in to display the account's *Overview* page, from which the License and Pull Secret required for installation may be copied or downloaded.
+Check your inbox for a confirmation email. Once confirmed, log in to display the account's *Overview* page. Click "Free for use for up to 10 nodes" under Tectonic, and add your contact information. Once the update has processed, the *Overview* window will refresh to display the License and Pull Secret required for installation.
 
 ## Step 2: Download and run Tectonic Installer
 
