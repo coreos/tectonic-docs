@@ -1,11 +1,11 @@
 # Managing your CoreOS account
 
-Creating an account provides up to 10 free nodes on a Tectonic cluster.
+Creating a CoreOS account provides up to 10 free nodes on a Tectonic cluster.
 
 Use the account management interface to review and update your CoreOS accounts and subscriptions.
 
-Once created, [log in to your CoreOS account][login] to:
-* review and update account information (account number and contact information)
+Once created, [log in to your CoreOS account][account-login] to:
+* review and update account account number and contact information
 * review and update subscription plans
 * obtain CoreOS License and Pull Secret
 * add new users to the account
@@ -18,7 +18,7 @@ Click the *Account* tab to view your CoreOS account number, and review or edit y
 
 ## Review subscription plans
 
-Use the *Overview* tab to review the history of your subscriptions, including activation date and status. It also links to CoreOS contact information to update your plans.
+Use the *Overview* tab to review the history of your subscriptions, including activation date and status. Click *Update my Plan* to obtain contact information for subscription changes.
 
 ## Obtain CoreOS License and Pull Secret
 
@@ -54,7 +54,6 @@ To edit a user's access rights, click the sprocket to the left of their email ad
 
 Select *Change Role* to assign Read Only or Admin rights to the user. Select *Revoke Access* to remove the user from the cluster.
 
-
 ## Review and update billing information
 
 Use the *Billing* tab to view billing information, or to change the account's payment method or billing address.
@@ -81,4 +80,5 @@ To switch contexts, click the email address in the upper right corner of the pag
   </div>
 </div>
 
-[login]: https://account.coreos.com/login
+
+[account-login]: https://account.coreos.com/login

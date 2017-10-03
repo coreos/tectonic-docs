@@ -1,8 +1,8 @@
 # Creating a CoreOS account
 
-Creating a CoreOS account activates a CoreOS License for up to 10 free nodes.
+Creating a CoreOS account activates a License for up to 10 free nodes on a Tectonic cluster.
 
-First, go to [https://account.coreos.com/login][sign-up] to sign up for a CoreOS account. Sign up using an existing +Google account, or enter an email address and password, and click *Create Account*.
+First, go to [https://account.coreos.com/login][account-login] to sign up for a CoreOS account. Sign up using an existing +Google account, or enter an email address and password, and click *Create Account*.
 
 A confirmation email will be sent to the listed account. Check your inbox for an email from CoreOS Support, and click *Verify Email*.
 
@@ -20,9 +20,9 @@ This page lists your current CoreOS subscriptions and other available products, 
 
 ## CoreOS License and Pull Secret
 
-The *CoreOS License* and *Pull Secret* are required to access container images for CoreOS products.
+The *CoreOS License* and *Pull Secret* are required to install Tectonic and access container images for CoreOS products.
 
-Provide the License and Pull Secret during Tectonic Installation to enable cluster access. When requested, click the *copy and paste* link to open a window containing these strings. Then, copy and paste them into the appropriate fields during the installation process.
+When requested during Tectonic Installation, [sign in][sign-up] to your CoreOS account, and click the *copy and paste* link to open a window containing these strings. Then, copy and paste them into the appropriate fields during the installation process.
 
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
@@ -39,4 +39,4 @@ Download `config.json` from the account *Overview* screen and write it to the Do
 Docker will use the credentials in `config.json` when fetching Tectonic software.
 
 
-[sign-up]: https://account.coreos.com/login
+[account-login]: https://account.coreos.com/login
