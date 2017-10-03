@@ -6,7 +6,7 @@ Use this guide to deploy a Tectonic cluster on virtual or physical hardware usin
 
 For a complete list of requirements, see [Bare Metal Installation requirements][bare-requirements].
 
-* [CoreOS Tectonic Account][account-login], with access to its License and Pull Secret.
+* [Tectonic Account][account].
 * The Terraform version included in the Tectonic Installer tarball. See the [Tectonic Installer release notes][release-notes] for information about which Terraform versions are compatible.
 * [Matchbox v0.6+][matchbox-latest] installation with TLS client credentials and the gRPC API enabled.
 * [PXE network boot environment][network-setup] with DHCP, TFTP, and DNS services.
@@ -16,17 +16,6 @@ For a complete list of requirements, see [Bare Metal Installation requirements][
 * A SSH keypair whose private key is present in your system's [ssh-agent][ssh-agent].
 
 ## Getting Started
-
-### Sign up for a CoreOS account
-
-First, sign up for a CoreOS account, which provides up to 10 free nodes of production quality Tectonic. Once completed, log in to the account to obtain the License and Pull Secret required for installation.
-
-1. Go to [https://account.coreos.com/login][account-login].
-2. Click *Sign Up* and create an account using either your Google account or another email address.
-3. Enter your contact information, and click *Get License* for 10 nodes.
-4. Agree to the license terms.
-
-Check your inbox for a confirmation email. Once confirmed, log in to display the account's *Overview* page, from which the License and Pull Secret required for installation may be copied or downloaded.
 
 ### Download and extract Tectonic Installer
 
@@ -143,7 +132,7 @@ For more information on working with installed clusters, see [Scaling Tectonic b
 
 [conventions]: ../../conventions.md
 [generic]: ../../generic-platform.md
-[account-login]: https://account.coreos.com/login
+[account]: https://account.coreos.com
 [vars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/config.md
 [troubleshooting]: ../../troubleshooting/faq.md
 [uninstall]: uninstall.md
@@ -154,4 +143,4 @@ For more information on working with installed clusters, see [Scaling Tectonic b
 [network-setup]: https://coreos.com/matchbox/docs/latest/network-setup.html
 [matchbox-latest]: https://coreos.com/matchbox/docs/latest/
 [dns]: index.md#dns
-[verification-key]: https://coreos.com/security/app-signing-key/
+[verification-key]: https://coreos.com/security/app-signing-key/ 
