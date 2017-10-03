@@ -6,6 +6,17 @@ The Azure platform templates generally adhere to the standards defined by the pr
 
 ## Prerequisites
 
+### CoreOS account
+
+Tectonic Installer requires the License and Pull Secret provided with a CoreOS account. To obtain this information and up to 10 free nodes, create a CoreOS account.
+
+1. Go to [https://account.coreos.com/login][account-login].
+2. Click *Sign Up* and create an account using either your Google account or another email address.
+3. Enter your contact information, and click *Get License* for 10 nodes.
+4. Agree to the license terms.
+
+Check your inbox for a confirmation email. Once confirmed, log in to display the account's *Overview* page, from which the License and Pull Secret required for installation may be copied or downloaded.
+
 ### Terraform
 
 Tectonic Installer includes the required version of Terraform. See the [Tectonic Installer release notes][release-notes] for information about which Terraform versions are compatible.
@@ -27,10 +38,6 @@ To configure a custom domain and the associated records in an Azure DNS zone (e.
 * The custom domain must be specified using `tectonic_base_domain`
 * The domain must be publicly discoverable. The Tectonic installer uses the created record to access the cluster and complete configuration. See the Microsoft Azure documentation for instructions on how to [delegate a domain to Azure DNS][domain-delegation].
 * An Azure DNS zone matching the chosen `tectonic_base_domain` must be created prior to running the installer. The full resource ID of the DNS zone must then be referenced in `tectonic_azure_external_dns_zone_id`
-
-### Tectonic Account
-
-Register for a [Tectonic Account][register], free for up to 10 nodes. The cluster license and pull secret are required during installation.
 
 ### Azure CLI
 
@@ -269,9 +276,9 @@ See the [installer troubleshooting][troubleshooting] document for known problem 
 [install-go]: https://golang.org/doc/install
 [login]: https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli
 [plan-docs]: https://www.terraform.io/docs/commands/plan.html
-[register]: https://account.coreos.com/signup/summary/tectonic-2016-12
 [release-notes]: https://coreos.com/tectonic/releases/
 [terraform-tvars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/azure.md
 [troubleshooting]: ../../troubleshooting/installer-terraform.md
 [vars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/config.md
-[verification-key]: https://coreos.com/security/app-signing-key/ 
+[verification-key]: https://coreos.com/security/app-signing-key/
+[account-login]: https://account.coreos.com/login

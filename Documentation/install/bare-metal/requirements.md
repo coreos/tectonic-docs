@@ -4,7 +4,7 @@ The Tectonic Installer creates bare metal Tectonic clusters within networks with
 
 Installation requires the following items, which are discussed in more detail below:
 
-* [Tectonic Account][account]. Register for a Tectonic Account, which is free for up to 10 nodes. The cluster license and pull secret are required during installation of Tectonic.
+* [CoreOS Tectonic account][account-login] License and Pull Secret.
 * Terraform. Tectonic Installer includes and requires a specific version of Terraform. This is included in the Tectonic Installer tarball. See the [Tectonic Installer release notes][release-notes] for information about which Terraform versions are compatible.
 * [Matchbox v0.6+][matchbox-latest] installation with TLS client credentials and the gRPC API enabled. For more information, see the Matchbox [installation guide][matchbox-install].
 * PXE network boot environment with DHCP, TFTP, and DNS services. For more information, see [Network setup][network-setup].
@@ -13,6 +13,10 @@ Installation requires the following items, which are discussed in more detail be
 * Machines with known MAC addresses and stable domain names.
 * A SSH keypair whose private key is present in your system's [ssh-agent][ssh-agent].
 * Production clusters require an existing Load Balancer, configured for Tectonic. For an example setup, see [Using F5 BIG-IP LTM with Tectonic][using-f5].
+
+## Tectonic License and Pull Secret
+
+To obtain the License and Pull Secret required during Tectonic installation, go to [https://account.coreos.com/login][account-login] and sign up for a CoreOS account. This account will entitle you to up to 10 free nodes on a production ready Tectonic cluster.
 
 ## Tectonic Installer
 
@@ -114,7 +118,7 @@ The provisioner must:
 * Serve CoreOS PXE and install images
 
 
-[account]: https://account.coreos.com
+[account-login]: https://account.coreos.com/login
 [daemonset]: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
 [reprovision]: uninstall.md
 [matchbox]: https://coreos.com/matchbox

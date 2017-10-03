@@ -1,8 +1,8 @@
 # AWS: Installation requirements
 
-The following tools and access rights are required to use Tectonic Installer with and Amazon Web Services (AWS) account.
+The following tools and access rights are required to use Tectonic Installer with an Amazon Web Services (AWS) account.
 
-* Tectonic License and Pull Secret
+* [CoreOS Tectonic account][account-login] License and Pull Secret
 * A public AWS Route 53 Hosted Zone identifier. Public Route 53 DNS resolution is a requirement for controller-worker TLS communication. Choose a domain or subdomain and [configure it for name service at Route 53][aws-r53-doc]. Tectonic will create 2 subdomains in this Hosted Zone during provisioning.
 * An EC2 Region and Availability Zone
 * An EC2 SSH Key pair in that region
@@ -10,6 +10,10 @@ The following tools and access rights are required to use Tectonic Installer wit
 * Two (1 Controller, 1 Worker) t2.medium nodes (minimum).
 * Access to a minimum of 30GB of storage for each node.
 * A current version of the Google Chrome or Mozilla Firefox web browser to run Tectonic Installer.
+
+## Tectonic License and Pull Secret
+
+To obtain the License and Pull Secret required during Tectonic installation, go to [https://account.coreos.com/login][account-login] and sign up for a CoreOS account. This account will entitle you to up to 10 free nodes on a production ready Tectonic cluster.
 
 ## Privileges
 
@@ -180,3 +184,4 @@ When using an existing VPC, tag AWS VPC subnets with the `kubernetes.io/cluster/
 [tectonic-installer-aws-policy]: ../../files/aws-policy.json
 [aws-vpc-dns-hostnames]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-dns.html#vpc-dns-hostnames
 [aws-internal-troubleshooting]: ./troubleshooting.md#internal-vpc-elb-andor-hosted-zone
+[account-login]: https://account.coreos.com/login
