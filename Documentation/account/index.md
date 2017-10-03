@@ -34,3 +34,4 @@ Go to [Getting started with Tectonic][choose-platform], select your platform, an
 [account-login]: https://account.coreos.com/login
 [choose-platform]: ../install/index.md
 [account-overview]: create-account.md#coreos-account-license-and-pull-secret
+[install-sandbox]: https://coreos.com/tectonic/sandbox
