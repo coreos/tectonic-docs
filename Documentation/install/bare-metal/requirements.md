@@ -130,3 +130,4 @@ The provisioner must:
 [network-setup]: https://coreos.com/matchbox/docs/latest/network-setup.html
 [dns]: index.md#dns
 [using-f5]: ../../reference/f5-ltm-lb.md
+[release-notes]: https://coreos.com/tectonic/releases/
