@@ -1,30 +1,22 @@
-# Getting started with your CoreOS account
+# Getting started with CoreOS Tectonic
 
-First, sign up for a CoreOS account from [coreos.com](https://coreos.com/). Then, check your inbox for an email from CoreOS Support, and click *Verify Email*.
+The easiest way to learn about Tectonic is to [download and install Tectonic Sandbox][install-sandbox]. This allows you to deploy Tectonic on your local machine, and evaluate the full functionality of Tectonic and Tectonic Console.
 
-Log in to complete registration and access the Account Overview page.
+When you’re ready to create a production ready cluster, follow these instructions to create an account, and spin up a free 10-node cluster.
 
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-    <a href="../img/coreos-account-overview-agreement.png" class="co-m-screenshot">
-      <img src="../img/coreos-account-overview-agreement.png" class="img-responsive">
-    </a>
-  </div>
-</div>
+## Create a CoreOS account
 
-After signing up for one of the *Available Products* you will be redirected to the account Overview page with a list of subscriptions, and links to access your account's CoreOS License and Pull Secret.
+Go to [https://account.coreos.com/login][account-login], and click *Sign Up*.
 
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-    <a href="../img/coreos-account-license.png" class="co-m-screenshot">
-      <img src="../img/coreos-account-license.png" class="img-responsive">
-    </a>
-  </div>
-</div>
+Select an existing +Google account, or enter an email address and password, and click *Create Account*.
 
-## Using your pull secret to download CoreOS software
+A confirmation email will be sent to the listed account. Click through to accept the terms of the license, activate your account, and be redirected to your *Account Overview* page.
 
-The *CoreOS License* and *Pull Secret* are required to access container images for CoreOS products. Click the link to copy and paste below the Download buttons to open a window from which these may be copied into the appropriate fields during the Tectonic installation process.
+## Obtain your License and Pull Secret
+
+During installation, you will be asked to provide your Tectonic License and Pull Secret, which are available from your [Account Overview][account-overview] page.
+
+When requested, log in to your [account][account-login], and click the *Overview* tab. Then, click the link to *copy and paste* the strings into the appropriate fields in Tectonic Installer.
 
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
@@ -34,62 +26,11 @@ The *CoreOS License* and *Pull Secret* are required to access container images f
   </div>
 </div>
 
-The License and Pull secret may also be entered manually. The `config.json` file contains a pull secret granting access to CoreOS container registries.
+## Download and install Tectonic
 
-Download `config.json` from the account *Overview* screen and write it to the Docker configuration directory. On CoreOS Container Linux, copy the file to `/home/core/.docker/config.json`. On most other Linux distributions, copy the file to `/root/.docker/config.json` or the configured Docker configuration directory.
+Go to [Getting started with Tectonic][choose-platform], select your platform, and follow the download and installation instructions provided.
 
-Docker will use the credentials in `config.json` when fetching Tectonic software.
 
-## Adding users to a CoreOS account
-
-Use the *Account* tab to invite new users to the account, and to manage existing user subscriptions. Users must be added to an account before they can deploy CoreOS software from the account.
-
-To edit a user's details, click the sprocket to the left of their email address.
-
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-    <a href="../img/coreos-account-user-invited.png" class="co-m-screenshot">
-      <img src="../img/coreos-account-user-invited.png" class="img-responsive">
-    </a>
-  </div>
-</div>
-
-To invite new users to the account, click *Invite New User*. Email invitations will be sent, from which new users may activate their account. **To accept the invitation, users must first create a CoreOS account by clicking the *Register* link at the bottom of the login box and completing email validation.**
-
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-    <a href="../img/coreos-account-invited-email.png" class="co-m-screenshot">
-      <img src="../img/coreos-account-invited-email.png" class="img-responsive">
-    </a>
-  </div>
-</div>
-
-Once added, users will see the organization name to the left of their account name at the top of their *Overview* page. Their status on the *Account* page will change from *Invited* to *Accepted*.
-
-## Changing account context
-
-A user may be a member of several CoreOS accounts. For example, they may have a Quay Enterprise license through work and access to a trial Tectonic cluster through a personal account. In this case, users must switch account contexts to access each license separately.
-
-To switch contexts, click the email address in the upper right corner of the page, and select an account to load the *Overview* page for that context.
-
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-    <a href="../img/change-account-context.png" class="co-m-screenshot">
-      <img src="../img/change-account-context.png" class="img-responsive">
-    </a>
-  </div>
-</div>
-
------------------------------------------------------------------
-
-## Managing billing
-
-Use the *Billing* tab to view billing information, or to change the account's payment method or billing address.
-
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-    <a href="../img/billingpage.png" class="co-m-screenshot">
-      <img src="../img/billingpage.png" class="img-responsive">
-    </a>
-  </div>
-</div>
+[account-login]: https://account.coreos.com/login
+[choose-platform]: ../install/index.md
+[account-overview]: create-account.md#coreos-account-license-and-pull-secret
