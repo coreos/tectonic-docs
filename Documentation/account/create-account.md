@@ -8,6 +8,12 @@ A confirmation email will be sent to the listed account. Check your inbox for an
 
 Log in to complete registration and access the account *Overview* page.
 
+add new screen grab - once i have it - beth
+
+This page lists your current CoreOS subscriptions and other available products, and provides access to your CoreOS License and Pull Secret.
+
+Click *Free for use up to 10 nodes* below Tectonic, enter your contact information, and click *Get License for 10 nodes* to complete the registration process.
+
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
     <a href="../img/coreos-account-overview.png" class="co-m-screenshot">
@@ -15,8 +21,6 @@ Log in to complete registration and access the account *Overview* page.
     </a>
   </div>
 </div>
-
-This page lists your current CoreOS subscriptions and other available products, and provides access to your CoreOS License and Pull Secret.
 
 ## CoreOS License and Pull Secret
 
