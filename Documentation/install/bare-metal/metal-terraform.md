@@ -49,6 +49,21 @@ $ export INSTALLER_PATH=$(pwd)/tectonic-installer/linux/installer
 $ export PATH=$PATH:$(pwd)/tectonic-installer/linux
 ```
 
+Add the [terraform-provider-matchbox](https://github.com/coreos/terraform-provider-matchbox/releases) plugin binary onto your system.
+
+```bash
+$ wget https://github.com/coreos/terraform-provider-matchbox/releases/download/v0.2.2/terraform-provider-matchbox-v0.2.2-linux-amd64.tar.gz
+$ tar xzf terraform-provider-matchbox-v0.2.2-linux-amd64.tar.gz
+```
+
+Add the plugin to your `~/.terraformrc`
+
+```bash
+providers {
+  matchbox = "/path/to/terraform-provider-matchbox"
+}
+```
+
 Next, get the modules that Terraform will use to create the cluster resources:
 
 ```bash
