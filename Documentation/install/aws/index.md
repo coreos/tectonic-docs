@@ -29,7 +29,7 @@ Download the [Tectonic installer][latest-tectonic-release].
 
 ```bash
 wget https://releases.tectonic.com/releases/tectonic_1.7.3-tectonic.3.tar.gz
-tar xzvf tectonic-1.7.3-tectonic.2.tar.gz
+tar xzvf tectonic_1.7.3-tectonic.3.tar.gz
 cd tectonic
 ```
 
