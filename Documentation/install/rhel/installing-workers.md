@@ -48,24 +48,24 @@ The `tectonic-release` RPM includes the repo definition for the Tectonic softwar
 Download the RPM from the CoreOS `yum` repository:
 
 ```
-$ curl -LJO https://yum.prod.coreos.systems/repo/tectonic-rhel/7Server/x86_64/Packages/tectonic-release-7-2.el7.noarch.rpm
+$ curl -LJO https://yum.prod.coreos.systems/repo/tectonic-rhel/7Server/x86_64/Packages/tectonic-release-7-3.el7.noarch.rpm
 ```
 
 Verify the signature:
 
 ```
-$ rpm -qip tectonic-release-7-2.el7.noarch.rpm
+$ rpm -qip tectonic-release-7-3.el7.noarch.rpm
 Name        : tectonic-release
 Version     : 7
-Release     : 2.el7
+Release     : 3.el7
 Architecture: noarch
 Install Date: (not installed)
 Group       : System Environment/Base
-Size        : 13332
+Size        : 13720
 License     : ASL 2.0
-Signature   : RSA/SHA256, Sat Sep  2 02:28:11 2017, Key ID cf866cfe16431e6a
-Source RPM  : tectonic-release-7-2.el7.src.rpm
-Build Date  : Sat Sep  2 01:59:11 2017
+Signature   : RSA/SHA256, Tue Oct  3 23:50:28 2017, Key ID cf866cfe16431e6a
+Source RPM  : tectonic-release-7-3.el7.src.rpm
+Build Date  : Tue Oct  3 22:43:08 2017
 Build Host  : buildhost.tectonic.coreos.systems
 Relocations : (not relocatable)
 URL         : https://coreos.com/tectonic
@@ -80,25 +80,32 @@ Confirm that the signature on the RPM matches the last 16 characters of the fing
 After verifying the signature, install the `tectonic-release` RPM:
 
 ```
-$ yum localinstall tectonic-release-7-2.el7.noarch.rpm
+$ yum localinstall tectonic-release-7-3.el7.noarch.rpm
 ```
+
+### Restrict updates to a specific Tectonic channel
+
+To keep RHEL worker versions in line with the rest of the Tectonic cluster, consider whitelisting specific package versions with the `includepkgs` repository configuration option. For example, to stay on the Tectonic 1.6 channel, write the following line under the `[tectonic]` section in `/etc/yum.repos.d/tectonic.repo`.
+
+```
+includepkgs=rkt tectonic-release tectonic-worker-1.6.*
+```
+
+This will cause `yum` commands ignore all packages in the Tectonic repository except `rkt`, `tectonic-release` (repo configuration), and versions of the Tectonic worker starting with `1.6`. It allows receiving updates without upgrading to Tectonic 1.7 or later channels.
+
+To prevent other accidental worker upgrades, the Tectonic repository can be disabled by setting `enabled=0` under the `[tectonic]` section in `/etc/yum.repos.d/tectonic.repo`. If using this option, YUM must be invoked with `yum --enablerepo=tectonic ...` to install packages from this repository again.
+
+Note that upgrading the `tectonic-worker` RPM will not affect the running kubelet service. The new version will only be used after rebooting or running `systemctl restart kubelet`.
 
 ### Install the tectonic-worker RPM
 
-After the `tectonic-release` RPM is installed, complete the installation of the `tectonic-worker` RPM:
+After the `tectonic-release` RPM is installed and worker versions were optionally whitelisted, complete the installation of the `tectonic-worker` RPM:
 
 ```
 $ yum install tectonic-worker
 ```
 
-This will download the relevant dependencies and then prompt to validate the
-GPG key installed by the `tectonic-release` RPM.
-
-The Kubelet version must be kept in sync with the cluster's Tectonic version. To prevent incorrect `yum update` commands from updating the version, disable the Tectonic repo by writing `enabled=0` into:
-
-```
-/etc/yum.repos.d/tectonic.repo
-```
+This will download the relevant dependencies and then prompt to validate the GPG key installed by the `tectonic-release` RPM.
 
 ### Copy the kubeconfig file from the Tectonic Installer to the host
 
