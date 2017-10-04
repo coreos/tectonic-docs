@@ -1,4 +1,4 @@
-# Downloading and installing Tectonic on AWS
+# Download and install Tectonic on AWS
 
 Once your AWS account is activated, create a CoreOS Tectonic account, and prepare your AWS account for installation. This tutorial will cover:
 
@@ -7,7 +7,7 @@ Once your AWS account is activated, create a CoreOS Tectonic account, and prepar
 * Installing Tectonic using AWS
 * Creating a new Kubernetes cluster
 
-## Creating your CoreOS account<a name="create-account"></a>
+## Create a CoreOS account
 
 First, sign up for a CoreOS account, which provides up to 10 free nodes of production quality Tectonic. Once completed, log in to the account to obtain the License and Pull Secret required for installation.
 
@@ -18,7 +18,7 @@ First, sign up for a CoreOS account, which provides up to 10 free nodes of produ
 
 Check your inbox for a confirmation email. Once confirmed, log in to display the account's *Overview* page. Click "Free for use for up to 10 nodes" under Tectonic, and add your contact information. Once the update has processed, the *Overview* window will refresh to display the License and Pull Secret required for installation.
 
-## Preparing your AWS account for installation
+## Prepare your AWS account for installation
 
 After activating your Tectonic account, review and complete [Creating an AWS account][creating-aws] before downloading Tectonic Installer.
 
@@ -31,13 +31,14 @@ Installing Tectonic requires:
 
 Tectonic will create a new AWS Virtual Private Cloud (VPC), or you can select an existing VPC. To use an existing VPC, see the [existing VPC requirements][vpc-req].
 
-## Downloading and running Tectonic Installer
+## Download and run Tectonic Installer
 
 Having completed the AWS installation requirements, you are now ready to download and run the Tectonic Installer.
 
 Make sure a current version of either Google Chrome or Mozilla Firefox is set as the default browser on the workstation where the installer will run.
 
 1. Download and run Tectonic Installer by opening a new terminal and running the following command:
+
 ```
 $ curl -O https://releases.tectonic.com/releases/tectonic_1.7.3-tectonic.3.tar.gz
 ```
@@ -56,7 +57,7 @@ $ gpg2 --verify tectonic-1.7.3-tectonic.2-tar-gz.asc tectonic-1.7.3-tectonic.2-t
 
 A browser window will open Tectonic Installer to walk you through the setup process and provision your cluster.
 
-When prompted, log in to your CoreOS account to obtain the License and Pull Secret, as described in [Creating your CoreOS account](#create-account) above.
+When prompted, log in to your CoreOS account to obtain the License and Pull Secret, as described in [Create a CoreOS account](#create-a-coreos-account) above.
 
 If you prefer to work within the terminal, extract and launch the Installer using:
 ```bash
@@ -74,7 +75,7 @@ Setup should take about 10-15 minutes. If you encounter any errors, please see t
 
 Once installation is complete, access Tectonic Console through a browser window.
 
-## Creating a new Kubernetes cluster
+## Create a new Kubernetes cluster
 
 Step through Tectonic Installer to deploy the Tectonic Kubernetes distribution on a new cluster.
 
