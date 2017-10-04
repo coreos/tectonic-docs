@@ -188,7 +188,7 @@ This should run for a short time.
 
 ## Access the cluster
 
-When `terraform apply` is complete, the Tectonic console will be available at `https://my-cluster.example.com`, as configured in the cluster build's variables file.
+The Tectonic Console will be up and running after the containers have downloaded. Access it at the DNS name `https://<tectonic_cluster_name>.<tectonic_base_domain>` (or external DNS values), configured in the `terraform.tfvars` variables file.
 
 ### CLI cluster operations with kubectl
 
