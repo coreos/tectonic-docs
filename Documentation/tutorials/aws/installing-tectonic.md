@@ -7,7 +7,7 @@ Once your AWS account is activated, create a CoreOS Tectonic account, and prepar
 * Installing Tectonic using AWS
 * Creating a new Kubernetes cluster
 
-## Creating your CoreOS account
+## Creating your CoreOS account<a name="create-account"></a>
 
 First, sign up for a CoreOS account, which provides up to 10 free nodes of production quality Tectonic. Once completed, log in to the account to obtain the License and Pull Secret required for installation.
 
@@ -23,6 +23,7 @@ Check your inbox for a confirmation email. Once confirmed, log in to display the
 After activating your Tectonic account, review and complete [Creating an AWS account][creating-aws] before downloading Tectonic Installer.
 
 Installing Tectonic requires:
+* The License and Pull Secret associated with your CoreOS account
 * An Identity Access Management (IAM) account
 * An associated Access Key
 * A domain or subdomain with DNS name service at AWS Route 53
@@ -54,6 +55,8 @@ $ gpg2 --verify tectonic-1.7.3-tectonic.2-tar-gz.asc tectonic-1.7.3-tectonic.2-t
 5. Double click the installer to launch it.
 
 A browser window will open Tectonic Installer to walk you through the setup process and provision your cluster.
+
+When prompted, log in to your CoreOS account to obtain the License and Pull Secret, as described in [Creating your CoreOS account](#create-account) above.
 
 If you prefer to work within the terminal, extract and launch the Installer using:
 ```bash

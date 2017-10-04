@@ -10,7 +10,7 @@ Check the [requirements doc][install-aws-requirements] to see what's needed. The
 * a domain or subdomain with [DNS name service at AWS Route53][aws-r53-doc].
 * Tectonic will create a new AWS Virtual Private Cloud (VPC), or you can select an existing VPC. To use an existing VPC, see the [existing VPC requirements][install-aws-requirements-evpc].
 
-## Step 1: Create a CoreOS account
+## Step 1: Create a CoreOS account<a name="step-1"></a>
 
 Go to [https://account.coreos.com/login][account-login] to create and enable a CoreOS account. Once created, you will have access to 10 free nodes on Tectonic.
 
@@ -33,7 +33,7 @@ tar xzvf tectonic-1.7.3-tectonic.2.tar.gz
 cd tectonic
 ```
 
-Run the Tectonic Installer for your platform:
+Run the Tectonic Installer for your platform.
 
 For macOS users:
 
@@ -47,7 +47,7 @@ For Linux users:
 $ ./tectonic-installer/linux/installer
 ```
 
-For Windows users, [see this guide][install-windows].
+For Windows users, see [Running Tectonic Installer in a Docker container on Windows][install-windows].
 
 A browser window will open to begin the GUI installation process.
 
@@ -61,6 +61,8 @@ A browser window will open to begin the GUI installation process.
 ## Step 3: Install
 
 Be sure to read the [installation requirements][install-aws-requirements], which include a section on [privileges for your AWS credentials][install-aws-requirements-creds], as well as the [known issues section in the Troubleshooting guide][install-aws-troubleshooting] before you install.
+
+Installation requires the CoreOS License and Pull Secret described in [Step 1](#step-1). Be certain to create an account and enable the 10 free nodes before launching Tectonic Installer.
 
 Follow the on-screen instructions to provision your cluster. This process should take about 10-15 minutes.
 
