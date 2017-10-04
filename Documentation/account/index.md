@@ -30,6 +30,8 @@ When requested, log in to your [account][account-login], and click the *Overview
 
 Go to [Getting started with Tectonic][choose-platform], select your platform, and follow the download and installation instructions provided.
 
+Installation requires the CoreOS License and Pull Secret described above. Be certain to create an account and enable the 10 free nodes before launching Tectonic Installer.
+
 
 [account-login]: https://account.coreos.com/login
 [choose-platform]: ../install/index.md
