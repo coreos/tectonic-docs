@@ -111,7 +111,7 @@ This will run for a little bit. When complete, your Tectonic cluster will be rea
 
 ## Access the cluster
 
-The Tectonic Console will be up and running after the containers have downloaded. Access it at the DNS name configured in your variables file.
+The Tectonic Console will be up and running after the containers have downloaded. Access it at the DNS name `https://<tectonic_cluster_name>.<tectonic_base_domain>`, configured in the `terraform.tfvars` variables file.
 
 Inside of the `/generated` folder you should find any credentials, including the CA if generated, and a `kubeconfig`. Use these credentials to control the cluster with `kubectl`:
 
