@@ -15,7 +15,7 @@ To resolve these issues, delete each affected Pod and allow the StatefulSet to r
 
 To update to 1.7.1-tectonic.1, first update to 1.6.7-tectonic.2. Updates to 1.7.1-tectonic.1 from versions previous to 1.6.7-tectonic.2 will fail.
 
-### Switching to 1.7 channel before updating to v1.6.7_tectonic.2.
+### Switching to 1.7 channel before updating to v1.6.7-tectonic.2.
 
 If Tectonic Console was used to switch to the `Tectonic-1.7-preproduction` or `Tectonic-1.7-production` channel from v1.6.7-tectonic.1 or previous, first revert to the channel listed before update. Then wait for the next update check. When Tectonic Console lists the option, switch to `Tectonic-1.6.7`. Once that update is complete, use the Console to update to `Tectonic-1.7`.
 
