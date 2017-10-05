@@ -8,32 +8,38 @@ When you’re ready to create a production ready cluster, follow these instructi
 
 Go to [https://account.coreos.com/login][account-login], and click *Sign Up*.
 
-Select an existing +Google account, or enter an email address and password, and click *Create Account*.
+Check your inbox for a confirmation email. Click through to accept the terms of the license, activate your account, and be redirected to the account's *Overview* page.
 
-A confirmation email will be sent to the listed account. Click through to accept the terms of the license, activate your account, and be redirected to your *Account Overview* page.
+Click "Free for use up to 10 nodes" under Tectonic. Enter your contact information, and click *Get License for 10 nodes*.
+
+Once the update has processed, the *Overview* window will refresh to include links to download the License and Pull Secret.
 
 ## Obtain your License and Pull Secret
 
 During installation, you will be asked to provide your Tectonic License and Pull Secret, which are available from your [Account Overview][account-overview] page.
 
-When requested, log in to your [account][account-login], and click the *Overview* tab. Then, click the link to *copy and paste* the strings into the appropriate fields in Tectonic Installer.
+When requested, log in to your [account][account-login], and click the *Overview* tab. Then, click the buttons to *Download CoreOS License* and *Download Pull Secret*.
 
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-    <a href="../img/coreos-account-license-secret.png" class="co-m-screenshot">
-      <img src="../img/coreos-account-license-secret.png" class="img-responsive">
+    <a href="../img/coreos-account-overview.png" class="co-m-screenshot">
+      <img src="../img/coreos-account-overview.png" class="img-responsive">
     </a>
   </div>
 </div>
 
 ## Download and install Tectonic
 
-Go to [Getting started with Tectonic][choose-platform], select your platform, and follow the download and installation instructions provided.
+Select your platform, and follow the download and installation instructions provided.
+
+* [AWS Install Guide][install-aws]: Install a scalable cluster using Tectonic Installer
+* [Bare-metal Install Guide][install-bare-metal]: Deploy Kubernetes onto your physical infrastructure
 
 Installation requires the CoreOS License and Pull Secret described above. Be certain to create an account and enable the 10 free nodes before launching Tectonic Installer.
 
 
+[install-aws]: aws/index.md
+[install-bare-metal]: bare-metal/index.md
 [account-login]: https://account.coreos.com/login
-[choose-platform]: ../install/index.md
 [account-overview]: create-account.md#coreos-account-license-and-pull-secret
 [install-sandbox]: https://coreos.com/tectonic/sandbox
