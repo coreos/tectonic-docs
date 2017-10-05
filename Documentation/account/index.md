@@ -32,7 +32,7 @@ When requested, log in to your [account][account-login], and click the *Overview
 
 Select your platform, and follow the download and installation instructions provided.
 
-* [Install on AWS with a graphic interface][aws-gui]
+* [Install on AWS with a graphical interface][aws-gui]
 * [Install on AWS with Terraform][aws-tf]
 * [Install on Azure with Terraform][azure-tf]
 * [Install on bare metal with Terraform][bare-tf]
