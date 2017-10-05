@@ -13,16 +13,17 @@ Generally, the AWS platform templates adhere to the standards defined by the pro
 
 ## Getting Started
 
-### Sign up for a CoreOS account
+### Create a CoreOS account
 
-First, sign up for a CoreOS account, which provides up to 10 free nodes of production quality Tectonic. Once completed, log in to the account to obtain the License and Pull Secret required for installation.
+Tectonic Installer requires the License and Pull Secret provided with a CoreOS account. To obtain this information and up to 10 free nodes, create a CoreOS account.
 
-1. Go to [https://account.coreos.com/login][account-login].
-2. Click *Sign Up* and create an account using either your Google account or another email address.
-3. Enter your contact information, and click *Get License* for 10 nodes.
-4. Agree to the license terms.
+1. Go to [https://account.coreos.com/login][account-login], and click *Sign Up*.
 
-Check your inbox for a confirmation email. Once confirmed, log in to display the account's *Overview* page. Click "Free for use for up to 10 nodes" under Tectonic, and add your contact information. Once the update has processed, the *Overview* window will refresh to display the License and Pull Secret required for installation.
+2. Check your inbox for a confirmation email. Click through to accept the terms of the license, activate your account, and be redirected to the *Account Overview* page.
+
+3. Click "Free for use up to 10 nodes" under Tectonic. Enter your contact information, and click *Get License for 10 nodes*.
+
+Once the update has processed, the *Overview* window will refresh to include links to download the License and Pull Secret.
 
 ### Download and extract Tectonic Installer
 
