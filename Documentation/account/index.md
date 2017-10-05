@@ -32,14 +32,18 @@ When requested, log in to your [account][account-login], and click the *Overview
 
 Select your platform, and follow the download and installation instructions provided.
 
-* [AWS Install Guide][install-aws]: Install a scalable cluster using Tectonic Installer
-* [Bare-metal Install Guide][install-bare-metal]: Deploy Kubernetes onto your physical infrastructure
+* [Install on AWS with a graphic interface][aws-gui]
+* [Install on AWS with Terraform][aws-tf]
+* [Install on Azure with Terraform][azure-tf]
+* [Install on bare metal with Terraform][bare-tf]
 
 Installation requires the CoreOS License and Pull Secret described above. Be certain to create an account and enable the 10 free nodes before launching Tectonic Installer.
 
 
-[install-aws]: aws/index.md
-[install-bare-metal]: bare-metal/index.md
+[aws-tf]: ../install/aws/aws-terraform.md
+[aws-gui]: ../install/aws/index.md
+[azure-tf]: ../install/azure/azure-terraform.md
+[bare-tf]: ../install/bare-metal/index.md
 [account-login]: https://account.coreos.com/login
 [account-overview]: create-account.md#coreos-account-license-and-pull-secret
 [install-sandbox]: https://coreos.com/tectonic/sandbox
