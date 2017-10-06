@@ -65,6 +65,7 @@ Next, get the modules that Terraform will use to create the cluster resources:
 
 ```bash
 $ terraform init ./platforms/metal
+Downloading modules...
 Get: modules/metal/vpc
 Get: modules/metal/etcd
 Get: modules/metal/ignition
@@ -75,7 +76,12 @@ Get: modules/bootkube
 Get: modules/tectonic
 Get: modules/net/flannel-vxlan
 Get: modules/net/calico-network-policy
+
+Initializing provider plugins...
+   Checking for available provider plugins on https://releases.hashicorp.com...
 ```
+
+Terraform will download any available plugins, and report when initialization is complete.
 
 Now, specify the cluster configuration.
 

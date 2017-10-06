@@ -122,6 +122,7 @@ Download the Tectonic Terraform modules:
 
 ```
 $ terraform init ../../platforms/vmware
+Downloading modules...
 Get: modules/vmware/vpc
 Get: modules/vmware/etcd
 Get: modules/vmware/ignition
@@ -132,7 +133,12 @@ Get: modules/bootkube
 Get: modules/tectonic
 Get: modules/net/flannel-vxlan
 Get: modules/net/calico-network-policy
+
+Initializing provider plugins...
+   Checking for available provider plugins on https://releases.hashicorp.com...
 ```
+
+Terraform will download any available plugins, and report when initialization is complete.
 
 Test out the plan before deploying everything:
 

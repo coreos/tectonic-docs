@@ -61,6 +61,7 @@ Download the Tectonic Terraform modules.
 
 ```bash
 $ terraform init platforms/aws
+Downloading modules...
 Get: modules/aws/vpc
 Get: modules/aws/etcd
 Get: modules/aws/ignition
@@ -71,7 +72,12 @@ Get: modules/bootkube
 Get: modules/tectonic
 Get: modules/net/flannel-vxlan
 Get: modules/net/calico-network-policy
+
+Initializing provider plugins...
+   Checking for available provider plugins on https://releases.hashicorp.com...
 ```
+
+Terraform will download any available plugins, and report when initialization is complete.
 
 Configure your AWS credentials. See the [AWS docs][env] for details.
 

@@ -66,6 +66,7 @@ Download the Tectonic Terraform modules.
 
 ```bash
 $ terraform init platforms/openstack/<flavor>
+Downloading modules...
 Get: modules/openstack/<flavor>/vpc
 Get: modules/openstack/<flavor>/etcd
 Get: modules/openstack/<flavor>/ignition
@@ -76,7 +77,12 @@ Get: modules/bootkube
 Get: modules/tectonic
 Get: modules/net/flannel-vxlan
 Get: modules/net/calico-network-policy
+
+Initializing provider plugins...
+   Checking for available provider plugins on https://releases.hashicorp.com...
 ```
+
+Terraform will download any available plugins, and report when initialization is complete.
 
 Configure your AWS credentials for setting up Route 53 DNS record entries. See the [AWS docs][env] for details.
 

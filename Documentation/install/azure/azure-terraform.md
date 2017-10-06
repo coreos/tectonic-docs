@@ -103,6 +103,7 @@ Initialize the Tectonic Terraform modules.
 
 ```bash
 $ terraform init platforms/azure
+Downloading modules...
 Get: modules/azure/vpc
 Get: modules/azure/etcd
 Get: modules/azure/ignition
@@ -113,7 +114,12 @@ Get: modules/bootkube
 Get: modules/tectonic
 Get: modules/net/flannel-vxlan
 Get: modules/net/calico-network-policy
+
+Initializing provider plugins...
+   Checking for available provider plugins on https://releases.hashicorp.com...
 ```
+
+Terraform will download any available plugins, and report when initialization is complete.
 
 ### Generate credentials with Azure CLI
 
