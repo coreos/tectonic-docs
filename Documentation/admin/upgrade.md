@@ -1,6 +1,6 @@
 ## Upgrading Tectonic &amp; Kubernetes
 
-Tectonic and Kubernetes can be automatically updated with controls in the Tectonic Console. Clusters are attached to an update channel and are set to update either automatically, or with manual approval. This automatic update functionality is currently an experimental feature, and must be optionally enabled during Tectonic installation. Clusters installed without enabling this experimental feature will need to perform manual upgrades of Tectonic.
+Use Tectonic Console to control the process by which Tectonic and Kubernetes are updated. Clusters are attached to an update channel and are set to update either automatically, or with admin approval.
 
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 co-m-screenshot">
