@@ -17,21 +17,14 @@ To learn more about how this process is executed, read about [Operators][operato
 
 ## Manually update Container Linux
 
-To provide the most secure operating system, Tectonic automatically updates Container Linux. To manage the update process for Container Linux, rather than allowing it to run automatically, configure the system to allow manual updates.
+To provide the most secure operating system, Tectonic automatically updates Container Linux. If your business model does not allow automated updates, and requires them to be human-controlled, you may configure the system to allow manual updates.
 
-First, scale the container-linux-update-operator deployment to 0 to pause automated updates.
-* Go to *Workloads > Deployments*, and select the container-linux-update-operator.
-* Set the desired count to 0 Pods, and click *Save*.
-
-Then, mask update-engine to prevent it from downloading or installing updates.
+Disable the Container Linux update-engine service to prevent it from downloading or installing updates.
 For more information, see [Disable Automatic Updates Daemon][disable-auto] in the Container Linux reboot strategies guide.
 
-Reset the deployment.
-* Go to *Workloads > Deployments*, and select the container-linux-update-operator.
-* Reset the Pod count, and click *Save*.
+Then, follow the instructions to [manually trigger a Container Linux update][manually-trigger].
 
-Apply CL updates before applying Tectonic updates.
-* Follow the instructions to [manually trigger a Container Linux update][manually-trigger].
+Be certain to apply CL updates before applying Tectonic updates.
 
 ## Preserve &amp; Restore etcd
 
