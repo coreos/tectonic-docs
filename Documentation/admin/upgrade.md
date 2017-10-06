@@ -24,7 +24,7 @@ For more information, see [Disable Automatic Updates Daemon][disable-auto] in th
 
 Then, follow the instructions to [manually trigger a Container Linux update][manually-trigger].
 
-Be certain to apply CL updates before applying Tectonic updates.
+Be certain to apply Container Linux updates before applying Tectonic updates.
 
 ## Preserve &amp; Restore etcd
 
