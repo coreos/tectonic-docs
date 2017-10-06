@@ -1,6 +1,6 @@
 # Upgrading Tectonic workers on Red Hat Enterprise Linux
 
-Tectonic worker versions on RHEL are not managed from the Tectonic console. Upgrades are performed using standard Red Hat package management tools and practices, specifically the YUM program.
+Tectonic worker versions on RHEL are not managed from the Tectonic Console. Upgrades are performed using standard Red Hat package management tools and practices, specifically the YUM program.
 
 After installing the `tectonic-release` package from the [installation guide][install], the RHEL system will be configured to upgrade the worker software to the latest available version with the `yum upgrade` command. Depending on your site's update practices, additional care should be taken to ensure the RHEL workers continue to run the same version as the rest of the Tectonic cluster.
 
