@@ -56,10 +56,11 @@ $ cd tectonic
 
 ### Initialize and configure Terraform
 
-We need to add the `terraform` binary to our `PATH`. The platform should be `darwin` or `linux`.
+Start by setting the `INSTALLER_PATH` to the location of your platform's Tectonic installer. The platform should be `linux` or `darwin`.
 
 ```bash
-$ export PATH=$PATH:$(pwd)/tectonic-installer/linux # Put the `terraform` binary in our PATH
+$ export INSTALLER_PATH=$(pwd)/tectonic-installer/linux/installer
+$ export PATH=$PATH:$(pwd)/tectonic-installer/linux
 ```
 
 Download the Tectonic Terraform modules.
