@@ -63,6 +63,22 @@ Download the Tectonic Terraform modules.
 $ terraform init platforms/aws
 ```
 
+Run `terraform get` to confirm the list of initialized modules:
+
+```
+$ terraform get platforms/aws
+Get: modules/aws/vpc
+Get: modules/aws/etcd
+Get: modules/aws/ignition
+Get: modules/aws/master-asg
+Get: modules/aws/ignition
+Get: modules/aws/worker-asg
+Get: modules/bootkube
+Get: modules/tectonic
+Get: modules/net/flannel-vxlan
+Get: modules/net/calico-network-policy
+```
+
 Configure your AWS credentials. See the [AWS docs][env] for details.
 
 ```bash

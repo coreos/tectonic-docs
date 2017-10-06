@@ -68,6 +68,22 @@ Download the Tectonic Terraform modules.
 $ terraform init platforms/openstack/<flavor>
 ```
 
+Run `terraform get` to confirm the list of initialized modules:
+
+```
+$ terraform get platforms/openstack/<flavor>
+Get: modules/openstack/<flavor>/vpc
+Get: modules/openstack/<flavor>/etcd
+Get: modules/openstack/<flavor>/ignition
+Get: modules/openstack/<flavor>/master-asg
+Get: modules/openstack/<flavor>/ignition
+Get: modules/openstack/<flavor>/worker-asg
+Get: modules/bootkube
+Get: modules/tectonic
+Get: modules/net/flannel-vxlan
+Get: modules/net/calico-network-policy
+```
+
 Configure your AWS credentials for setting up Route 53 DNS record entries. See the [AWS docs][env] for details.
 
 ```

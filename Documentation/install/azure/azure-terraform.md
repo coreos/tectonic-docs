@@ -105,6 +105,22 @@ Initialize the Tectonic Terraform modules.
 $ terraform init platforms/azure
 ```
 
+Run `terraform get` to confirm the list of initialized modules:
+
+```
+$ terraform get platforms/azure
+Get: modules/azure/vpc
+Get: modules/azure/etcd
+Get: modules/azure/ignition
+Get: modules/azure/master-asg
+Get: modules/azure/ignition
+Get: modules/azure/worker-asg
+Get: modules/bootkube
+Get: modules/tectonic
+Get: modules/net/flannel-vxlan
+Get: modules/net/calico-network-policy
+```
+
 ### Generate credentials with Azure CLI
 
 Execute `az login` to obtain an authentication token. See the [Azure CLI docs][login] for more information. Once logged in, note the `id` field of the output from the `az login` command. This is a simple way to retrieve the Subscription ID for the Azure account.

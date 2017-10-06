@@ -67,6 +67,22 @@ Next, get the modules that Terraform will use to create the cluster resources:
 $ terraform init ./platforms/metal
 ```
 
+Run `terraform get` to confirm the list of initialized modules:
+
+```
+$ terraform get platforms/metal
+Get: modules/metal/vpc
+Get: modules/metal/etcd
+Get: modules/metal/ignition
+Get: modules/metal/master-asg
+Get: modules/metal/ignition
+Get: modules/metal/worker-asg
+Get: modules/bootkube
+Get: modules/tectonic
+Get: modules/net/flannel-vxlan
+Get: modules/net/calico-network-policy
+```
+
 Now, specify the cluster configuration.
 
 ## Customize the deployment

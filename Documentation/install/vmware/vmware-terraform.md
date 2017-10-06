@@ -122,6 +122,16 @@ Get the modules that Terraform will use to create the cluster resources:
 
 ```
 $ terraform get ../../platforms/vmware
+Get: modules/vmware/vpc
+Get: modules/vmware/etcd
+Get: modules/vmware/ignition
+Get: modules/vmware/master-asg
+Get: modules/vmware/ignition
+Get: modules/vmware/worker-asg
+Get: modules/bootkube
+Get: modules/tectonic
+Get: modules/net/flannel-vxlan
+Get: modules/net/calico-network-policy
 ```
 
 Test out the plan before deploying everything:
