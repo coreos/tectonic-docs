@@ -75,7 +75,7 @@ The example Trust Relationship below has been edited to add a user's (named tect
 
 6. Assume the `tectonic-installer` role with your AWS user using the AWS CLI tool as follows:
 ```bash
-$ aws sts assume-role --role-arn=<TECTONIC_INSTALLER_ROLE_ARN> --role-session-name=tectonic-installer --role-session-name=<DESIRED_USER_NAME>
+$ aws sts assume-role --role-arn=<TECTONIC_INSTALLER_ROLE_ARN> --role-session-name=<DESIRED_SESSION_NAME>
 ```
    The returned response will look like:
 ```json
