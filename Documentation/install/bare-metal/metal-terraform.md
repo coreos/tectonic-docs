@@ -65,12 +65,6 @@ Next, get the modules that Terraform will use to create the cluster resources:
 
 ```bash
 $ terraform init ./platforms/metal
-```
-
-Run `terraform get` to confirm the list of initialized modules:
-
-```
-$ terraform get platforms/metal
 Get: modules/metal/vpc
 Get: modules/metal/etcd
 Get: modules/metal/ignition

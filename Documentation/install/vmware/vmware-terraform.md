@@ -118,10 +118,10 @@ Edit the parameters with details of the VMware infrastructure. View all of the [
 
 ## Deploy the cluster
 
-Get the modules that Terraform will use to create the cluster resources:
+Download the Tectonic Terraform modules:
 
 ```
-$ terraform get ../../platforms/vmware
+$ terraform init ../../platforms/vmware
 Get: modules/vmware/vpc
 Get: modules/vmware/etcd
 Get: modules/vmware/ignition

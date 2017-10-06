@@ -61,12 +61,6 @@ Download the Tectonic Terraform modules.
 
 ```bash
 $ terraform init platforms/aws
-```
-
-Run `terraform get` to confirm the list of initialized modules:
-
-```
-$ terraform get platforms/aws
 Get: modules/aws/vpc
 Get: modules/aws/etcd
 Get: modules/aws/ignition

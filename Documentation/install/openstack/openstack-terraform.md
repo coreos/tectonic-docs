@@ -66,12 +66,6 @@ Download the Tectonic Terraform modules.
 
 ```bash
 $ terraform init platforms/openstack/<flavor>
-```
-
-Run `terraform get` to confirm the list of initialized modules:
-
-```
-$ terraform get platforms/openstack/<flavor>
 Get: modules/openstack/<flavor>/vpc
 Get: modules/openstack/<flavor>/etcd
 Get: modules/openstack/<flavor>/ignition

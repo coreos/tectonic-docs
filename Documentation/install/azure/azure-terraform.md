@@ -103,12 +103,6 @@ Initialize the Tectonic Terraform modules.
 
 ```bash
 $ terraform init platforms/azure
-```
-
-Run `terraform get` to confirm the list of initialized modules:
-
-```
-$ terraform get platforms/azure
 Get: modules/azure/vpc
 Get: modules/azure/etcd
 Get: modules/azure/ignition
