@@ -1,6 +1,6 @@
-## Upgrading Tectonic &amp; Kubernetes
+# Upgrading Tectonic &amp; Kubernetes
 
-Tectonic and Kubernetes can be automatically updated with controls in the Tectonic Console. Clusters are attached to an update channel and are set to update either automatically, or with manual approval. This automatic update functionality is currently an experimental feature, and must be optionally enabled during Tectonic installation. Clusters installed without enabling this experimental feature will need to perform manual upgrades of Tectonic.
+Use Tectonic Console to control the process by which Tectonic and Kubernetes are updated. Clusters are attached to an update channel and are set to update either automatically, or with admin approval.
 
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 co-m-screenshot">
@@ -15,6 +15,17 @@ Please note that the update payload process may affect any or all components in 
 
 To learn more about how this process is executed, read about [Operators][operators].
 
+## Manually update Container Linux
+
+To provide the most secure operating system, Tectonic automatically updates Container Linux. If your business model does not allow automated updates, and requires them to be human-controlled, you may configure the system to allow manual updates.
+
+Disable the Container Linux update-engine service to prevent it from downloading or installing updates.
+For more information, see [Disable Automatic Updates Daemon][disable-auto] in the Container Linux reboot strategies guide.
+
+Then, follow the instructions to [manually trigger a Container Linux update][manually-trigger].
+
+Be certain to apply Container Linux updates before applying Tectonic updates.
+
 ## Preserve &amp; Restore etcd
 
 If you'd like to preserve and restore etcd data to the new cluster, see the etcd [disaster recovery][etcd-disaster-recovery] guide.
@@ -22,3 +33,5 @@ If you'd like to preserve and restore etcd data to the new cluster, see the etcd
 
 [operators]: https://coreos.com/operators/
 [etcd-disaster-recovery]: https://coreos.com/etcd/docs/latest/admin_guide.html#disaster-recovery
+[disable-auto]: https://coreos.com/os/docs/latest/update-strategies.html#disable-automatic-updates-daemon
+[manually-trigger]: https://coreos.com/os/docs/latest/update-strategies.html#manually-triggering-an-update
