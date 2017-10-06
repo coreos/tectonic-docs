@@ -26,7 +26,7 @@ Deploy a Tectonic worker atop Red Hat Enterprise Linux using the process outline
 
 ### Deploy Red Hat Enterprise Linux
 
-Deploy RHEL. Any standard deployment technique may be used, including an optical disk installation, a netbooted installation, or an image based deployment (standard for VMWare and OpenStack). You can use a minimal install for the base environment. For more information, see the [Red Hat Enterprise Linux Install Documentation][rhel-install].
+Deploy RHEL. Any standard deployment technique may be used, including an optical disk installation, a netbooted installation, or an image based deployment (standard for VMWare and OpenStack). Use a minimal install for the base environment. For more information, see the [Red Hat Enterprise Linux Install Documentation][rhel-install].
 
 ### Enable "extras" repo
 
@@ -120,7 +120,20 @@ Once this value has been retrieved it will be placed in the user managed file `/
 
 ### Configure Firewalld
 
-The default CNI installation for Tectonic uses VXLAN for its communications with [flannel][flannel-repo], which requires communications between hosts on UDP port 4789. The Kubernetes API also communicates with hosts on TCP port 10250. To simplify the configuration of these options, either allow all communications between cluster members, place the relevant ethernet interfaces into the "trusted" zone using FirewallD, or at a minimum allow `4789/udp` and `10250/tcp`. These last steps can be completed with the commands:
+The default CNI installation for Tectonic uses VXLAN for its communications with [flannel][flannel-repo], which requires communications between hosts on UDP port 4789. The Kubernetes API also communicates with hosts on TCP port 10250. To simplify the configuration of these options, either allow all communications between cluster members, or allow 4789/udp and 10250/tcp.
+
+Use firewalld to allow all communication between cluster members, using "trusted" zones with relevant ethernet interfaces.
+
+Specify your ethernet adapter's name. In this example it's `eth0`.
+
+```
+$ sudo systemctl start firewalld
+$ sudo firewall-cmd --zone=trusted --add-interface eth0
+$ sudo firewall-cmd --set-default-zone=trusted
+$ sudo firewall-cmd --list-all
+```
+
+Or, allow 4789/udp and 10250/tcp.
 
 ```
 $ sudo firewall-cmd --add-port 10250/tcp
@@ -130,17 +143,6 @@ $ sudo firewall-cmd --add-port 4789/udp --permanent
 ```
 
 Note: These settings may not be all inclusive and will not represent relative node ports or other communications which may need to be performed. For more information consult the [Kubernetes Networking][k8s-networking] documentation.
-
-Or alternatively you can allow all communication between cluster members, using "trusted" zones with relevant ethernet interfaces with the commands:
-
-```
-$ sudo systemctl start firewalld
-$ sudo firewall-cmd --zone=trusted --add-interface eth0
-$ sudo firewall-cmd --set-default-zone=trusted
-$ sudo firewall-cmd --list-all
-```
-
-Note: You will need to specify whatever your ethernet adapter is named in this example its `eth0`.
 
 ### Set SELinux to Permissive mode
 
