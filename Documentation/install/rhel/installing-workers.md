@@ -38,7 +38,6 @@ $ subscription-manager repos --enable=rhel-7-server-extras-rpms
 
 If `subscription-manager` is not in use, ensure that the correct URL for the mirror of extras that is to be used is placed in the corresponding file in `/etc/yum.repos.d` and set to `enabled`.
 
-
 ### Install the tectonic-release RPM
 
 The `tectonic-release` RPM includes the repo definition for the Tectonic software as well as relevant signing keys. The GPG signing key fingerprint for CoreOS shipped RPMs is:
@@ -83,23 +82,11 @@ After verifying the signature, install the `tectonic-release` RPM:
 $ yum localinstall tectonic-release-7-3.el7.noarch.rpm
 ```
 
-### Restrict updates to a specific Tectonic channel
-
-To keep RHEL worker versions in line with the rest of the Tectonic cluster, consider whitelisting specific package versions with the `includepkgs` repository configuration option. For example, to stay on the Tectonic 1.6 channel, write the following line under the `[tectonic]` section in `/etc/yum.repos.d/tectonic.repo`.
-
-```
-includepkgs=rkt tectonic-release tectonic-worker-1.6.*
-```
-
-This will cause `yum` commands ignore all packages in the Tectonic repository except `rkt`, `tectonic-release` (repo configuration), and versions of the Tectonic worker starting with `1.6`. It allows receiving updates without upgrading to Tectonic 1.7 or later channels.
-
-To prevent other accidental worker upgrades, the Tectonic repository can be disabled by setting `enabled=0` under the `[tectonic]` section in `/etc/yum.repos.d/tectonic.repo`. If using this option, YUM must be invoked with `yum --enablerepo=tectonic ...` to install packages from this repository again.
-
-Note that upgrading the `tectonic-worker` RPM will not affect the running kubelet service. The new version will only be used after rebooting or running `systemctl restart kubelet`.
-
 ### Install the tectonic-worker RPM
 
-After the `tectonic-release` RPM is installed and worker versions were optionally whitelisted, complete the installation of the `tectonic-worker` RPM:
+By default, YUM commands will install the latest available worker package. If the Tectonic cluster is using an update channel other than preproduction, see the [different update strategies][updates] for options to restrict worker packages to versions that match the rest of the cluster.
+
+After the `tectonic-release` RPM is installed and worker versions are optionally configured, complete the installation of the `tectonic-worker` RPM:
 
 ```
 $ yum install tectonic-worker
@@ -175,7 +162,6 @@ $ systemctl enable kubelet.service
 
 Once complete, use Tectonic Console to view the new worker nodes, and confirm that they're ready to start running your containers.
 
-
 [rhel-install]: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/index.html
 [tectonic-installer]: https://github.com/coreos/tectonic-installer
 [flannel-repo]: https://github.com/coreos/flannel
@@ -183,5 +169,4 @@ Once complete, use Tectonic Console to view the new worker nodes, and confirm th
 [container-linux]: https://coreos.com/os/docs/latest
 [aws-install]: ../../tutorials/aws/installing-tectonic.md
 [bare-install]: ../bare-metal/metal-terraform.md
-<!-- vim: ts=2 sw=2 tw=80 expandtab:
--->
+[updates]: ../../admin/rhel/upgrading-workers.md
