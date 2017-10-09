@@ -43,7 +43,7 @@ Verify the release has been signed by the [CoreOS App Signing Key][verification-
 
 ```bash
 $ gpg2 --keyserver pgp.mit.edu --recv-key 18AD5014C99EF7E3BA5F6CE950BDD3E0FC8A365E
-$ gpg2 --verify tectonic_1.7.5-tectonic.1-tar-gz.sig tectonic_1.7.5-tectonic.1-tar.gz
+$ gpg2 --verify tectonic_1.7.5-tectonic.1.tar.gz.sig tectonic_1.7.5-tectonic.1.tar.gz
 # gpg2: Good signature from "CoreOS Application Signing Key <security@coreos.com>"
 ```
 
