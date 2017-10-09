@@ -1,8 +1,8 @@
-### Tectonic Identity with G-Suite SAML
+### Tectonic Identity with G Suite SAML
 
-G-Suite supports setting up custom SAML applications for sign in with enterprise cloud applications. Tectonic Identity can make use of this feature.
+[G Suite][gsuite] supports setting up custom SAML applications for sign in with enterprise cloud applications. Tectonic Identity can make use of this feature.
 
-This document assumes the document [Set up your own custom SAML application][saml-google] is being followed by a G-Suite administrator and a Tectonic cluster is deployed with the DNS name: tectonic.example.com
+This document assumes the document [Set up your own custom SAML application][saml-google] is being followed by a G Suite administrator and a Tectonic cluster is deployed with the DNS name: tectonic.example.com
 
 When creating the SAML app be sure to copy the `SSO URL` and download the certificate when presented with Google IdP Information.
 
@@ -19,7 +19,7 @@ Below is a SAML configuration template for Tectonic Identity:
 ```
 - type: saml
   id: saml
-  name: G-Suite SAML
+  name: G Suite SAML
   config:
     ssoURL:
     entityIssuer:
@@ -56,12 +56,12 @@ An example would be:
 
 <img src="img/g-suite-attribute-map.png" class="img-center" alt="Attribute Mapping"/>
 
-Final configuration for G-Suite SAML:
+Final configuration for G Suite SAML:
 
 ```
 - type: saml
   id: saml
-  name: G-Suite SAML
+  name: G Suite SAML
   config:
     ssoURL: https://accounts.google.com/o/saml2/idp?idpid=1234567
     entityIssuer: https://tectonic.example.com/identity/callback
@@ -80,7 +80,7 @@ Deploy this to Tectonic Identity by following the [Editing Tectonic Identity Con
 
 ## Turn on SSO to your new SAML app
 
-Instructions from the [G-Suite Custom SAML Application][saml-google]:
+Instructions from the [G Suite Custom SAML Application][saml-google]:
 
 ```
 In your Google Admin console (at admin.google.com)...
@@ -92,5 +92,7 @@ At the top of the gray box, click More Settings and choose:
 On for everyone to turn on the service for all users (click again to confirm).
 ```
 
+
+[gsuite]: https://gsuite.google.com/
 [saml-google]: https://support.google.com/a/answer/6087519
 [edit-identity]: https://coreos.com/tectonic/docs/latest/admin/saml-user-management.html#editing-tectonic-identity-configuration
