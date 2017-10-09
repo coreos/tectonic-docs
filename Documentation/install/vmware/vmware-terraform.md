@@ -123,12 +123,15 @@ Download the Tectonic Terraform modules:
 ```
 $ terraform init ../../platforms/vmware
 Downloading modules...
-Get: modules/vmware/vpc
 Get: modules/vmware/etcd
-Get: modules/vmware/ignition
-Get: modules/vmware/master-asg
-Get: modules/vmware/ignition
-Get: modules/vmware/worker-asg
+Get: modules/ignition
+Get: modules/vmware/node
+Get: modules/ignition
+Get: modules/vmware/node
+Get: modules/tls/kube/self-signed
+Get: modules/tls/etcd
+Get: modules/tls/ingress/self-signed
+Get: modules/tls/identity/self-signed
 Get: modules/bootkube
 Get: modules/tectonic
 Get: modules/net/flannel-vxlan

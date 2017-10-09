@@ -66,12 +66,12 @@ Next, get the modules that Terraform will use to create the cluster resources:
 ```bash
 $ terraform init ./platforms/metal
 Downloading modules...
-Get: modules/metal/vpc
-Get: modules/metal/etcd
-Get: modules/metal/ignition
-Get: modules/metal/master-asg
-Get: modules/metal/ignition
-Get: modules/metal/worker-asg
+Get: modules/ignition
+Get: modules/ignition
+Get: modules/tls/kube/self-signed
+Get: modules/tls/etcd
+Get: modules/tls/ingress/self-signed
+Get: modules/tls/identity/self-signed
 Get: modules/bootkube
 Get: modules/tectonic
 Get: modules/net/flannel-vxlan

@@ -104,16 +104,20 @@ Initialize the Tectonic Terraform modules.
 ```bash
 $ terraform init platforms/azure
 Downloading modules...
-Get: modules/azure/vpc
+Get: modules/azure/resource-group
+Get: modules/azure/vnet
 Get: modules/azure/etcd
-Get: modules/azure/ignition
-Get: modules/azure/master-asg
-Get: modules/azure/ignition
-Get: modules/azure/worker-asg
+Get: modules/azure/master-as
+Get: modules/azure/worker-as
+Get: modules/dns/azure
 Get: modules/bootkube
 Get: modules/tectonic
 Get: modules/net/flannel-vxlan
 Get: modules/net/calico-network-policy
+Get: modules/net/ignition
+Get: modules/azure/udev-rules
+Get: modules/net/ignition
+Get: modules/azure/udev-rules
 
 Initializing provider plugins...
    Checking for available provider plugins on https://releases.hashicorp.com...
