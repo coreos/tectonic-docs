@@ -26,14 +26,14 @@ Deploy a Tectonic worker atop Red Hat Enterprise Linux using the process outline
 
 ### Deploy Red Hat Enterprise Linux
 
-Deploy RHEL. Any standard deployment technique may be used, including an optical disk installation, a netbooted installation, or an image based deployment (standard for VMWare and OpenStack). For more information, see the [Red Hat Enterprise Linux Install Documentation][rhel-install].
+Deploy RHEL. Any standard deployment technique may be used, including an optical disk installation, a netbooted installation, or an image based deployment (standard for VMWare and OpenStack). Use a minimal install for the base environment. For more information, see the [Red Hat Enterprise Linux Install Documentation][rhel-install].
 
 ### Enable "extras" repo
 
 Once basic installation of a host is complete, ensure that the additional Red Hat Enterprise Linux repository `extras` is included. Use `subscription-manager` to include the repo:
 
 ```
-$ subscription-manager repos --enable=rhel-7-server-extras-rpms
+$ sudo subscription-manager repos --enable=rhel-7-server-extras-rpms
 ```
 
 If `subscription-manager` is not in use, ensure that the correct URL for the mirror of extras that is to be used is placed in the corresponding file in `/etc/yum.repos.d` and set to `enabled`.
@@ -53,7 +53,7 @@ $ curl -LJO https://yum.prod.coreos.systems/repo/tectonic-rhel/7Server/x86_64/Pa
 Verify the signature:
 
 ```
-$ rpm -qip tectonic-release-7-3.el7.noarch.rpm
+$ sudo rpm -qip tectonic-release-7-3.el7.noarch.rpm
 Name        : tectonic-release
 Version     : 7
 Release     : 3.el7
@@ -79,7 +79,7 @@ Confirm that the signature on the RPM matches the last 16 characters of the fing
 After verifying the signature, install the `tectonic-release` RPM:
 
 ```
-$ yum localinstall tectonic-release-7-3.el7.noarch.rpm
+$ sudo yum localinstall tectonic-release-7-3.el7.noarch.rpm
 ```
 
 ### Install the tectonic-worker RPM
@@ -89,7 +89,7 @@ By default, YUM commands will install the latest available worker package. If th
 After the `tectonic-release` RPM is installed and worker versions are optionally configured, complete the installation of the `tectonic-worker` RPM:
 
 ```
-$ yum install tectonic-worker
+$ sudo yum install tectonic-worker
 ```
 
 This will download the relevant dependencies and then prompt to validate the GPG key installed by the `tectonic-release` RPM.
@@ -114,13 +114,26 @@ Once this value has been retrieved it will be placed in the user managed file `/
 
 ### Configure Firewalld
 
-The default CNI installation for Tectonic uses VXLAN for its communications with [flannel][flannel-repo], which requires communications between hosts on UDP port 4789. The Kubernetes API also communicates with hosts on TCP port 10250. To simplify the configuration of these options, either allow all communications between cluster members, place the relevant ethernet interfaces into the "trusted" zone using FirewallD, or at a minimum allow `4789/udp` and `10250/tcp`. These last steps can be completed with the commands:
+The default CNI installation for Tectonic uses VXLAN for its communications with [flannel][flannel-repo], which requires communications between hosts on UDP port 4789. The Kubernetes API also communicates with hosts on TCP port 10250. To simplify the configuration of these options, either allow all communications between cluster members, or allow 4789/udp and 10250/tcp.
+
+Use firewalld to allow all communication between cluster members, using "trusted" zones with relevant ethernet interfaces.
+
+Specify your ethernet adapter's name. In this example it's `eth0`.
 
 ```
-$ firewall-cmd --add-port 10250/tcp
-$ firewall-cmd --add-port 10250/tcp --permanent
-$ firewall-cmd --add-port 4789/udp
-$ firewall-cmd --add-port 4789/udp --permanent
+$ sudo systemctl start firewalld
+$ sudo firewall-cmd --zone=trusted --add-interface eth0
+$ sudo firewall-cmd --set-default-zone=trusted
+$ sudo firewall-cmd --list-all
+```
+
+Or, allow 4789/udp and 10250/tcp.
+
+```
+$ sudo firewall-cmd --add-port 10250/tcp
+$ sudo firewall-cmd --add-port 10250/tcp --permanent
+$ sudo firewall-cmd --add-port 4789/udp
+$ sudo firewall-cmd --add-port 4789/udp --permanent
 ```
 
 Note: These settings may not be all inclusive and will not represent relative node ports or other communications which may need to be performed. For more information consult the [Kubernetes Networking][k8s-networking] documentation.
@@ -141,7 +154,7 @@ Clock synchronization is important for Tectonic, as it relies heavily on TLS cer
 This process is the same as with all systemd hosts. The service as installed by the `tectonic-worker` RPM is called `kubelet`. It can be started with the command:
 
 ```
-$ systemctl start kubelet.service
+$ sudo systemctl start kubelet.service
 ```
 
 It will take a number of minutes for the worker to retrieve the relevant assets from Quay.io, bootstrap, and join the cluster. Use `journalctl` to monitor progress:
@@ -155,7 +168,7 @@ Note: PolicyKit requires the user to be in a relevant group with access to the j
 To ensure the service starts on each boot run the command:
 
 ```
-$ systemctl enable kubelet.service
+$ sudo systemctl enable kubelet.service
 ```
 
 ### Verify deployment
