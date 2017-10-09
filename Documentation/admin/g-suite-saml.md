@@ -6,11 +6,11 @@ This document assumes the document [Set up your own custom SAML application][sam
 
 When creating the SAML app be sure to copy the `SSO URL` and download the certificate when presented with Google IdP Information.
 
-<img src="img/g-suite-idp.png" class="img-center" alt="Google IdP Information"/>
+<img src="../img/g-suite-idp.png" class="img-center" alt="Google IdP Information" />
 
 Two values are required during set up of the custom SAML application: ACS URL and Entity ID. These values should be set to: `https://<cluster-dns>/identity/callback`
 
-<img src="img/acs-entity-saml.png" class="img-center" alt="ACS URL and Entity ID"/>
+<img src="../img/acs-entity-saml.png" class="img-center" alt="ACS URL and Entity ID" />
 
 ## Identity Configuration
 
