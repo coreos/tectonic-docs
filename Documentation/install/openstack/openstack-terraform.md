@@ -8,9 +8,9 @@ Generally, the OpenStack platform templates adhere to the standards defined by t
 
 ## Prerequsities
 
+* **CoreOS Tectonic account**: A [CoreOS Tectonic account][account-login]. You must provide the account's License and Pull Secret during installation.
 * **Terraform**: Tectonic Installer includes and requires a specific version of Terraform. This is included in the Tectonic Installer tarball. See the [Tectonic Installer release notes][release-notes] for information about which Terraform versions are compatible.
 * **CoreOS Container Linux**: The latest Container Linux Beta (1353.2.0 or later) [uploaded into Glance](https://coreos.com/os/docs/latest/booting-on-openstack.html) and its OpenStack image ID.
-* **CoreOS Tectonic account**: A [CoreOS Tectonic account][account-login]. You must provide the account's License and Pull Secret during installation.
 
 ## Getting Started
 OpenStack is a highly customizable environment where different components can be enabled/disabled. The installer currently supports only one flavor:
@@ -19,16 +19,17 @@ OpenStack is a highly customizable environment where different components can be
 
 Replace `<flavor>` with either option in the following commands. Now we're ready to specify our cluster configuration.
 
-### Sign up for a CoreOS account
+### Create a CoreOS account
 
-First, sign up for a CoreOS account, which provides up to 10 free nodes of production quality Tectonic. Once completed, log in to the account to obtain the License and Pull Secret required for installation.
+Tectonic Installer requires the License and Pull Secret provided with a CoreOS account. To obtain this information and up to 10 free nodes, create a CoreOS account.
 
-1. Go to [https://account.coreos.com/login][account-login].
-2. Click *Sign Up* and create an account using either your Google account or another email address.
-3. Enter your contact information, and click *Get License* for 10 nodes.
-4. Agree to the license terms.
+1. Go to [https://account.coreos.com/login][account-login], and click *Sign Up*.
 
-Check your inbox for a confirmation email. Once confirmed, log in to display the account's *Overview* page. Click "Free for use for up to 10 nodes" under Tectonic, and add your contact information. Once the update has processed, the *Overview* window will refresh to display the License and Pull Secret required for installation.
+2. Check your inbox for a confirmation email. Click through to accept the terms of the license, activate your account, and be redirected to the *Account Overview* page.
+
+3. Click "Free for use up to 10 nodes" under Tectonic. Enter your contact information, and click *Get License for 10 nodes*.
+
+Once the update has processed, the *Overview* window will refresh to include links to download the License and Pull Secret.
 
 ### Download and extract Tectonic Installer
 
@@ -42,14 +43,14 @@ Verify the release has been signed by the [CoreOS App Signing Key][verification-
 
 ```bash
 $ gpg2 --keyserver pgp.mit.edu --recv-key 18AD5014C99EF7E3BA5F6CE950BDD3E0FC8A365E
-$ gpg2 --verify tectonic-1.7.3-tectonic.2-tar-gz.asc tectonic-1.7.3-tectonic.2-tar.gz
+$ gpg2 --verify tectonic_1.7.3-tectonic.3-tar-gz.asc tectonic_1.7.3-tectonic.3-tar.gz
 # gpg2: Good signature from "CoreOS Application Signing Key <security@coreos.com>"
 ```
 
 Extract the tarball and navigate to the `tectonic` directory.
 
 ```bash
-$ tar xzvf tectonic-1.7.3-tectonic.2.tar.gz
+$ tar xzvf tectonic_1.7.3-tectonic.3.tar.gz
 $ cd tectonic
 ```
 
@@ -127,7 +128,7 @@ If you encounter any issues, check the known issues and workarounds below.
 
 ## Access the cluster
 
-The Tectonic Console should be up and running after the containers have downloaded. You can access it at the DNS name configured in your variables file.
+The Tectonic Console should be up and running after the containers have downloaded. Access it at the DNS name `https://<tectonic_cluster_name>.<tectonic_base_domain>`, configured in the `terraform.tfvars` variables file.
 
 Inside of the `/generated` folder you should find any credentials, including the CA if generated, and a kubeconfig. You can use this to control the cluster with `kubectl`:
 

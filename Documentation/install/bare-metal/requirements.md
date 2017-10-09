@@ -16,7 +16,15 @@ Installation requires the following items, which are discussed in more detail be
 
 ## Tectonic License and Pull Secret
 
-To obtain the License and Pull Secret required during Tectonic installation, go to [https://account.coreos.com/login][account-login] and sign up for a CoreOS account. This account will entitle you to up to 10 free nodes on a production ready Tectonic cluster.
+Tectonic Installer requires the License and Pull Secret provided with a CoreOS account. To obtain this information and up to 10 free nodes, create a CoreOS account.
+
+1. Go to [https://account.coreos.com/login][account-login], and click *Sign Up*.
+
+2. Check your inbox for a confirmation email. Click through to accept the terms of the license, activate your account, and be redirected to the *Account Overview* page.
+
+3. Click "Free for use up to 10 nodes" under Tectonic. Enter your contact information, and click *Get License for 10 nodes*.
+
+Once the update has processed, the *Overview* window will refresh to include links to download the License and Pull Secret.
 
 ## Tectonic Installer
 

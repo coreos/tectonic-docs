@@ -2,7 +2,7 @@
 
 Creating a CoreOS account activates a License for up to 10 free nodes on a Tectonic cluster.
 
-First, go to [https://account.coreos.com/login][account-login] to sign up for a CoreOS account. Sign up using an existing Google+ account, or enter an email address and password, and click *Create Account*.
+First, go to [https://account.coreos.com/login][account-login] to sign up for a CoreOS account.
 
 A confirmation email will be sent to the listed account. Check your inbox for an email from CoreOS Support, and click *Verify Email*.
 
@@ -30,17 +30,7 @@ Click *Free for use up to 10 nodes* below Tectonic, enter your contact informati
 
 The *CoreOS License* and *Pull Secret* are required to install Tectonic and access container images for CoreOS products.
 
-When requested during Tectonic Installation, [log in][account-login] to your CoreOS account, and click the *copy and paste* link to open a window containing these strings. Then, copy and paste them into the appropriate fields during the installation process.
-
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-    <a href="../img/coreos-account-license-secret.png" class="co-m-screenshot">
-      <img src="../img/coreos-account-license-secret.png" class="img-responsive">
-    </a>
-  </div>
-</div>
-
-The License and Pull Secret may also be downloaded for later use. The Pull Secret will be downloaded as `config.json` which may be added to the Docker configuration directory to grant access to CoreOS container registries.
+To obtain these files, [log in][account-login] to your CoreOS account, and click the buttons to *Download CoreOS License* and *Download Pull Secret*. Then, provide them when requested during the installation process.
 
 
 [account-login]: https://account.coreos.com/login

@@ -10,18 +10,19 @@ Check the [requirements doc][install-aws-requirements] to see what's needed. The
 * a domain or subdomain with [DNS name service at AWS Route53][aws-r53-doc].
 * Tectonic will create a new AWS Virtual Private Cloud (VPC), or you can select an existing VPC. To use an existing VPC, see the [existing VPC requirements][install-aws-requirements-evpc].
 
-## Step 1: Create a CoreOS account
+## Create a CoreOS account
 
-Go to [https://account.coreos.com/login][account-login] to create and enable a CoreOS account. Once created, you will have access to 10 free nodes on Tectonic.
+Tectonic Installer requires the License and Pull Secret provided with a CoreOS account. To obtain this information and up to 10 free nodes, create a CoreOS account.
 
-1. Go to [https://account.coreos.com/login][account-login].
-2. Click *Sign Up* and create an account using either your Google account or another email address.
-3. Enter your contact information, and click *Get License* for 10 nodes.
-4. Agree to the license terms.
+1. Go to [https://account.coreos.com/login][account-login], and click *Sign Up*.
 
-Check your inbox for a confirmation email. Once confirmed, log in to display the account's *Overview* page. Click "Free for use for up to 10 nodes" under Tectonic, and add your contact information. Once the update has processed, the *Overview* window will refresh to display the License and Pull Secret required for installation.
+2. Check your inbox for a confirmation email. Click through to accept the terms of the license, activate your account, and be redirected to the *Account Overview* page.
 
-## Step 2: Download and run Tectonic Installer
+3. Click "Free for use up to 10 nodes" under Tectonic. Enter your contact information, and click *Get License for 10 nodes*.
+
+Once the update has processed, the *Overview* window will refresh to include links to download the License and Pull Secret.
+
+## Download and run Tectonic Installer
 
 Make sure a current version of either Google Chrome or Mozilla Firefox is set as the default browser on the workstation where Installer will run.
 
@@ -29,11 +30,11 @@ Download the [Tectonic installer][latest-tectonic-release].
 
 ```bash
 wget https://releases.tectonic.com/releases/tectonic_1.7.3-tectonic.3.tar.gz
-tar xzvf tectonic-1.7.3-tectonic.2.tar.gz
+tar xzvf tectonic_1.7.3-tectonic.3.tar.gz
 cd tectonic
 ```
 
-Run the Tectonic Installer for your platform:
+Run the Tectonic Installer for your platform.
 
 For macOS users:
 
@@ -47,7 +48,7 @@ For Linux users:
 $ ./tectonic-installer/linux/installer
 ```
 
-For Windows users, [see this guide][install-windows].
+For Windows users, see [Running Tectonic Installer in a Docker container on Windows][install-windows].
 
 A browser window will open to begin the GUI installation process.
 
@@ -58,9 +59,11 @@ A browser window will open to begin the GUI installation process.
   </div>
 </div>
 
-## Step 3: Install
+## Install Tectonic
 
 Be sure to read the [installation requirements][install-aws-requirements], which include a section on [privileges for your AWS credentials][install-aws-requirements-creds], as well as the [known issues section in the Troubleshooting guide][install-aws-troubleshooting] before you install.
+
+Installation requires the CoreOS License and Pull Secret described in [Create a CoreOS account](create-a-coreos-account) above. Be certain to create an account and enable the 10 free nodes before launching Tectonic Installer.
 
 Follow the on-screen instructions to provision your cluster. This process should take about 10-15 minutes.
 
@@ -70,7 +73,7 @@ Once complete click *Go to my Tectonic Console* to launch the Console, and begin
 
 If you encounter any errors check the [troubleshooting][install-aws-troubleshooting] documentation.
 
-## Step 4: Tectonic Console
+## Use Tectonic Console
 
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 co-m-screenshot">

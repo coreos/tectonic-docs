@@ -38,7 +38,6 @@ $ sudo subscription-manager repos --enable=rhel-7-server-extras-rpms
 
 If `subscription-manager` is not in use, ensure that the correct URL for the mirror of extras that is to be used is placed in the corresponding file in `/etc/yum.repos.d` and set to `enabled`.
 
-
 ### Install the tectonic-release RPM
 
 The `tectonic-release` RPM includes the repo definition for the Tectonic software as well as relevant signing keys. The GPG signing key fingerprint for CoreOS shipped RPMs is:
@@ -48,24 +47,24 @@ The `tectonic-release` RPM includes the repo definition for the Tectonic softwar
 Download the RPM from the CoreOS `yum` repository:
 
 ```
-$ curl -LJO https://yum.prod.coreos.systems/repo/tectonic-rhel/7Server/x86_64/Packages/tectonic-release-7-2.el7.noarch.rpm
+$ curl -LJO https://yum.prod.coreos.systems/repo/tectonic-rhel/7Server/x86_64/Packages/tectonic-release-7-3.el7.noarch.rpm
 ```
 
 Verify the signature:
 
 ```
-$ sudo rpm -qip tectonic-release-7-2.el7.noarch.rpm
+$ sudo rpm -qip tectonic-release-7-3.el7.noarch.rpm
 Name        : tectonic-release
 Version     : 7
-Release     : 2.el7
+Release     : 3.el7
 Architecture: noarch
 Install Date: (not installed)
 Group       : System Environment/Base
-Size        : 13332
+Size        : 13720
 License     : ASL 2.0
-Signature   : RSA/SHA256, Sat Sep  2 02:28:11 2017, Key ID cf866cfe16431e6a
-Source RPM  : tectonic-release-7-2.el7.src.rpm
-Build Date  : Sat Sep  2 01:59:11 2017
+Signature   : RSA/SHA256, Tue Oct  3 23:50:28 2017, Key ID cf866cfe16431e6a
+Source RPM  : tectonic-release-7-3.el7.src.rpm
+Build Date  : Tue Oct  3 22:43:08 2017
 Build Host  : buildhost.tectonic.coreos.systems
 Relocations : (not relocatable)
 URL         : https://coreos.com/tectonic
@@ -80,25 +79,20 @@ Confirm that the signature on the RPM matches the last 16 characters of the fing
 After verifying the signature, install the `tectonic-release` RPM:
 
 ```
-$ sudo yum localinstall tectonic-release-7-2.el7.noarch.rpm
+$ sudo yum localinstall tectonic-release-7-3.el7.noarch.rpm
 ```
 
 ### Install the tectonic-worker RPM
 
-After the `tectonic-release` RPM is installed, complete the installation of the `tectonic-worker` RPM:
+By default, YUM commands will install the latest available worker package. If the Tectonic cluster is using an update channel other than preproduction, see the [different update strategies][updates] for options to restrict worker packages to versions that match the rest of the cluster.
+
+After the `tectonic-release` RPM is installed and worker versions are optionally configured, complete the installation of the `tectonic-worker` RPM:
 
 ```
 $ sudo yum install tectonic-worker
 ```
 
-This will download the relevant dependencies and then prompt to validate the
-GPG key installed by the `tectonic-release` RPM.
-
-The Kubelet version must be kept in sync with the cluster's Tectonic version. To prevent incorrect `yum update` commands from updating the version, disable the Tectonic repo by writing `enabled=0` into:
-
-```
-/etc/yum.repos.d/tectonic.repo
-```
+This will download the relevant dependencies and then prompt to validate the GPG key installed by the `tectonic-release` RPM.
 
 ### Copy the kubeconfig file from the Tectonic Installer to the host
 
@@ -181,7 +175,6 @@ $ sudo systemctl enable kubelet.service
 
 Once complete, use Tectonic Console to view the new worker nodes, and confirm that they're ready to start running your containers.
 
-
 [rhel-install]: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/index.html
 [tectonic-installer]: https://github.com/coreos/tectonic-installer
 [flannel-repo]: https://github.com/coreos/flannel
@@ -189,5 +182,4 @@ Once complete, use Tectonic Console to view the new worker nodes, and confirm th
 [container-linux]: https://coreos.com/os/docs/latest
 [aws-install]: ../../tutorials/aws/installing-tectonic.md
 [bare-install]: ../bare-metal/metal-terraform.md
-<!-- vim: ts=2 sw=2 tw=80 expandtab:
--->
+[updates]: ../../admin/rhel/upgrading-workers.md

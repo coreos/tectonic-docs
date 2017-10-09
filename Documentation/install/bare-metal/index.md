@@ -28,7 +28,7 @@ A minimum of 3 machines are required to run Tectonic.
  * **Controller nodes** run `etcd` and the control plane of the Tectonic cluster.
  * **Worker nodes** run your applications in Tectonic clusters. New worker nodes join the cluster by talking to controller nodes for admission.
 
-For more information, see [Bare metal installation requirements][requirements.md].
+For more information, see [bare metal installation requirements][requirements].
 
 ### Networking requirements
 
@@ -79,7 +79,7 @@ Matchbox can serve CoreOS Container Linux images to reduce bandwidth usage and i
 Download a recent CoreOS Container Linux stable [release][coreos-release] with signatures.
 
 ```sh
-$ ./scripts/get-coreos stable 1353.8.0 .     # note the "." 3rd argument
+$ ./scripts/get-coreos stable 1465.8.0 .     # note the "." 3rd argument
 ```
 
 Move the images to `/var/lib/matchbox/assets`,
@@ -92,7 +92,7 @@ $ sudo cp -r coreos /var/lib/matchbox/assets
 $ tree /var/lib/matchbox/assets
 /var/lib/matchbox/assets/
 ├── coreos
-│   └── 1353.8.0
+│   └── 1465.8.0
 │       ├── CoreOS_Image_Signing_Key.asc
 │       ├── coreos_production_image.bin.bz2
 │       ├── coreos_production_image.bin.bz2.sig
@@ -105,7 +105,7 @@ $ tree /var/lib/matchbox/assets
 and verify the images are accessible.
 
 ```
-$ curl http://matchbox.example.com:8080/assets/coreos/1353.8.0/
+$ curl http://matchbox.example.com:8080/assets/coreos/1465.8.0/
 <pre>...
 ```
 
@@ -163,8 +163,8 @@ Download [Tectonic Installer][latest-tectonic-release].
 
 ```sh
 wget https://releases.tectonic.com/releases/tectonic_1.7.3-tectonic.3.tar.gz
-tar xzvf tectonic-1.7.3-tectonic.2.tar.gz
-cd tectonic/tectonic-installer
+tar xzvf tectonic_1.7.3-tectonic.3.tar.gz
+cd tectonic/
 ```
 
 Run the Tectonic Installer for your platform:
