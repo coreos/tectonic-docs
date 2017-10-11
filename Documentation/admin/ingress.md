@@ -1,9 +1,10 @@
 # Tectonic Ingress
 
-Tectonic AWS and bare metal clusters include an Ingress Controller to expose the Tectonic Console and Tectonic Identity services. Ingress controllers watch the Kubernetes API for Ingress resources and update their configuration to expose Kubernetes services. When service traffic is routed through Ingress controllers, services of type LoadBalancer, NodePort, and HostPort are not required. Ingress resources can have rules which match hostnames, match paths, and perform TLS termination.
+Tectonic clusters include an Ingress Controller to expose the Tectonic Console and Tectonic Identity services. Ingress controllers watch the Kubernetes API for Ingress resources and update their configuration to expose Kubernetes services. When service traffic is routed through Ingress controllers, services of type LoadBalancer, NodePort, and HostPort are not required. Ingress resources can have rules which match hostnames, match paths, and perform TLS termination.
 
 * On Tectonic bare metal, Ingress controllers are run as a daemonset on host ports across worker nodes by default.
 * On Tectonic AWS, Ingress controllers are run as a deployment with node ports behind an AWS ELB by default.
+* On Tectonic Azure, Ingress controllers are run as a deployment with node ports behind an Azure load balancer by default.
 
 ## Using Tectonic Ingress
 
@@ -58,7 +59,7 @@ On Tectonic bare metal, add a DNS record on your network which resolves `hello.e
 workerIP hello.example.com
 ```
 
-For Tectonic AWS, add a DNS CNAME record `hello.example.com` to your Tectonic ELB. It ends in `-tec` and can be found on your AWS dashboard.
+For Tectonic AWS, add a DNS CNAME record `hello.example.com` to your Tectonic ELB. It ends in `-con` and can be found on your AWS dashboard.
 
 Visit the example application `http://hello.example.com`. Learn more about [Ingress][ingress-userguide] and add TLS termination for HTTPS apps.
 
