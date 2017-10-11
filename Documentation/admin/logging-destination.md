@@ -131,7 +131,7 @@ Use AWS Elasticsearch Service with minimal overhead. Let's walk through the step
   		  
  - Log in to the AWS console and click Elasticsearch service.
  - Click "Create a new domain".
- - Configure the instance type, disk, and permissions. Use IAM based credentials for security. If you're not familiar with IAM users, you can read more about it [here](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html). Here's an example config that I made specifically for this purpose. 
+ - Configure the instance type, disk, and permissions. Use IAM based credentials for security. If you're not familiar with IAM users, you can read more about [IAM credentials][iam-credentials]. Here's an example config that I made specifically for this purpose. 
 
 If you do not wish to use credentials in your configuration via the `access_key_id` and `secret_access_key` options you should use IAM policies.
 
@@ -211,7 +211,7 @@ Attach a policy to the instance profile to ensure that the environment in which 
  }
  ```
  
-Next, configure fluentd to gather the selected logs and deliver them to the Elasticsearch machine. Use the [td-agent configuration file](https://docs.treasuredata.com/articles/td-agent). We're going to add the below configuration in the Kubernetes repository for the [fluentd plugin](https://github.com/kubernetes/kubernetes/blob/7e1b9dfd0fc75311ff6339f19b514e8caaebeafd/cluster/addons/fluentd-elasticsearch/fluentd-es-image/td-agent.conf).
+Next, configure fluentd to gather the selected logs and deliver them to the Elasticsearch machine. Use the [td-agent configuration file][td-config]. We're going to add the below configuration in the Kubernetes repository for the [fluentd plugin][fluentd-plugin].
  
  ```
  <match **>
@@ -237,6 +237,10 @@ Next, configure fluentd to gather the selected logs and deliver them to the Elas
 
 [fluentd-ds]: ../files/logging/fluentd-ds.yaml
 [fluentd-config]: ../files/logging/fluentd-configmap.yaml
-[quay-fluentd-kubernetes]: https://quay.io/repository/coreos/fluentd-kubernetes?tab=tags
 [fluentd-docs-output]: http://docs.fluentd.org/v0.12/articles/output-plugin-overview
 [fluentd-match]: http://docs.fluentd.org/v0.12/articles/config-file#2-ldquomatchrdquo-tell-fluentd-what-to-do
+[fluentd-plugin]:
+ https://github.com/kubernetes/kubernetes/blob/7e1b9dfd0fc75311ff6339f19b514e8caaebeafd/cluster/addons/fluentd-elasticsearch/fluentd-es-image/td-agent.conf
+[iam-credentials]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html
+[quay-fluentd-kubernetes]: https://quay.io/repository/coreos/fluentd-kubernetes?tab=tags
+[td-config]: https://docs.treasuredata.com/articles/td-agent
