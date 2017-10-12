@@ -73,7 +73,8 @@ Also ensure the SSH known_hosts file doesn't have old records for the API DNS na
 Open a new terminal and run the following command to download Tectonic Installer.
 
 ```bash
-$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.5-tectonic.1.tar.gz # download
+$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.5-tectonic.1.tar.gz
+$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.5-tectonic.1.tar.gz.sig
 ```
 
 Verify the release has been signed by the [CoreOS App Signing Key][verification-key].

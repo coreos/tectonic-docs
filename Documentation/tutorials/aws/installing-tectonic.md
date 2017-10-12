@@ -41,6 +41,7 @@ Make sure a current version of either Google Chrome or Mozilla Firefox is set as
 
 ```
 $ curl -O https://releases.tectonic.com/releases/tectonic_1.7.5-tectonic.1.tar.gz
+$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.5-tectonic.1.tar.gz.sig
 ```
 
 2. Verify the release has been signed by the [CoreOS App Signing Key][verification-key].
