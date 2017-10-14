@@ -42,5 +42,5 @@ Any connection errors will indicate that your cluster is not yet done bootstrapp
 For more information on troubleshooting cluster errors, see [triaging a cluster][triaging-cluster].
 
 
-[triaging-cluster]: ../../troubleshooting/troubleshooting.html
-[tectonic-kubectl]: ../aws/first-app.html#configuring-credentials
+[triaging-cluster]: ../../troubleshooting/troubleshooting.md
+[tectonic-kubectl]: ../aws/first-app.md#configuring-credentials
