@@ -299,7 +299,7 @@ containers:
 [check-app]: check-logs.md
 [check-work]: https://console.tectonicsandbox.com/simple-deployment/
 [edit-service]: ../img/walkthrough/edit-service.png
-[installing]: installing-tectonic.md
+[installing]: install.md
 [k8s-deployment]: https://kubernetes.io/docs/user-guide/deployments/
 [k8s-ingress]: https://kubernetes.io/docs/concepts/services-networking/ingress/
 [k8s-service]: https://kubernetes.io/docs/user-guide/services/

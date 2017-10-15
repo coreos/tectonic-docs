@@ -43,7 +43,7 @@ The Azure DNS service allows you to perform DNS management, traffic management, 
 
 When creating an Azure DNS Zone, enter a domain or subdomain that you own and can manage.
 
-The Tectonic installation requires a domain or subdomain name in which it will create two [sub-]subdomains: one for the Tectonic console, and one for the Kubernetes API server. This allows Tectonic to access and use the listed domain. This tutorial employs the domain name `example.com`. The string `example.com` should be replaced with the domain or subdomain name configured in this step wherever it appears later in the tutorial.
+The Tectonic installation requires a domain or subdomain name in which it will create two subdomains: one for the Tectonic console, and one for the Kubernetes API server. This allows Tectonic to access and use the listed domain. This tutorial employs the domain name `example.com`. The string `example.com` should be replaced with the domain or subdomain name configured in this step wherever it appears later in the tutorial.
 
 1. From the menu at left, selet *DNS Zones*
 2. Click *Add* to create a new zone.

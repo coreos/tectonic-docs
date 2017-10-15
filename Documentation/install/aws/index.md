@@ -63,7 +63,7 @@ A browser window will open to begin the GUI installation process.
 
 Be sure to read the [installation requirements][install-aws-requirements], which include a section on [privileges for your AWS credentials][install-aws-requirements-creds], as well as the [known issues section in the Troubleshooting guide][install-aws-troubleshooting] before you install.
 
-Installation requires the CoreOS License and Pull Secret described in [Create a CoreOS account](create-a-coreos-account) above. Be certain to create an account and enable the 10 free nodes before launching Tectonic Installer.
+Installation requires the CoreOS License and Pull Secret described in [Create a CoreOS account][create-coreos-acct] above. Be certain to create an account and enable the 10 free nodes before launching Tectonic Installer.
 
 Follow the on-screen instructions to provision your cluster. This process should take about 10-15 minutes.
 
@@ -88,6 +88,7 @@ For those new to Tectonic and Kubernetes, the [Tectonic Tutorials][tutorials] pr
 
 
 [aws-r53-doc]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/creating-migrating.html
+[create-coreos-acct]: #create-a-coreos-account
 [ssh-key-req]: requirements.md#ssh-key
 [install-aws-requirements]: requirements.md
 [install-aws-requirements-creds]: requirements.md#privileges

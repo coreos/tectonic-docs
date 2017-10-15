@@ -195,7 +195,7 @@ If Identity presents a "Database Error", this is typically a failure of the Kube
 [dex-failure]: ../admin/failure-domains-identity.md
 [etcd-reconfig]: https://coreos.com/etcd/docs/latest/op-guide/runtime-configuration.html
 [etcd-failures]: https://github.com/coreos/etcd/blob/master/Documentation/op-guide/failures.md
-[configure-kubectl]: ../tutorials/first-app.md#configuring-credentials
+[configure-kubectl]: ../tutorials/aws/first-app.md#configuring-credentials
 [etcd-recover]: bootkube_recovery_tool.md#bootkube-recover
 [controller-recovery]: controller-recovery.md#recovering-a-controller-manager
 [scheduler-recovery]: controller-recovery.md#recovering-a-scheduler

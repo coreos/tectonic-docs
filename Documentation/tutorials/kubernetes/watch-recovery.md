@@ -109,7 +109,7 @@ Suggested topics:
 
 
 [autoscaling-pods]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale
-[first-app]: ../sandbox/first-app.html
+[first-app]: ../sandbox/first-app.md
 [hardway]: https://github.com/kelseyhightower/kubernetes-the-hard-way
 [k8s-doc]: https://kubernetes.io/docs/home
 [pods]: https://coreos.com/kubernetes/docs/latest/pods.html

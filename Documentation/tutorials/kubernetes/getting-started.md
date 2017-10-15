@@ -29,9 +29,9 @@ Then, follow these guides to analyze, break, and watch your cluster rebuild.
 
 
 [account-login]: https://account.coreos.com/login
-[creating-aws]: ../aws/creating-aws.html
-[aws-terraform]: ../../install/aws/aws-terraform.html
-[aws-installer]: ../../install/aws/index.html
+[creating-aws]: ../aws/creating-aws.md
+[aws-terraform]: ../../install/aws/aws-terraform.md
+[aws-installer]: ../../install/aws/index.md
 [configure-kubectl]: configure-kubectl.md
 [deploy-master]: deploy-master.md
 [deploy-workers]: deploy-workers.md
