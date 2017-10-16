@@ -18,6 +18,14 @@ This guide walks through a bare metal installation of Tectonic utilizing PXE-bas
 
 For a more complete list of hardware and networking requirements, please see the bare metal [requirements document][requirements].
 
+## Overview video
+
+This overview video helps understand the big picture before beginning the deployment steps:
+
+<div class="tectonic-demo">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/61tSi50rfRI" frameborder="0" allowfullscreen></iframe>
+</div>
+
 <h2 id="1-overview"> 1. Node and networking requirements </h2>
 
 ### Node types
