@@ -61,7 +61,7 @@ metadata:
   namespace: default
 spec:
   replicas: 1
-  version: v1.7.3
+  version: v1.8.0
   serviceAccountName: prometheus-hello
   serviceMonitorSelector:
     matchLabels:
