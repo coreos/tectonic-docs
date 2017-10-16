@@ -38,7 +38,7 @@ The status of the image download in progressively printed in the command window.
 
 Direct a web browser on the Windows host to the URL `http://127.0.0.1:4444`. The Tectonic Installer GUI is shown. Proceed through the installation according to the instructions for the target provider, such as [AWS][aws-install] or [Bare Metal][bm-install].
 
-Installation requires the CoreOS License and Pull Secret described in [Create a CoreOS account](create-a-coreos-account) above. Be certain to create an account and enable the 10 free nodes before launching Tectonic Installer.
+Installation requires the CoreOS License and Pull Secret described in [Create a CoreOS account][create-coreos-acct] above. Be certain to create an account and enable the 10 free nodes before launching Tectonic Installer.
 
 ### Download cluster assets
 
@@ -98,5 +98,6 @@ $ TERRAFORM_CONFIG=$(pwd)/.terraformrc terraform destroy --force
 [assets-anchor]: #download-cluster-assets
 [aws-install]: aws/index.md#step-2-install
 [bm-install]: bare-metal/index.md
+[create-coreos-acct]: #create-a-coreos-account
 [dce-win]: https://store.docker.com/editions/community/docker-ce-desktop-windows
 [tut-firstapp]: ../tutorials/azure/first-app.md
