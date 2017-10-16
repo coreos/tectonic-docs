@@ -239,8 +239,7 @@ Next, configure fluentd to gather the selected logs and deliver them to the Elas
 [fluentd-config]: ../files/logging/fluentd-configmap.yaml
 [fluentd-docs-output]: http://docs.fluentd.org/v0.12/articles/output-plugin-overview
 [fluentd-match]: http://docs.fluentd.org/v0.12/articles/config-file#2-ldquomatchrdquo-tell-fluentd-what-to-do
-[fluentd-plugin]:
- https://github.com/kubernetes/kubernetes/blob/7e1b9dfd0fc75311ff6339f19b514e8caaebeafd/cluster/addons/fluentd-elasticsearch/fluentd-es-image/td-agent.conf
+[fluentd-plugin]: https://github.com/kubernetes/kubernetes/blob/7e1b9dfd0fc75311ff6339f19b514e8caaebeafd/cluster/addons/fluentd-elasticsearch/fluentd-es-image/td-agent.conf
 [iam-credentials]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html
 [quay-fluentd-kubernetes]: https://quay.io/repository/coreos/fluentd-kubernetes?tab=tags
 [td-config]: https://docs.treasuredata.com/articles/td-agent
