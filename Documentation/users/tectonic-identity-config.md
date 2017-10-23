@@ -53,11 +53,11 @@ To add a static user, update the Tectonic Identity `ConfigMap` with a new `stati
 staticPasswords:
 # The following fields are required.
 - email: "test1@example.com"
+  # bcrypt hash for string "password"
   hash: "$2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W"
-    # bcrypt hash for string "password"
   username: "test1" # username to display. NOT used during login.
+  # userID randomly generated using uuidgen.
   userID: "1d55c7c4-a76d-4d74-a257-31170f2c4845"
-    # randomly generated using uuidgen.
 ``
 Apply ConfigMap changes, then bring up the Tectonic Identity Pod with the changes to enable users to log in to Tectonic Console using the  password.
 
@@ -73,8 +73,8 @@ To change the password of an existing user, generate a bcrypt hash for the new p
 staticPasswords:
 # Existing user entry.
 - email: "test1@example.com"
+  # bcrypt hash for new password
   hash: "$2a$10$TcWtvcw0N8.xK8nKdBw80uzYij6cJwuQhtfYnEf/hEC9bRTzlWdIq"
-    # bcrypt hash for new password
   username: "test1"
   userID: "1d55c7c4-a76d-4d74-a257-31170f2c4845"
 ```
