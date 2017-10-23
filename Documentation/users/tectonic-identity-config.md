@@ -58,7 +58,7 @@ staticPasswords:
   username: "test1" # username to display. NOT used during login.
   # userID randomly generated using uuidgen.
   userID: "1d55c7c4-a76d-4d74-a257-31170f2c4845"
-``
+```
 Apply ConfigMap changes, then bring up the Tectonic Identity Pod with the changes to enable users to log in to Tectonic Console using the  password.
 
 A bcrypt encoded hash of the user's password can be generated using the [coreos/bcrypt-tool](https://github.com/coreos/bcrypt-tool/releases/tag/v1.0.0). When generating Tectonic Console passwords with `bcrypt-tool`, using values higher than the default of `-cost=10` may result in timeouts. bcrypt also imposes a maximum password length of 56 bytes.
