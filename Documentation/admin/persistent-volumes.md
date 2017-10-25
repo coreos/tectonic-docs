@@ -10,7 +10,7 @@ For more information, see [Persistent Volumes][persistent-volumes] in the Kubern
 
 ## Defining Default Storage Classes
 
-When Persistent Volumes are statically provisioned, the `StorageClass` objects are requested by name. The `storageClassName` defined in the Persistent volume must match the `metadata:
+When Persistent Volumes are statically provisioned, the `StorageClass` objects are requested by name. The `storageClassName` defined in the Persistent Volume must match the `metadata:
  name` defined in the `StorageClass` it references.
 
 When Persistent Volumes are dynamically provisioned, the `StorageClass` fields `provisioner`, `parameters`, or `reclaimPolicy` may be used.
@@ -62,7 +62,7 @@ parameters:
 
 Persistent Volumes may be defined statically for use across the cluster. Static Persistent Volume definitions must specify a `StorageClass`, which must exist before the Persistent Volume is defined.
 
-To define Persistent Volumes, go to *Administration > Persistent Volume*, and click *Create*. Enter the definition, and click *Create*.
+To define Persistent Volumes, go to *Administration > Persistent Volumes*, and click *Create*. Enter the definition, and click *Create*.
 
 The following example creates a Persistent Volume which references an existing `StorageClass`, using `storageClassName: slow`.
 
@@ -85,9 +85,9 @@ spec:
 
 ### Azure Persistent Volumes
 
-Tectonic uses Managed Disks for the VMs. As a result, Persistent Volume Claims (PVCs) using an Azure Disk storage class that has `kind: shared` (the default) will fail to mount to the container.
+Tectonic uses Managed Disks for the VMs. As a result, a Persistent Volume Claim (PVC) using an Azure Disk storage class that has `kind: shared` (the default) will fail to be mounted by the container.
 
-To define PVCs on Azure, first create `StorageClasses` of `kind: managed`. Then, use those classes when creating dynamic or static Persistent Volumes.
+To define a PVC on Azure, create a `StorageClass` of `kind: managed`. Then, use those classes when creating dynamic or static Persistent Volumes.
 
 ## Defining Persistent Volume Claims
 
