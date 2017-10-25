@@ -2,7 +2,7 @@
 
 Use Tectonic Installer to create clusters within an existing private Azure network. In addition to the standard Azure requirements, private clusters require:
 * An existing Virtual Network with a configured and connected VPN link.
-* A DNS domain managed by Azure DNS, or, or a 3rd party DNS server that supports DNS UPDATE operations.
+* A DNS domain name: This domain can managed in Azure DNS, or with a 3rd party DNS server that supports DNS UPDATE operations.
 
 Once these requirements are met, follow the guide to [Install Tectonic on Azure with Terraform][azure-terraform].
 
@@ -18,9 +18,9 @@ For more information, see the Microsoft Azure document [Deploy an Openvpn Access
 
 ## DNS domain or server
 
-Private clusters must use an external DNS provider, rather than Azure’s default hostname resolution. The selected DNS server must be configured as the default resolver for the nodes.
+Private clusters must use their own DNS domain name, rather than Azure’s default DNS zone. The selected DNS server must be configured as the default resolver for the nodes.
 
-Tectonic will use DNS only, rather than Load Balancers, to balance traffic to the master nodes of your private clusters on Azure.
+Tectonic will use only DNS, rather than Load Balancers, to balance traffic to the master nodes of your private clusters on Azure.
 
 Follow the instructions to set up [DNS delegation and custom zones via Azure DNS][azure-dns].
 
