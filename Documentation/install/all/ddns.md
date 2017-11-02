@@ -4,7 +4,7 @@ This document describes replacing the default DNS Terraform module with the DDNS
 
 ## Selecting the DDNS module
 
-Currently, switching from the standard Azure DNS module to the DDNS module requires editing the platform's `main.tf` configuration.
+Currently, switching from Terraform's DNS module to the DDNS module requires editing the platform's `main.tf` configuration.
 
 ### Remove platform DNS module
 
