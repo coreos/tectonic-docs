@@ -1,6 +1,6 @@
 # Custom DNS service with RFC 2136 UPDATES ("DDNS")
 
-This document describes replacing the a cloud provider (Azure, AWS) DNS Terraform module with the DDNS module, allowing provisining configuration of custom, external DNS name servers supporting the [RFC 2136 `UPDATE` protocol][rfc2136].
+This document describes replacing the default DNS Terraform module with the DDNS module, allowing provisioning of DNS name servers that support the [RFC 2136 `DNS UPDATE` protocol][rfc2136]. This can be used, for example, to replace a cloud provider's included DNS service with a custom external DNS service.
 
 ## Selecting the DDNS module
 
@@ -8,7 +8,7 @@ Currently, switching from the standard Azure DNS module to the DDNS module requi
 
 ### Remove platform DNS module
 
-Remove the existing DNS module in your platform, e.g., `platforms/azure/main.tf`, by commenting out lines matching these:
+Remove the existing DNS module for the platform by commenting out the DNS module stanza from the platform's Terraform file, e.g., `platforms/azure/main.tf`:
 
 ```go
 /*
@@ -39,7 +39,7 @@ module "dns" {
 
 ### Add Terraform DDNS module
 
-Configure the DDNS module to replace the standard DNS module for the platform by editing the platform Terraform file, e.g., `platforms/azure/main.tf`, to add these lines:
+Configure the DDNS module to replace the removed DNS module by editing the platform's Terraform file to add this DDNS module stanza:
 
 ```go
 module "dns" {
@@ -67,20 +67,24 @@ module "dns" {
 
 ## Configure DDNS variables
 
-Now that the platform will use the DDNS module, configure the key DDNS variables in the `terraform.tfvars` variables file for the cluster:
+Now that the platform will use the DDNS module, configure the key DDNS variables in the cluster's `terraform.tfvars` variables file:
 
 * `tectonic_base_domain`: The domain or subdomain name chosen for the cluster.
-* `tectonic_ddns_server`: The address of the DNS name server for the chosen domain.
-* `tectonic_ddns_key_name`: The authentication key for DNS `UPDATE`s.
-* `tectonic_ddns_key_secret`: The decryption secret for the authentication key.
-* `tectonic_ddns_key_algorithm`: Authentication key's [encryption algorithm][key-algo].
+* `tectonic_ddns_server`: The address of the DNS nameserver for the chosen domain.
+* `tectonic_ddns_key_name`: The Transaction Signature (TSIG) key name, e.g., `example.com.`.
+* `tectonic_ddns_key_secret`: The decryption secret string for the TSIG key.
+* `tectonic_ddns_key_algorithm`: TSIG key's encryption algorithm. One of `hmac-md5`, `hmac-sha1`, `hmac-sha256`, or `hmac-sha512`.
 
 ## Continue Tectonic installation
 
-With DNS configured to use the chosen name server, proceed with remaining configuration and Tectonic installation on either [AWS][install-aws] or [Azure][install-azure].
+With the DDNS module configured to use the chosen name server, proceed with Tectonic installation for the platform:
+
+* [Tectonic on AWS][install-aws]
+* [Tectonic on Azure][install-azure]
+* [Tectonic on bare metal][install-bm]
 
 
-[key-algo]: https://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xhtml
 [install-aws]: ../aws/aws-terraform.md
-[install-azure]: ../install/azure/azure-terraform.md
+[install-azure]: ../azure/azure-terraform.md
+[install-bm]: ../bare-metal/index.md
 [rfc2136]: https://tools.ietf.org/html/rfc2136
