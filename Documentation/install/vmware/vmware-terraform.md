@@ -4,8 +4,6 @@ Following this guide will deploy a Tectonic cluster within a VMware vSphere infr
 
 Generally, the VMware platform templates adhere to the standards defined by the project [conventions][conventions] and [generic platform requirements][generic]. This document aims to document the implementation details specific to the VMware platform.
 
-<p style="background:#d9edf7; padding: 10px;" class="text-info"><strong>Pre-Alpha:</strong> These modules and instructions are currently considered pre-alpha. See the <a href="../../platform-lifecycle.md">platform life cycle</a> for more details.</p>
-
 ## Prerequsities
 
 1. Download the latest Container Linux Stable OVA from  [https://coreos.com/os/docs/latest/booting-on-vmware.html][boot-vm].
