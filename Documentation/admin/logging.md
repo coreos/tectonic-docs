@@ -69,7 +69,7 @@ Once all the pods are ready, everything should be functioning. To double check, 
 
 ### (Optional) Deploy Prometheus to monitor Fluentd
 
-Tectonic includes the [promtheus-operator][prometheus-operator] in installations by default. This operator can be used to create additional instances of Prometheus to monitor your apps.
+Tectonic includes the [prometheus-operator][prometheus-operator] in installations by default. This operator can be used to create additional instances of Prometheus to monitor your apps.
 
 If you wish to enable Prometheus monitoring of your Fluentd pods, run the following commands:
 
