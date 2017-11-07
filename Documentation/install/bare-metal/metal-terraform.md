@@ -59,7 +59,7 @@ Start by setting the `INSTALLER_PATH` to the location of your platform's Tectoni
 
 ```bash
 $ export INSTALLER_PATH=$(pwd)/tectonic-installer/linux/installer
-$ export PATH=$PATH:$(pwd)/tectonic-installer/linux
+$ export PATH=$(pwd)/tectonic-installer/linux:$PATH
 ```
 
 Next, get the modules that Terraform will use to create the cluster resources:
