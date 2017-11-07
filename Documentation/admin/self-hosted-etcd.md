@@ -33,7 +33,7 @@ To launch and configure a self-hosted etcd cluster and an etcd operator in Tecto
 
 ### Installation workflow
 
-Tectonic uses `bootkube` to install a self-hosted Kubernetes cluster with self-hosted etcd service. `bootkube` creates an external etcd cluster member for bootstrapping the installation. This initial etcd cluster member is used only during initial setup. TThe following list summarizes the self-hosted etcd bootstrap and installation process:
+Tectonic uses `bootkube` to install a self-hosted Kubernetes cluster with self-hosted etcd service. `bootkube` creates an external etcd cluster member for bootstrapping the installation. This initial etcd cluster member is used only during initial setup. The following list summarizes the self-hosted etcd bootstrap and installation process:
 
 1. Start a temporary external single-member etcd cluster
 2. Start a temporary Kubernetes cluster using the temporary etcd cluster’s address
