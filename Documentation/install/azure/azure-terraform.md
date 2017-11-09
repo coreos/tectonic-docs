@@ -184,7 +184,7 @@ These are the basic values that must be adjusted for each Tectonic deployment on
 
 #### Environment variables
 
-Set these sensitive values in the environment. Terraform will encrypt them before storage or transport:
+Set these sensitive values in the environment. The `tectonic_admin_password` will be encrypted before storage or transport:
 
 * `TF_VAR_tectonic_admin_email` - String giving the email address used as user name for the initial Console login
 * `TF_VAR_tectonic_admin_password` - Plaintext password string for initial Console login

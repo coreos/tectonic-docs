@@ -115,6 +115,20 @@ $ cd build/${CLUSTER}/
 
 Edit the parameters with details of the VMware infrastructure. View all of the [VMware][vmware] specific options and [the common Tectonic variables][vars].
 
+### Set Console login secrets
+
+Set these sensitive values in the environment. The `tectonic_admin_password` will be encrypted before storage or transport:
+
+* `TF_VAR_tectonic_admin_email` - String giving the email address used as user name for the initial Console login
+* `TF_VAR_tectonic_admin_password` - Plaintext password string for initial Console login
+
+For example, in the `bash(1)` shell, replace the quoted values with those for the cluster being deployed and run the following commands:
+
+```bash
+$ export TF_VAR_tectonic_admin_email="admin@example.com"
+$ export TF_VAR_tectonic_admin_password="pl41nT3xt"
+```
+
 ## Deploy the cluster
 
 Download the Tectonic Terraform modules:
