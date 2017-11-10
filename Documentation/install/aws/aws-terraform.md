@@ -54,7 +54,7 @@ $ cd tectonic
 Add the `terraform` binary to our `PATH`. The platform should be `darwin` or `linux`.
 
 ```bash
-$ export PATH=$PATH:$(pwd)/tectonic-installer/darwin # Put the `terraform` binary on the PATH
+$ export PATH=$(pwd)/tectonic-installer/darwin:$PATH # Put the `terraform` binary on the PATH
 ```
 
 Download the Tectonic Terraform modules.
