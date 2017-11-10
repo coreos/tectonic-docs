@@ -152,7 +152,7 @@ $ cd tectonic
 
 ### Create a cluster build directory
 
-Choose a cluster name to identify the cluster. Export an environment variable with the chosen cluster name. In this tutorial, `my-cluster` is used.
+Choose a cluster name to identify the cluster. Export an environment variable with the chosen cluster name. This tutorial names the cluster `my-cluster`.
 
 ```
 $ export CLUSTER=my-cluster
@@ -165,17 +165,34 @@ $ mkdir -p build/${CLUSTER}
 $ cp examples/terraform.tfvars.azure build/${CLUSTER}/terraform.tfvars
 ```
 
-Edit the parameters in `build/$CLUSTER/terraform.tfvars` with the deployment's Azure details, domain name, license, and pull secret. [View all of the Azure specific options][azure-vars] and [the common Tectonic variables][vars].
-
 ### Key values for basic Azure deployment
 
-These are the basic values that must be adjusted for each Tectonic deployment on Azure. See the details of each value in the comments in the `terraform.tfvars` file.
+These are the basic values that must be adjusted for each Tectonic deployment on Azure.
 
-* `tectonic_admin_email` - For the initial Console login
-* `tectonic_admin_password_hash` - Use [`bcrypt-tool`][bcrypt-tool] to encrypt password
-* `tectonic_azure_client_secret` - As in `ARM_CLIENT_SECRET` above
+#### Environment variables
+
+Set these sensitive values in the environment. Terraform will encrypt them before storage or transport:
+
+* `TF_VAR_tectonic_admin_email` - String giving the email address used as user name for the initial Console login
+* `TF_VAR_tectonic_admin_password` - Plaintext password string for initial Console login
+* `TF_VAR_tectonic_azure_client_secret` - Generated, obfuscated password string matching `ARM_CLIENT_SECRET` and `password` value from `az ad` output, above
+* `TF_VAR_tectonic_azure_location` - Lowercase catenated string giving the Azure location name (example: `centralus`)
+
+For example, in the `bash(1)` shell, replace the quoted values with those for the cluster being deployed and run the following commands:
+
+```bash
+$ export TF_VAR_tectonic_admin_email="admin@example.com"
+$ export TF_VAR_tectonic_admin_password="pl41nT3xt"
+$ export TF_VAR_tectonic_azure_client_secret=${ARM_CLIENT_SECRET}
+$ export TF_VAR_tectonic_azure_location="centralus"
+...
+```
+
+#### Terraform variables file
+
+Edit the parameters in `build/$CLUSTER/terraform.tfvars` with the deployment's Azure details, domain name, license, and pull secret. See the details of each value below in the [terraform.tfvars][terraform-tvars] file, or check the complete list of [Azure specific options][azure-vars] and [the common Tectonic variables][vars].
+
 * `tectonic_azure_ssh_key` - Full path to the public key part of the key added to `ssh-agent` above
-* `tectonic_azure_location` - e.g., `centralus`
 * `tectonic_base_domain` - The DNS domain or subdomain delegated to an Azure DNS zone above
 * `tectonic_azure_external_dns_zone_id` - Value of `id` in `az network dns zone list` output
 * `tectonic_cluster_name` - Usually matches `$CLUSTER` as set above
