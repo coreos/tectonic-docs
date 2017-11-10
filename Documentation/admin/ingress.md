@@ -159,7 +159,7 @@ For more information, see the nginx documentation on the [large-client-header-bu
 
 
 [ingress-userguide]: https://kubernetes.io/docs/user-guide/ingress/
-[service-accounts]: onboard-service-account.md
-[controller-deployments]: https://github.com/kubernetes/ingress/tree/master/examples/deployment
+[service-accounts]: ../users/creating-service-accounts.md
+[controller-deployments]: https://github.com/kubernetes/ingress-nginx/tree/master/deploy
 [nginx-ingress]: https://github.com/kubernetes/ingress/tree/master/controllers/nginx
 [large-flag]: http://nginx.org/en/docs/http/ngx_http_core_module.html#large_client_header_buffers

@@ -35,4 +35,4 @@ kubectl patch deployment tectonic-identity \
 
 Administrators should take proper precautions to ensure these assets remain secure.
 
-[tectonic-identity]: user-management.md
+[tectonic-identity]: ../users/tectonic-identity-config.md

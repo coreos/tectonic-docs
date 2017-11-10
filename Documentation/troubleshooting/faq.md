@@ -61,6 +61,6 @@ Make sure to check out the [community support forum](https://github.com/coreos/t
 
 
 [assets]: ../admin/assets-zip.md
-[user-management]: ../admin/user-management.md
+[user-management]: ../users/tectonic-identity-config.md
 [contact]: https://coreos.com/contact/
 [sign-up]: https://account.coreos.com/signup/summary/tectonic-2016-12

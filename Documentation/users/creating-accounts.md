@@ -119,4 +119,4 @@ For more information see the [Kubernetes RBAC documentation][k8s-rbac].
 [ldap-integration]: ldap-integration.md
 [saml-integration]: saml-integration.md
 [user-facing]: https://kubernetes.io/docs/admin/authorization/rbac/#user-facing-roles
-[default-roles]: creating-roles.md/#default-roles-in-tectonic
+[default-roles]: creating-roles.md#default-roles-in-tectonic
