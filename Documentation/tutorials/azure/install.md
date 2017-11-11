@@ -190,7 +190,7 @@ $ export TF_VAR_tectonic_azure_location="centralus"
 
 #### Terraform variables file
 
-Edit the parameters in `build/$CLUSTER/terraform.tfvars` with the deployment's Azure details, domain name, license, and pull secret. See the details of each value below in the [terraform.tfvars][terraform-tvars] file, or check the complete list of [Azure specific options][azure-vars] and [the common Tectonic variables][vars].
+Edit the parameters in `build/$CLUSTER/terraform.tfvars` with the deployment's Azure details, domain name, license, and pull secret. See the details of each value in the cluster's `terraform.tfvars`  file, or check the complete list of [Azure specific options][azure-vars] and [the common Tectonic variables][vars].
 
 * `tectonic_azure_ssh_key` - Full path to the public key part of the key added to `ssh-agent` above
 * `tectonic_base_domain` - The DNS domain or subdomain delegated to an Azure DNS zone above

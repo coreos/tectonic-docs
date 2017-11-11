@@ -55,9 +55,8 @@ For more information on these roles, see [User-facing Roles][user-facing] in the
 
 ## Assign Users to Roles
 
-To grant users access to Roles, [use a Role Binding][creating-role-bindings].
+To grant users access to Roles, [use a Role Binding][role-binding].
 
 
 [role-binding]: creating-accounts.md#creating-role-bindings
 [user-facing]: https://kubernetes.io/docs/admin/authorization/rbac/#user-facing-roles
-[creating-role-bindings]: creating-accounts.md/#creating-role-bindings

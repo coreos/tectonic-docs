@@ -7,6 +7,6 @@
 
 
 [admin-upgrade]: upgrade.md
-[admin-user-management]: user-management.md
+[admin-user-management]: ../users/tectonic-identity-config.md
 [assets-zip]: assets-zip.md
 [logging]: logging.md

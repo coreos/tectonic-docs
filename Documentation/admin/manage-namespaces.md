@@ -50,5 +50,5 @@ Check out the [Kubernetes Namespace User Guide][k8s-namespace-ug] for more infor
 
 [k8s-namespace-ug]: https://kubernetes.io/docs/admin/namespaces/
 [namespaces-default]: ../img/walkthrough/namespaces-default.png
-[user-mgmt]: ../admin/user-management.md
+[user-mgmt]: ../users/tectonic-identity-config.md
 [k8s-rbac]: https://kubernetes.io/docs/admin/authorization/#rbac-mode

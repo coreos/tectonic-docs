@@ -93,8 +93,8 @@ The default Cluster-wide roles in tectonic are:
 | view      | Read only view for all objects. Can be used cluster-wide, or just within a specific namespace.|
 
 
-[user-management]: user-management.md
-[ldap-user-management]: ldap-user-management.md
-[saml-user-management]: saml-user-management.md
+[user-management]: ../users/tectonic-identity-config.md
+[ldap-user-management]: ../users/ldap-integration.md
+[saml-user-management]: ../users/saml-integration.md
 [dex]: https://github.com/coreos/dex
 [third-party]: https://github.com/coreos/dex/blob/master/Documentation/storage.md#Kubernetes-third-party-resources
