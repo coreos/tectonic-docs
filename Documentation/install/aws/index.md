@@ -31,7 +31,7 @@ Download the [Tectonic installer][latest-tectonic-release].
 ```bash
 wget https://releases.tectonic.com/releases/tectonic_1.7.9-tectonic.1.tar.gz
 tar xzvf tectonic_1.7.9-tectonic.1.tar.gz
-cd tectonic
+cd tectonic_1.7.9-tectonic.1
 ```
 
 Run the Tectonic Installer for your platform.

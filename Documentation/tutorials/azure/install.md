@@ -147,7 +147,7 @@ Extract the tarball and navigate to the `tectonic` directory.
 
 ```bash
 $ tar xzvf tectonic_1.7.9-tectonic.1.tar.gz
-$ cd tectonic
+$ cd tectonic_1.7.9-tectonic.1
 ```
 
 ### Create a cluster build directory

@@ -63,7 +63,7 @@ When prompted, log in to your CoreOS account to obtain the License and Pull Secr
 If you prefer to work within the terminal, extract and launch the Installer using:
 ```bash
 tar xzvf tectonic_1.7.9-tectonic.1.tar.gz # to extract the tarball
-$ cd tectonic/tectonic-installer # to change to the previously untarred directory
+$ cd tectonic_1.7.9-tectonic.1/tectonic-installer # to change to the previously untarred directory
 $ ./$PLATFORM/installer # to run Tectonic Installer
 ```
 Where `$PLATFORM` is `linux` or `darwin`.
