@@ -172,7 +172,7 @@ Download [Tectonic Installer][latest-tectonic-release].
 ```sh
 wget https://releases.tectonic.com/releases/tectonic_1.7.9-tectonic.1.tar.gz
 tar xzvf tectonic_1.7.9-tectonic.1.tar.gz
-cd tectonic/tectonic-installer
+cd tectonic_1.7.9-tectonic.1/tectonic-installer
 ```
 
 Run the Tectonic Installer for your platform:
