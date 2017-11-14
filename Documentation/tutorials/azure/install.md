@@ -131,22 +131,22 @@ $ ssh-add -L
 Open a new terminal and run the following command to download Tectonic Installer.
 
 ```bash
-$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.5-tectonic.1.tar.gz
-$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.5-tectonic.1.tar.gz.sig
+$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.9-tectonic.1.tar.gz
+$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.9-tectonic.1.tar.gz.sig
 ```
 
 Verify the release has been signed by the [CoreOS App Signing Key][verification-key].
 
 ```bash
 $ gpg2 --keyserver pgp.mit.edu --recv-key 18AD5014C99EF7E3BA5F6CE950BDD3E0FC8A365E
-$ gpg2 --verify tectonic_1.7.5-tectonic.1.tar.gz.sig tectonic_1.7.5-tectonic.1.tar.gz
+$ gpg2 --verify tectonic_1.7.9-tectonic.1.tar.gz.sig tectonic_1.7.9-tectonic.1.tar.gz
 # gpg2: Good signature from "CoreOS Application Signing Key <security@coreos.com>"
 ```
 
 Extract the tarball and navigate to the `tectonic` directory.
 
 ```bash
-$ tar xzvf tectonic_1.7.5-tectonic.1.tar.gz
+$ tar xzvf tectonic_1.7.9-tectonic.1.tar.gz
 $ cd tectonic
 ```
 
