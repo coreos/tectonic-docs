@@ -6,7 +6,7 @@ Clusters created with the graphical Tectonic Installer can be deleted with a few
 
 ### Destroying a cluster with Installer state
 
-Recent users of Tectonic Installer will have downloaded a release `.tar.gz` file, extracted a `tectonic` directory from it, and executed the installation from there. Locate the directory where Tectonic Installer was extracted and executed.
+Recent users of Tectonic Installer will have downloaded a release `.zip` file, extracted a `tectonic` directory from it, and executed the installation from there. Locate the directory where Tectonic Installer was extracted and executed.
 
 #### Export AWS credentials
 
@@ -26,7 +26,7 @@ Next, navigate to the cluster state directory written to the extracted `tectonic
 ```bash
 # Replace <os> with darwin or linux
 # Replace <CLUSTERNAME> with a string like mytectonic_2017-05-03_11-41-02
-$ cd tectonic_1.7.9-tectonic.1/tectonic-installer/<os>/clusters/<CLUSTERNAME>
+$ cd tectonic_1.7.9-tectonic.2/tectonic-installer/<os>/clusters/<CLUSTERNAME>
 $ export PATH=$(pwd)/../..:$PATH	# Add Installer's terraform binary to PATH
 ```
 

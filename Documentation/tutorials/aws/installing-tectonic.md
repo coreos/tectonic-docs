@@ -40,19 +40,19 @@ Make sure a current version of either Google Chrome or Mozilla Firefox is set as
 1. Download and run Tectonic Installer by opening a new terminal and running the following command:
 
 ```
-$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.9-tectonic.1.tar.gz
-$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.9-tectonic.1.tar.gz.sig
+$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.9-tectonic.2.zip
+$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.9-tectonic.2.zip.sig
 ```
 
 2. Verify the release has been signed by the [CoreOS App Signing Key][verification-key].
 
 ```bash
 $ gpg2 --keyserver pgp.mit.edu --recv-key 18AD5014C99EF7E3BA5F6CE950BDD3E0FC8A365E
-$ gpg2 --verify tectonic_1.7.9-tectonic.1.tar.gz.sig tectonic_1.7.9-tectonic.1.tar.gz
+$ gpg2 --verify tectonic_1.7.9-tectonic.2.zip.sig tectonic_1.7.9-tectonic.2.zip
 # gpg2: Good signature from "CoreOS Application Signing Key <security@coreos.com>"
 ```
 
-3. Double click the tarball to extract it, then navigate to the tectonic/tectonic-installer folder.
+3. Double click the release to extract it, then navigate to the tectonic/tectonic-installer folder.
 4. Double click the folder for your operating system.
 5. Double click the installer to launch it.
 
@@ -62,8 +62,8 @@ When prompted, log in to your CoreOS account to obtain the License and Pull Secr
 
 If you prefer to work within the terminal, extract and launch the Installer using:
 ```bash
-tar xzvf tectonic_1.7.9-tectonic.1.tar.gz # to extract the tarball
-$ cd tectonic_1.7.9-tectonic.1/tectonic-installer # to change to the previously untarred directory
+$ unzip tectonic_1.7.9-tectonic.2.zip
+$ cd tectonic_1.7.9-tectonic.2/tectonic-installer # to change to the previously untarred directory
 $ ./$PLATFORM/installer # to run Tectonic Installer
 ```
 Where `$PLATFORM` is `linux` or `darwin`.
