@@ -85,7 +85,7 @@ $ gpg2 --verify tectonic_1.7.9-tectonic.2.zip.sig tectonic_1.7.9-tectonic.2.zip
 # gpg2: Good signature from "CoreOS Application Signing Key <security@coreos.com>"
 ```
 
-Unzip the release and navigate to the `tectonic` directory.
+Unzip Tectonic Installer and navigate to the `tectonic` directory.
 
 ```bash
 $ unzip tectonic_1.7.9-tectonic.2.zip
