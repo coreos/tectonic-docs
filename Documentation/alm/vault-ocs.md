@@ -61,11 +61,9 @@ Vault does not store the master key. Without at least 1 keys,
 your vault will remain permanently sealed.
 ```
 
-### Obtain keys
-
-Copy / paste from the return listed above.
-
 ### Unseal
+
+Use the Unseal Key returned from `vault init` to unseal the cluster.
 
 ```
 $ vault unseal
@@ -77,9 +75,11 @@ Unseal Progress: 0
 Unseal Nonce:
 ```
 
+The first node unsealed in a multi-node Vault cluster will become the active node. The active node holds the leader election lock. The other unsealed nodes become standby.
+
 ## Working with Kubernetes Services and Secrets
 
-Use the Service’s YAML manifest to obtain the clientSecret and serverSecret required to expose the Vault instance to your apps.
+Use the Vault Service’s YAML manifest to obtain the clientSecret and serverSecret required to expose the Vault instance to your apps.
 
 For more information, see [Configuring Vault nodes][configure-vault].
 
