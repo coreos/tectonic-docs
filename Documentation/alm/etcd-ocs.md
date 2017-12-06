@@ -13,7 +13,7 @@ Use Tectonic Console to enable the etcd OCS for selected namespaces. By default,
 Objects created using the etcd OCS will be labeled `app=etcd` and `etcd_cluster=<cluster-name>`.
 
 Using the etcd Open Cloud Service to deploy an etcd cluster will create the following Kubernetes objects:
-* An etcd CRD
+* An etcd Custom Resource Definition (CRD)
 * 3 Pod etcd cluster
 * 2 Services, one for internal communication and one for use with etcdctl/API
 
@@ -22,6 +22,8 @@ Using the etcd Open Cloud Service to deploy an etcd cluster will create the foll
 For every etcd cluster created Tectonic will create an etcd client service in the same namespace with the name `<cluster-name>-client`.
 
 The client service is of type `ClusterIP` and is accessible only from within the Kubernetes cluster's network.
+
+To expose this address outside of the cluster, create a new service of type LoadBalancer or NodePort.
 
 For more information on accessing this service, see [Client service][client-service] in the etcd-operator documentation set.
 
