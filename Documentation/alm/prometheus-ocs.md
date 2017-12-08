@@ -38,7 +38,7 @@ Once enabled, go to *https://<your-cluster-dns>/prometheus* to access Prometheus
 
 Use the built-in Tectonic Alertmanager with the Prometheus OCS. Alertmanagers should be shared between Prometheus instances.
 
-For Service discovery, the Prometheus Pod must have permission to access the Kubernetes API in this tectonic-system namespace. Follow the instructions in [Monitoring Applications][monitoring-apps] to create a ClusterRoleBinding to bind the available ClusterRole to an appropriate ServiceAccount. Using Tectonic Console to create a Prometheus instance will automatically generate the required ClusterRoleBinding.
+For Service discovery, the Prometheus Pod must have permission to access the Kubernetes API in the tectonic-system namespace. Follow the instructions in [Monitoring Applications][monitoring-apps] to create a ClusterRoleBinding to bind the available ClusterRole to an appropriate ServiceAccount. Using Tectonic Console to create a Prometheus instance will automatically generate the required ClusterRoleBinding.
 
 For more information, see [Exposing Prometheus and Alertmanager][exposing-prometheus] and [Alerting][alerting-md].
 
