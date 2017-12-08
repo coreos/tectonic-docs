@@ -110,6 +110,7 @@
                 "iam:RemoveRoleFromInstanceProfile",
                 "iam:DeleteInstanceProfile",
                 "iam:ListInstanceProfilesForRole",
+                "iam:ListRoles",
                 "iam:DeleteRole"
             ],
             "Effect": "Allow",
