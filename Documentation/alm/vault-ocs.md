@@ -31,7 +31,7 @@ Once enabled, use Console to create a new Vault Service, then use the Vault Comm
 ### Proxy the Vault instance to your laptop
 
 ```
-kubectl -n default get vault example -o jsonpath='{.status.sealedNodes[0]}' | xargs -0 -I {} kubectl -n default port-forward {} 8200
+$ kubectl -n default get vault example -o jsonpath='{.status.sealedNodes[0]}' | xargs -0 -I {} kubectl -n default port-forward {} 8200
 ```
 
 ### Point the vault CLI to the local endpoint
@@ -39,8 +39,8 @@ kubectl -n default get vault example -o jsonpath='{.status.sealedNodes[0]}' | xa
 Because communication passes over localhost through a secured tunnel, verification may be skipped.
 
 ```
-export VAULT_SKIP_VERIFY="true"
-export VAULT_ADDR='https://localhost:8200'
+$ export VAULT_SKIP_VERIFY="true"
+$ export VAULT_ADDR='https://localhost:8200'
 ```
 
 ### Use the Vault CLI tools to initialize the cluster
@@ -75,7 +75,15 @@ Unseal Progress: 0
 Unseal Nonce:
 ```
 
-The first node unsealed in a multi-node Vault cluster will become the active node. The active node holds the leader election lock. The other unsealed nodes become standby.
+The first node unsealed in a multi-node Vault cluster will become the active node. The active node holds the leader election lock. The other unsealed nodes become standbys with the status of `Running` but condition of `ContainersNotReady` until they need to take over.
+
+### Repeat for each Vault instance
+
+Repeat the unseal process by port-forwarding to each instance listed as sealed. This will make them available for fail over if the active instance fails.
+
+```
+$ kubectl -n default get vault example -o jsonpath='{.status.sealedNodes}'
+```
 
 ## Working with Kubernetes Services and Secrets
 
