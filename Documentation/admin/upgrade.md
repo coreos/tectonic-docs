@@ -28,7 +28,7 @@ Configure your desired update channel in the Cluster Settings screen in the Cons
 
 ## Upgrading between minor versions of Kubernetes
 
-Before attempting an upgrade to a new "minor" version, ensure you are running the latest Tectonic version of the current minor version. For example, you need to be running the latest `1.7.9-tectonic.3` before upgrading to `1.8.4-tectonic.1`.
+Before attempting an upgrade to a new "minor" version, ensure you are running the latest Tectonic version of the current minor version. For example, you must be running `1.7.9-tectonic.3` before upgrading to the next available version, `1.8.4-tectonic.1`.
 
 To start the opt-in upgrade process, switch your channel to the new minor version, and choose either production or pre-production. After this selection, click Check for Updates to query the new channel for updates.
 
