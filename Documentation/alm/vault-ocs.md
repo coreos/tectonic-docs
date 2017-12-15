@@ -31,7 +31,7 @@ Once enabled, use Console to create a new Vault Service, then use the Vault Comm
 ### Proxy the Vault instance to your laptop
 
 ```
-kubectl -n default get vault example -o jsonpath=’{.status.sealedNodes[0]}’ | xargs -0 -I {} kubectl -n default port-forward {} 8200
+kubectl -n default get vault example -o jsonpath='{.status.sealedNodes[0]}' | xargs -0 -I {} kubectl -n default port-forward {} 8200
 ```
 
 ### Point the vault CLI to the local endpoint
