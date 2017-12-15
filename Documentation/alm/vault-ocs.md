@@ -31,7 +31,7 @@ Once enabled, use Console to create a new Vault Service, then use the Vault Comm
 ### Proxy the Vault instance to your laptop
 
 ```
-kubectl -n default get vault example -o jsonpath='{.status.sealedNodes[0]}' | xargs -0 -I {} kubectl -n default port-forward {} 8200
+kubectl -n default get vault example -o jsonpath='{.status.nodes.sealed[0]}' | xargs -0 -I {} kubectl -n default port-forward {} 8200
 ```
 
 ### Point the vault CLI to the local endpoint
@@ -84,5 +84,5 @@ Use the Vault Service’s YAML manifest to obtain the clientSecret and serverSec
 For more information, see [Configuring Vault nodes][configure-vault].
 
 
-[configure-vault]: https://github.com/coreos-inc/vault-operator/blob/master/doc/user/vault.md
+[configure-vault]: https://github.com/coreos-inc/vault-operator/blob/master/doc/user/vault.md#writing-secrets-to-the-active-node
 [vault-cli]: https://www.vaultproject.io/docs/install/index.html
