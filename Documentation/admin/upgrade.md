@@ -19,8 +19,8 @@ To learn more about how this process is executed, read about [Operators][operato
 
 Tectonic clusters can be conifigured to track either a production or pre-production update channel for the desired "minor" version of Kubernetes, like `1.8` or `1.7`.
 
-| Name | Workload | Timeframe |
-|------|----------|-----------|
+| Name | Workload | Availability |
+|:-----|:---------|:-------------|
 | Pre-production | Development or testing environments running real workloads, with the goal of catching capability bugs early | Available upon release |
 | Production | Clusters serving any amount of production traffic and/or have high reliability and uptime requirements | Promoted 2-4 weeks after initial release |
 
