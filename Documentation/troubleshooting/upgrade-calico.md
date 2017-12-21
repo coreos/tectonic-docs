@@ -1,6 +1,6 @@
 # Upgrading Calico Manually
 
-Tectonic included alpha support for Network Security Policy and BGP routing functionality in 1.7.x releases, powered by Calico.
+Tectonic included alpha support for Network Security Policy functionality in 1.7.x releases, powered by Calico.
 
 Under the hook, Calico utilized Third Party Resources (TPRs) for configuration. These TPRs need to be upgraded to Custom Resource Definitions (CRDs) before upgrading to 1.8.x. This process is automated, but must be started manually.
 
