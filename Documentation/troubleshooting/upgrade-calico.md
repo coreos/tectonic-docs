@@ -83,7 +83,7 @@ $ kubectl delete -f upgrade-job.yaml
 
 ## Proceed with your Tectonic upgrade
 
-This process ensures that TPRs utilized by Calcio are removed. If you are using other TPRs, remove or migrate them before attempting to upgrade to Tectonic 1.8.
+This process ensures that TPRs utilized by Calico are removed. If you are using other TPRs, remove or migrate them before attempting to upgrade to Tectonic 1.8.
 
 [download-rules]: calico-manifests/rbac-canal-tectonic-18.yaml
 [download-job]: calico-manifests/calico-upgrade-job.yaml
