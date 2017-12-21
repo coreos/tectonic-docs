@@ -2,7 +2,7 @@
 
 Tectonic included alpha support for Network Security Policy functionality in 1.7.x releases, powered by Calico.
 
-Under the hook, Calico utilized Third Party Resources (TPRs) for configuration. These TPRs need to be upgraded to Custom Resource Definitions (CRDs) before upgrading to 1.8.x. This process is automated, but must be started manually.
+Under the hood, Calico utilized Third Party Resources (TPRs) for configuration. These TPRs must be upgraded to be upgraded to Custom Resource Definitions (CRDs) before upgrading to 1.8.x. This process is automated, but must be manually started.
 
 After the alpha period, upgrades to Tectonic's network functionality will be fully supported by Tectonic's trademark Automated Operations.
 
@@ -24,7 +24,7 @@ An automated migration is run as a Kubernetes Job. [Download the Job object][dow
 $ kubectl -n default apply -f upgrade-job.yaml
 ```
 
-You can check the status of the Job and it's output logs:
+Check the status of the Job and its output logs:
 
 ```
 $ kubectl describe job/calico-upgrade-v2.5
@@ -37,7 +37,7 @@ $ kubectl get ippools.crd.projectcalico.org
 $ kubectl get globalfelixconfigs.crd.projectcalico.org
 ```
 
-## Upgrade the Role Based Access Control rules
+## Upgrade the Role-Based Access Control rules
 
 [Download the new RBAC rule][download-rules] which adds access to manipulate the new CRD types:
 
@@ -47,7 +47,7 @@ $ kubectl -n kube-system apply -f rbac-canal-tectonic-18.yaml
 
 ## Perform the rolling update
 
-First, update the images to reference the new Calcio version:
+First, update the images to reference the new Calico version:
 
 ```
 $ kubectl -n kube-system set image daemonset/kube-calico kube-calico=quay.io/calico/node:v2.6.1 \
