@@ -58,4 +58,4 @@ Then, use Tectonic Console to switch the channel back to `Tectonic-1.6`. Click `
 
 After upgrading to `1.6.7-tectonic.2`, switch to the `Tectonic-1.7` channel and upgrade from there.
 
-[calico-upgrade]: upgrading-calico.md
+[calico-upgrade]: upgrade-calico.md
