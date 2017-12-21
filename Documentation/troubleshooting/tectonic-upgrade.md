@@ -1,6 +1,14 @@
 # Troubleshooting Tectonic upgrades
 
-This document describes how to troubleshoot issues encountered when upgrading to Tectonic versions 1.7.1-tectonic.1 or greater.
+This document describes how to troubleshoot issues encountered when upgrading to specific Tectonic versions.
+
+## Upgrading to 1.8.4-tectonic.1
+
+To update to 1.8.4-tectonic.1, first update to 1.7.9-tectonic.3. Ensure that all Third Party Resources (TPRs) have been removed from the cluster, as compatibility was removed in Kubernetes 1.8..
+
+If you participated in the Calico Network Security Policy alpha program, please follow [the manual steps][calico-upgrade] to migrate your TPRs to CRDs. After the alpha program concludes, migrations like this will be handled via Automated Operations without any user intervention.
+
+Once you are running `1.7.9-tectonic.3`, simply change the update channel to `Tectonic-1.8-preproduction` or `Tectonic-1.8-production` channel and click "Check for Update".
 
 ## Upgrading StatefulSets
 
@@ -51,3 +59,5 @@ EOF
 Then, use Tectonic Console to switch the channel back to `Tectonic-1.6`. Click `Check for Updates`, then click `Start Upgrade`.
 
 After upgrading to `1.6.7-tectonic.2`, switch to the `Tectonic-1.7` channel and upgrade from there.
+
+[calico-upgrade]: upgrade-calico.md
