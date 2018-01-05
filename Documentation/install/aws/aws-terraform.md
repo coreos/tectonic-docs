@@ -10,7 +10,6 @@ Generally, the AWS platform templates adhere to the standards defined by the pro
 * **Terraform**: Tectonic Installer includes and requires a specific version of Terraform. This is included in the Tectonic Installer tarball. See the [Tectonic Installer release notes][release-notes] for information about which Terraform versions are compatible.
 * **DNS**: Ensure that the DNS zone is already created and available in Route 53 for the account. For example if the `tectonic_base_domain` is set to `kube.example.com` a Route 53 zone must exist for this domain and the AWS nameservers must be configured for the domain.
 
-
 ## Getting Started
 
 ### Create a CoreOS account
@@ -111,6 +110,12 @@ $ cp examples/terraform.tfvars.aws build/${CLUSTER}/terraform.tfvars
 
 Edit the parameters with your AWS details, domain name, license, etc. [View all of the AWS specific options][aws-vars] and [the common Tectonic variables][vars].
 
+### Add custom TLS certificates
+
+By default, Tectonic provides self-signed certificates, which enables TLS and prevents user-provided TLS from being enabled for the cluster. To enable custom TLS certs, provide a Certificate Authority Certificate and Key (in PEM format) during Tectonic installation.
+
+For more information, see [Transport Layer Security (TLS) Certificates][tls-certs].
+
 ### Set Console login secrets
 
 Set these sensitive values in the environment. The `tectonic_admin_password` will be encrypted before storage or transport:
@@ -174,3 +179,4 @@ See the [troubleshooting][troubleshooting] document for workarounds for bugs tha
 [release-notes]: https://coreos.com/tectonic/releases/
 [verification-key]: https://coreos.com/security/app-signing-key/
 [account-login]: https://account.coreos.com/login
+[tls-certs]: ../../tls/tls-certificates.md

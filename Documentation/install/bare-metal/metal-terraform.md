@@ -113,6 +113,12 @@ Several variables are currently required, but their values are not used.
 * `tectonic_worker_count`
 * `tectonic_etcd_count`
 
+### Add custom TLS certificates
+
+By default, Tectonic provides self-signed certificates, which enables TLS and prevents user-provided TLS from being enabled for the cluster. To enable custom TLS certs, provide a Certificate Authority Certificate and Key (in PEM format) during Tectonic installation.
+
+For more information, see [Transport Layer Security (TLS) Certificates][tls-certs].
+
 ### Set Console login secrets
 
 Set these sensitive values in the environment. The `tectonic_admin_password` will be encrypted before storage or transport:
@@ -188,3 +194,4 @@ For more information on working with installed clusters, see [Scaling Tectonic b
 [matchbox-latest]: https://coreos.com/matchbox/docs/latest/
 [dns]: index.md#dns
 [verification-key]: https://coreos.com/security/app-signing-key/
+[tls-certs]: ../../tls/tls-certificates.md
