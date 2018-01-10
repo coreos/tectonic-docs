@@ -78,23 +78,23 @@ The following steps must be executed on a machine that has network connectivity 
 Open a new terminal and run the following command to download Tectonic Installer.
 
 ```bash
-$ curl -O https://releases.tectonic.com/releases/tectonic_1.8.4-tectonic.1.zip
-$ curl -O https://releases.tectonic.com/releases/tectonic_1.8.4-tectonic.1.zip.sig
+$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.9-tectonic.4.zip
+$ curl -O https://releases.tectonic.com/releases/tectonic_1.7.9-tectonic.4.zip.sig
 ```
 
 Verify the release has been signed by the [CoreOS App Signing Key][verification-key].
 
 ```bash
 $ gpg2 --keyserver pgp.mit.edu --recv-key 18AD5014C99EF7E3BA5F6CE950BDD3E0FC8A365E
-$ gpg2 --verify tectonic_1.8.4-tectonic.1.zip.sig tectonic_1.8.4-tectonic.1.zip
+$ gpg2 --verify tectonic_1.7.9-tectonic.4.zip.sig tectonic_1.7.9-tectonic.4.zip
 # gpg2: Good signature from "CoreOS Application Signing Key <security@coreos.com>"
 ```
 
 Unzip Tectonic Installer and navigate to the `tectonic` directory.
 
 ```bash
-$ unzip tectonic_1.8.4-tectonic.1.zip
-$ cd tectonic_1.8.4-tectonic.1
+$ unzip tectonic_1.7.9-tectonic.4.zip
+$ cd tectonic_1.7.9-tectonic.4
 ```
 
 ## Customize the deployment
