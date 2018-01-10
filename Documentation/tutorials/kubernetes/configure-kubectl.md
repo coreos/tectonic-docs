@@ -5,13 +5,13 @@ Use kubectl to interact with the Kubernetes API and with the cluster’s shared 
 Use `curl` to fetch the Linux kubectl binary:
 
 ```
-$ curl -O https://storage.googleapis.com/kubernetes-release/release/v1.7.5/bin/linux/amd64/kubectl
+$ curl -O https://storage.googleapis.com/kubernetes-release/release/v1.8.4/bin/linux/amd64/kubectl
 ```
 
 Or, to fetch the macOS binary:
 
 ```
-$ curl -O https://storage.googleapis.com/kubernetes-release/release/v1.7.5/bin/darwin/amd64/kubectl
+$ curl -O https://storage.googleapis.com/kubernetes-release/release/v1.8.4/bin/darwin/amd64/kubectl
 ```
 
 After downloading the binary, ensure it is executable and move it into your PATH:
