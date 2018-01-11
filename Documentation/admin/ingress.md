@@ -80,7 +80,7 @@ When selecting Ingress Controller options, be certain to consider the following 
 Here is a full example:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: production-ingress

@@ -33,7 +33,7 @@ First, edit the `simple-deployment.yaml` file used in [Deploying an application 
 `simple-deployment.yaml`:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: simple-deployment
@@ -102,7 +102,7 @@ to
 `simple-deployment.yaml`:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: simple-deployment

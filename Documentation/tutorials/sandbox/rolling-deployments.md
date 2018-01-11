@@ -49,7 +49,7 @@ Go to *Workloads > Deployments*, and click *Create Deployment*.
 Enter the following YAML into the window, and click *Create* to save changes and deploy the app.
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: simple-deployment
@@ -116,7 +116,7 @@ to
 The edited file will look like this:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: simple-deployment

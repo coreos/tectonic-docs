@@ -21,7 +21,7 @@ Create the following six YAML files, saved to the `guestbook` directory.
 `guestbook/redis-master-deployment.yaml`
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: redis-master
@@ -71,7 +71,7 @@ spec:
 `guestbook/redis-slave-deployment.yaml`:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: redis-slave
@@ -124,7 +124,7 @@ spec:
 `guestbook/frontend-deployment.yaml`:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: frontend

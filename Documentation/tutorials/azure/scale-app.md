@@ -20,7 +20,7 @@ To control application scale in Tectonic Console, first create a new `cookies` D
 ### cookies Deployment manifest:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: cookies
