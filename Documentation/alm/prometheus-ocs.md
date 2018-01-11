@@ -24,7 +24,7 @@ Using the Prometheus Open Cloud Service to deploy a Prometheus instance will cre
 
 Prometheus Open Cloud Service will not enable Ingress for the cluster. First configure Ingress to access the Prometheus UI.
 
-Once enabled, go to *https://<your-cluster-dns>/prometheus* to access Prometheus monitoring for the cluster. Select *Status > Targets* to confirm that Prometheus is correctly configured and ingesting metrics.
+Once enabled, go to *https://{your-cluster-dns}/prometheus* to access Prometheus monitoring for the cluster. Select *Status > Targets* to confirm that Prometheus is correctly configured and ingesting metrics.
 
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
