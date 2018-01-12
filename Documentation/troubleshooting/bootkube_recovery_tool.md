@@ -149,10 +149,10 @@ Alternatively, use a rescue pod to recover the control plane as explained in [Di
 If an [external etcd][external-etcd] cluster is running, the control plane can be extracted directly from etcd:
 
 ```
-$ bootkube recover --recovery-dir=recovered --etcd-servers=<etcd-server-ip>:2379 --kubeconfig=/etc/kubernetes/kubeconfig
+$ bootkube recover --recovery-dir=recovered --etcd-ca-path=/path/to/ca --etcd-certificate-path=/path/to/cert --etcd-private-key-path=/path/to/key --etcd-servers=https://<FQDN>:2379 --kubeconfig=/etc/kubernetes/kubeconfig
 ```
 
-Replace `etcd-server-ip` with the IP address of your etcd cluster.
+Replace `FQDN` with the DNS record pointing to the etcd cluster, and set the proper paths to the etcd TLS key, certificate, and CA.
 
 ### Recovery with an external etcd backup
 
@@ -163,20 +163,20 @@ Replace `etcd-server-ip` with the IP address of your etcd cluster.
 2. Recover the control plane manifests:
 
     ```
-    $ bootkube recover --recovery-dir=recovered --etcd-servers=<etcd-server-ip>:2379 --kubeconfig=/etc/kubernetes/kubeconfig
+    $ bootkube recover --recovery-dir=recovered --etcd-ca-path=/path/to/ca --etcd-certificate-path=/path/to/cert --etcd-private-key-path=/path/to/key --etcd-servers=https://<FQDN>:2379 --kubeconfig=/etc/kubernetes/kubeconfig
     ```
 
-    Replace `etcd-server-ip` with the IP address of the recovered etcd cluster.
+    Replace `FQDN` with the DNS record pointing to the recovered etcd cluster, and set the proper paths to the etcd TLS key, certificate, and CA.
 
 ### Recovery with a provisioned etcd cluster
 
 If a [provisioned etcd][provisioned-etcd] cluster is running, the control plane can be extracted directly from etcd:
 
 ```
-$ bootkube recover --recovery-dir=recovered --etcd-servers=<etcd-server-ip>:2379 --kubeconfig=/etc/kubernetes/kubeconfig
+$ bootkube recover --recovery-dir=recovered --etcd-ca-path=/path/to/ca --etcd-certificate-path=/path/to/cert --etcd-private-key-path=/path/to/key --etcd-servers=https://<FQDN>:2379 --kubeconfig=/etc/kubernetes/kubeconfig
 ```
 
-Replace `etcd-server-ip` with the IP address of your etcd cluster.
+Replace `FQDN` with the DNS record pointing to the etcd cluster, and set the proper paths to the etcd TLS key, certificate, and CA.
 
 ### Recovery with a provisioned etcd backup
 
@@ -187,10 +187,10 @@ Replace `etcd-server-ip` with the IP address of your etcd cluster.
 2. Recover the control plane manifests:
 
     ```
-    $ bootkube recover --recovery-dir=recovered --etcd-servers=<etcd-server-ip>:2379 --kubeconfig=/etc/kubernetes/kubeconfig
+    $ bootkube recover --recovery-dir=recovered --etcd-ca-path=/path/to/ca --etcd-certificate-path=/path/to/cert --etcd-private-key-path=/path/to/key --etcd-servers=https://<FQDN>:2379 --kubeconfig=/etc/kubernetes/kubeconfig
     ```
 
-    Replace `etcd-server-ip` with the IP address of the recovered etcd cluster.
+    Replace `FQDN` with the DNS record pointing to the recovered etcd cluster, and set the proper paths to the etcd TLS key, certificate, and CA.
 
 
 ### Recovery with a self-hosted etcd backup
