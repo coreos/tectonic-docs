@@ -6,7 +6,7 @@ The module does not contain any logic, but just passes user provided certificate
 
 The certificates provided here secure the TLS endpoint used to access Tectonic Console and Tectonic Identity services. They are not used to secure applications when using the Tectonic Ingress controller.
 
-This certificate must be provided to ensure user access to Tectonic Console's web browser interface without  errors.
+This certificate must be provided to ensure user access to Tectonic Console's web browser interface without errors.
 
 ## Usage
 
