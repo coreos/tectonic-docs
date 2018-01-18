@@ -115,7 +115,7 @@ Several variables are currently required, but their values are not used.
 
 ### Add custom TLS certificates
 
-By default, Tectonic provides self-signed certificates, which enables TLS and prevents user-provided TLS from being enabled for the cluster. To enable custom TLS certs, provide a Certificate Authority Certificate and Key (in PEM format) during Tectonic installation.
+By default, Tectonic will generate self-signed certificates at install time. To enable custom TLS certs, provide a Certificate Authority Certificate and Key (in PEM format) during Tectonic installation.
 
 For more information, see [Transport Layer Security (TLS) Certificates][tls-certs].
 

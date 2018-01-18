@@ -4,6 +4,8 @@ Use Tectonic's [Kubernetes TLS module][kube-module] to enable user provided Kube
 
 The module does not contain any logic, but just passes user provided certificates from its input directly to its output. This is to prevent changing existing references to the `tls/kube/self-signed` module, hence all `tls/kube/*` modules share the same outputs.
 
+If enabled, all kubelets will use this certificate. If not, each node will generate its own certificate.
+
 ## Usage
 
 Comment out the existing self-signed kube TLS in your platform, i.e. `platforms/aws/tectonic.tf`:

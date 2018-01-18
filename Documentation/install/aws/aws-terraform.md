@@ -8,7 +8,19 @@ Generally, the AWS platform templates adhere to the standards defined by the pro
 
 * **CoreOS Account**: Register for a [CoreOS Account][account-login], which provides free access for up to 10 nodes on Tectonic. You must provide the account's License and Pull Secret (available from the account Overview page) during installation.
 * **Terraform**: Tectonic Installer includes and requires a specific version of Terraform. This is included in the Tectonic Installer tarball. See the [Tectonic Installer release notes][release-notes] for information about which Terraform versions are compatible.
-* **DNS**: Ensure that the DNS zone is already created and available in Route 53 for the account. For example if the `tectonic_base_domain` is set to `kube.example.com` a Route 53 zone must exist for this domain and the AWS nameservers must be configured for the domain.
+* **DNS**: A DNS zone must be created and available in Route 53 for the account before installation.
+
+### Configure DNS
+
+If the `tectonic_base_domain` is set to `kube.example.com` a Route 53 zone must exist for this domain and the AWS nameservers must be configured for the domain.
+
+Entries created in the Route 53 zone are expected to be resolvable from the nodes. In most cases this means that the zone that you are configuring must be a public resolvable zone. Verify by using `dig` to determine the nameserver of this zone.
+
+```
+dig NS kube.example.com @8.8.8.8
+```
+
+If you see NS servers that match what you have configured in Route 53, your DNS zones are ready for use.
 
 ## Getting Started
 
@@ -112,7 +124,7 @@ Edit the parameters with your AWS details, domain name, license, etc. [View all 
 
 ### Add custom TLS certificates
 
-By default, Tectonic provides self-signed certificates, which enables TLS and prevents user-provided TLS from being enabled for the cluster. To enable custom TLS certs, provide a Certificate Authority Certificate and Key (in PEM format) during Tectonic installation.
+By default, Tectonic will generate self-signed certificates at install time. To enable custom TLS certs, provide a Certificate Authority Certificate and Key (in PEM format) during Tectonic installation.
 
 For more information, see [Transport Layer Security (TLS) Certificates][tls-certs].
 

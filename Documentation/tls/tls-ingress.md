@@ -4,6 +4,10 @@ Use Tectonic's [Ingress TLS module][ingress-module] to enable user provided Ingr
 
 The module does not contain any logic, but just passes user provided certificates from its input directly to its output. This is to prevent changing existing references to the `tls/ingress/self-signed` module, hence all `tls/ingress/*` modules share the same outputs.
 
+The certificates provided here secure the TLS endpoint used to access Tectonic Console and Tectonic Identity services. They are not used to secure applications when using the Tectonic Ingress controller.
+
+This certificate must be provided to ensure user access to Tectonic Console's web browser interface without  errors.
+
 ## Usage
 
 Comment out the existing self-signed ingress TLS in your platform, i.e. `platforms/aws/tectonic.tf`:
@@ -33,7 +37,7 @@ module "ingress_certs" {
 }
 ```
 
-The signed ingress certificate must have the following Subject Alternative Name (SAN) and Key Usage associations:
+All browsers have deprecated the fallback to the `commonName` in the absence of the `subjectAlternativeName` extension. The signed ingress TLS certificate must include the following Subject Alternative Name (SAN) and Key Usage associations:
 
 ```
 $ openssl x509 -noout -text -in /path/to/ingress.crt

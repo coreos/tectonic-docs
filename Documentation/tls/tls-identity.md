@@ -20,7 +20,9 @@ module "identity_certs" {
 */
 ```
 
-Configure the user provided certificate paths in your platform, i.e. `platforms/aws/tectonic.tf`:
+Configure the user provided certificate paths in your platform, i.e. `platforms/aws/tectonic.tf`.
+
+This certificate is used by Tectonic Console to communicate with Tectonic Identity's gRPC endpoint, securing communication between Console and the Tectonic Identity. The gRPC endpoint is provided for use in revoking tokens. Securing this channel ensures that tokens generated for cluster access are always secured.
 
 ```
 module "identity_certs" {

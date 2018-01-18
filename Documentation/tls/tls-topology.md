@@ -55,7 +55,6 @@ Certificate/Key      | API server parameter            | Description
 `ca_cert_pem`        | `--tls-ca-file`                 | secure access from Admission Controllers
 `apiserver_cert_pem` | `--tls-cert-file`               | https server cert
 `apiserver_key_pem`  | `--tls-private-key-file`        | https server key
-`apiserver_cert_pem` | `--tls-cert-file`               | https server cert
 
 **API → Kubelet**
 
