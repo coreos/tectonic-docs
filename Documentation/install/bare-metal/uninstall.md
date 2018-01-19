@@ -1,6 +1,6 @@
-## Uninstall Tectonic
+# Uninstall Tectonic from bare metal
 
-To uninstall Tectonic from a bare metal cluster, delete your cluster to delete the matchbox profiles and matcher groups. Deletion will not modify or power off your machines.
+To uninstall Tectonic from a bare metal cluster, delete your cluster to delete the Matchbox profiles and matcher groups. Deletion will not modify or power off your machines.
 
 ```
 $ terraform destroy -var-file=build/${CLUSTER}/terraform.tfvars platforms/metal
