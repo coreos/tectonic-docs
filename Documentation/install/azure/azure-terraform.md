@@ -212,6 +212,12 @@ Edit the parameters in `build/$CLUSTER/terraform.tfvars` with the deployment's A
 * `tectonic_license_path` - Full path to `tectonic-license.txt` file downloaded from Tectonic account
 * `tectonic_pull_secret_path` - Full path to `config.json` container pull secret file downloaded from Tectonic account
 
+#### Add custom TLS certificates
+
+By default, Tectonic will generate self-signed certificates at install time. To enable custom TLS certs, provide a Certificate Authority Certificate and Key (in PEM format) during Tectonic installation.
+
+For more information, see [Transport Layer Security (TLS) Certificates][tls-certs].
+
 ## Deploy the cluster
 
 Check the plan before deploying:
@@ -324,3 +330,4 @@ See the [installer troubleshooting][troubleshooting] document for known problem 
 [vars]: https://github.com/coreos/tectonic-installer/tree/master/Documentation/variables/config.md
 [verification-key]: https://coreos.com/security/app-signing-key/
 [account-login]: https://account.coreos.com/login
+[tls-certs]: ../../tls/tls-certificates.md
