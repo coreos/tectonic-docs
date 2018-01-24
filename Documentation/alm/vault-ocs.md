@@ -8,7 +8,7 @@ Tectonic's Vault Open Cloud Service provides a one-click, fully managed Vault Se
 
 ## Deploying Vault OCS
 
-Use Tectonic Console to enable Vault OCS for selected namespaces. Then, use kubectl and the [Vault Commands (CLI)][vault-cli] tool to initialize the instance and unseal the cluster.
+Use Tectonic Console to enable Vault OCS for selected namespaces. For more information on enabling the Vault OCS and creating instances, see [Working with Open Cloud Services][using-ocs].
 
 Creating the Vault Service will automatically generate TLS certs for the Service, and create and deploy a supporting etcd cluster. It will create two Vault Pods, and a Service routing to them.
 
@@ -26,7 +26,7 @@ Using the Vault Open Cloud Service to deploy a Vault instance will create the fo
 
 ## Initializing and Unsealing
 
-Once enabled, use Console to create a new Vault Service, then use the Vault Commands (CLI) tool to initialize the instance, obtain the keys, and unseal the cluster.
+Once instances are deployed, use kubectl and the [Vault Commands (CLI)][vault-cli] tool to initialize the instance, obtain the keys, and unseal the cluster.
 
 ### Proxy the Vault instance to your laptop
 
@@ -94,3 +94,4 @@ For more information, see [Configuring Vault nodes][configure-vault].
 
 [configure-vault]: https://github.com/coreos-inc/vault-operator/blob/master/doc/user/vault.md#writing-secrets-to-the-active-node
 [vault-cli]: https://www.vaultproject.io/docs/install/index.html
+[using-ocs]: using-ocs.md
