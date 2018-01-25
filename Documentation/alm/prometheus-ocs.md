@@ -10,7 +10,7 @@ Allows you to deploy and manage Prometheus instance into any namespace.
 
 ## Deploying Prometheus OCS
 
-Use Tectonic Console to enable the Prometheus OCS for selected namespaces.
+Use Tectonic Console to enable the Prometheus OCS for selected namespaces. For more information on enabling the Prometheus OCS and creating instances, see [Working with Open Cloud Services][using-ocs].
 
 By default, objects created using the Prometheus OCS will be labeled `prometheus=k8s`.
 
@@ -24,7 +24,7 @@ Using the Prometheus Open Cloud Service to deploy a Prometheus instance will cre
 
 Prometheus Open Cloud Service will not enable Ingress for the cluster. First configure Ingress to access the Prometheus UI.
 
-Once enabled, go to *https://{your-cluster-dns}/prometheus* to access Prometheus monitoring for the cluster. Select *Status > Targets* to confirm that Prometheus is correctly configured and ingesting metrics.
+Once enabled, go to `https://{your-cluster-dns}/prometheus` to access Prometheus monitoring for the cluster. Select *Status > Targets* to confirm that Prometheus is correctly configured and ingesting metrics.
 
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
@@ -38,7 +38,7 @@ Once enabled, go to *https://{your-cluster-dns}/prometheus* to access Prometheus
 
 Use the built-in Tectonic Alertmanager with the Prometheus OCS. Alertmanagers should be shared between Prometheus instances.
 
-For Service discovery, the Prometheus Pod must have permission to access the Kubernetes API in the tectonic-system namespace. Follow the instructions in [Monitoring Applications][monitoring-apps] to create a ClusterRoleBinding to bind the available ClusterRole to an appropriate ServiceAccount. Using Tectonic Console to create a Prometheus instance will automatically generate the required ClusterRoleBinding.
+For Service discovery, the Prometheus Pod must have permission to access the Kubernetes API in the tectonic-system namespace. Follow the instructions in [Application Monitoring][monitoring-apps] to create a ClusterRoleBinding to bind the available ClusterRole to an appropriate ServiceAccount. Using Tectonic Console to create a Prometheus instance will automatically generate the required ClusterRoleBinding.
 
 For more information, see [Exposing Prometheus and Alertmanager][exposing-prometheus] and [Alerting][alerting-md].
 
@@ -58,7 +58,8 @@ For more information, see [Application Monitoring][app-monitoring].
 
 [app-monitoring]: https://coreos.com/tectonic/docs/latest/tectonic-prometheus-operator/user-guides/application-monitoring.html
 [client-library]: https://prometheus.io/docs/instrumenting/clientlibs/
-[exposing-prometheus]:  https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/exposing-prometheus-and-alertmanager.md
-[alerting-md]:  https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/alerting.md
+[exposing-prometheus]:  https://coreos.com/operators/prometheus/docs/latest/user-guides/exposing-prometheus-and-alertmanager.html
+[alerting-md]:  https://coreos.com/operators/prometheus/docs/latest/user-guides/alerting.html
 [monitoring-apps]: https://coreos.com/tectonic/docs/latest/tectonic-prometheus-operator/user-guides/application-monitoring.html
 [prom-20]: https://coreos.com/blog/prometheus-2.0-released
+[using-ocs]: using-ocs.md
