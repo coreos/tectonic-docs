@@ -79,4 +79,4 @@ Trigger a rolling update for Open Cloud Services by clicking down into an instan
 
 [etcd-operator]: https://coreos.com/operators/etcd/docs/latest/
 [prom-operator]: https://coreos.com/operators/prometheus/docs/latest/
-[vault-operator]: https://github.com/coreos-inc/vault-operator/blob/master/doc/user/vault.md
+[vault-operator]: https://coreos.com/tectonic/docs/latest/vault-operator/user/vault.html
