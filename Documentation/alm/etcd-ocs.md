@@ -10,6 +10,8 @@ Tectonic’s etcd Open Cloud Service provides a one-click, fully managed etcd ke
 
 Use Tectonic Console to enable the etcd OCS for selected namespaces. By default, the etcd Open Cloud Service will deploy a 3 member cluster, which may be resized or updated by editing its YAML manifest.
 
+For more information on enabling the etcd OCS and creating instances, see [Working with Open Cloud Services][using-ocs].
+
 Objects created using the etcd OCS will be labeled `app=etcd` and `etcd_cluster=<cluster-name>`.
 
 Using the etcd Open Cloud Service to deploy an etcd cluster will create the following Kubernetes objects:
@@ -29,3 +31,4 @@ For more information on accessing this service, see [Client service][client-serv
 
 
 [client-service]: https://github.com/coreos/etcd-operator/blob/master/doc/user/client_service.md
+[using-ocs]: using-ocs.md
