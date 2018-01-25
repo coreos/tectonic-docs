@@ -54,7 +54,7 @@ groupsAttr:
 
 An example would be:
 
-<img src="img/g-suite-attribute-map.png" class="img-center" alt="Attribute Mapping"/>
+<img src="../img/g-suite-attribute-map.png" class="img-center" alt="Attribute Mapping"/>
 
 Final configuration for G Suite SAML:
 
