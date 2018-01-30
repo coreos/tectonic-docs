@@ -4,7 +4,7 @@ Tectonic master nodes are usually assigned to a public IP address. To debug a ma
 
 View logs on the master node by using `journalctl -xe` or similar tools. [Reading the system log][journalctl] has more information.
 
-If the cluster is deployed on AWS, check if the `init-assets` service started successfully and inspect the downloaded assets:
+If the cluster is deployed on AWS, check if the `init-assets` service started successfully:
 ```sh
 $ systemctl status init-assets && journalctl -u init-assets
 ```
