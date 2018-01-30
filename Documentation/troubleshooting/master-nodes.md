@@ -7,7 +7,6 @@ View logs on the master node by using `journalctl -xe` or similar tools. [Readin
 If the cluster is deployed on AWS, check if the `init-assets` service started successfully and inspect the downloaded assets:
 ```sh
 $ systemctl status init-assets && journalctl -u init-assets
-$ ls /opt/tectonic
 ```
 
 To examine if the kubelet log, execute:
