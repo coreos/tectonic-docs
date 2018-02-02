@@ -10,6 +10,7 @@ Troubleshooting a Tectonic cluster is separated into a few major topics:
    * [Troubleshoot etcd][troubleshoot-etcd]
    * [Troubleshoot worker nodes using SSH][worker-nodes]
    * [Troubleshoot master nodes using SSH][master-nodes]
+   * [Troubleshooting Chargeback][troubleshooting-chargeback]
  * Cluster installation is failing. See [Troubleshooting Tectonic Installer][installer-terraform] for more information on installation failure.
  * Cluster upgrade is failing. See [Troubleshooting Tectonic upgrades][tectonic-upgrade] for more information.
 
@@ -206,3 +207,4 @@ If Identity presents a "Database Error", this is typically a failure of the Kube
 [master-nodes]: master-nodes.md
 [etcd-nodes]: etcd-nodes.md
 [tectonic-upgrade]: tectonic-upgrade.md
+[troubleshooting-chargeback]: https://coreos.com/tectonic/docs/latest/troubleshooting/troubleshooting-chargeback.html
