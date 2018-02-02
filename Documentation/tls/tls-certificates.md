@@ -12,10 +12,10 @@ Read about the [TLS topology][tls-topology] for more technical information about
 
 | Type of Traffic | Source of Certificate |
 |:----------|:----------------------|
-| User authentication with the cluster </br> (Console, API Server, and Identity Pods) | Generated (default) </br> [User-provided][tls-identity] |
-| API to etcd cluster | Generated (default) </br> [User-provided][tls-etcd] |
-| Kubelet to anything (including the API Server) | Generated (default) </br> [User-provided][tls-kube] |
-| Tectonic Ingress certificate | Generated (default) </br> [User-provided][tls-ingress] |
+| User authentication with the cluster <br><br> (Console, API Server, and Identity Pods) | Generated (default) <br><br> [User-provided][tls-identity] |
+| API to etcd cluster | Generated (default) <br><br> [User-provided][tls-etcd] |
+| Kubelet to anything (including the API Server) | Generated (default) <br><br> [User-provided][tls-kube] |
+| Tectonic Ingress certificate | Generated (default) <br><br> [User-provided][tls-ingress] |
 | Pod to Pod communication | Optionally secured by the application deployer |
 | Ingress to Pod communication | Optionally secured by the application deployer |
 
