@@ -8,7 +8,7 @@ If you want to run these examples locally, all of the files mentioned are availa
 
 ### Prerequisites
 
-- Kubernetes 1.6+
+- Kubernetes 1.8+
 - `kubectl` configured
   - If you need to configure `kubectl`, follow the instructions in [configuring `kubectl`][configuring-credentials].
 - An Elasticsearch cluster, or other log storage destination
