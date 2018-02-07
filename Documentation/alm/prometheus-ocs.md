@@ -55,11 +55,11 @@ Then, configure Prometheus to discover these targets.
 
 For more information, see [Application Monitoring][app-monitoring].
 
-
+
 [app-monitoring]: https://coreos.com/tectonic/docs/latest/tectonic-prometheus-operator/user-guides/application-monitoring.html
 [client-library]: https://prometheus.io/docs/instrumenting/clientlibs/
-[exposing-prometheus]:  https://coreos.com/operators/prometheus/docs/latest/user-guides/exposing-prometheus-and-alertmanager.html
-[alerting-md]:  https://coreos.com/operators/prometheus/docs/latest/user-guides/alerting.html
+[exposing-prometheus]:  https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/exposing-prometheus-and-alertmanager.md
+[alerting-md]: https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/alerting.md
 [monitoring-apps]: https://coreos.com/tectonic/docs/latest/tectonic-prometheus-operator/user-guides/application-monitoring.html
 [prom-20]: https://coreos.com/blog/prometheus-2.0-released
 [using-ocs]: using-ocs.md
