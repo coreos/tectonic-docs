@@ -29,7 +29,7 @@ Type `cmd` in the Windows menu search box and press the Enter key. A new Windows
 Issue the following command to fetch and run the Tectonic Installer container image from the Quay registry:
 
 ```sh
-docker run --rm -p 4444:4444 -it quay.io/coreos/tectonic-installer:1.6.4-tectonic.1 /go/src/github.com/coreos/tectonic-installer/installer/bin/linux/installer -open-browser=false -address 0.0.0.0:4444
+docker run --rm -p 4444:4444 -it quay.io/coreos/tectonic-installer:1.8.7-tectonic.1 /go/src/github.com/coreos/tectonic-installer/installer/bin/linux/installer -open-browser=false -address 0.0.0.0:4444
 ```
 
 The status of the image download in progressively printed in the command window. Once Tectonic Installer is downloaded and running, `Starting Tectonic Installer on 0.0.0.0:4444` will be reported.
@@ -63,7 +63,7 @@ Type `cmd` into the Windows menu search box and press the Enter key. A new comma
 At the Windows command prompt, issue the command:
 
 ```sh
-docker run --rm -it -v %USERPROFILE%/Downloads:/Downloads quay.io/coreos/tectonic-installer:1.6.4-tectonic.1 bash
+docker run --rm -it -v %USERPROFILE%/Downloads:/Downloads quay.io/coreos/tectonic-installer:1.8.7-tectonic.1 bash
 ```
 
 The Installer container executes and presents a `bash` shell prompt within the container.
