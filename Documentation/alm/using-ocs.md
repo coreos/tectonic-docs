@@ -23,26 +23,25 @@ Once enabled, the Open Cloud Services page will list the version deployed, and t
 
 ### Using kubectl
 
-To enable Open Cloud Services using kubectl, create an `InstallPlan-v1` resource in the desired namespace.
+To enable Open Cloud Services using kubectl, create a `Subscription-v1` resource in the desired namespace.
 
 For example:
 
 ```yaml
 apiVersion: app.coreos.com/v1alpha1
-kind: InstallPlan-v1
+kind: Subscription-v1
 metadata:
-   namespace: default
-   name: etcd-installplan
+  name: etcd
 spec:
-   clusterServiceVersionNames:
-   - etcdoperator.v0.7.0
-   approval: Automatic
+  channel: alpha
+  name: etcd
+  source: tectonic-ocs
 ```
 
-Valid `clusterServiceVersionNames` include:
-* `etcdoperator.v0.7.0`
-* `prometheusoperator.0.14.0`
-* `vault-operator.0.1.3`
+Valid values for `spec.name` are:
+* `etc`
+* `prometheus`
+* `vault`
 
 The Vault OCS will automatically grant the namespace access to its private image repository.
 
