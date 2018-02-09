@@ -1,0 +1,141 @@
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: clusters.multicluster.coreos.com
+  labels:
+    tectonic-operators.coreos.com/managed-by: tectonic-utility-operator
+  annotations:
+    tectonic-operators.coreos.com/upgrade-strategy: Patch
+    tectonic-operators.coreos.com/upgrade-behaviour: CreateOrUpgrade
+spec:
+  group: multicluster.coreos.com
+  version: v1
+  scope: Cluster
+  names:
+    plural: clusters
+    singular: cluster
+    kind: Cluster
+---
+# Cluster role binding to allow all service accounts in the "tectonic-system"
+# namespace to view the cluster API.
+#
+# This lets us arbitrarily create service accounts in that namespace and know it
+# will have the basic level of access. To revoke that cluster's access, delete the
+# service account.
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: tectonic-multi-cluster-view-clusters
+  labels:
+    tectonic-operators.coreos.com/managed-by: tectonic-utility-operator
+  annotations:
+    tectonic-operators.coreos.com/upgrade-strategy: Patch
+    tectonic-operators.coreos.com/upgrade-behaviour: CreateOrUpgrade
+subjects:
+- kind: Group
+  name: system:serviceaccounts:tectonic-system
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: view-clusters
+  apiGroup: rbac.authorization.k8s.io
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: view-clusters
+  labels:
+    tectonic-operators.coreos.com/managed-by: tectonic-utility-operator
+  annotations:
+    tectonic-operators.coreos.com/upgrade-strategy: Patch
+    tectonic-operators.coreos.com/upgrade-behaviour: CreateOrUpgrade
+rules:
+- apiGroups: ["multicluster.coreos.com"]
+  resources: ["clusters", "clusterpolicies"]
+  verbs: ["get", "watch", "list"]
+---
+# A service account and assocated role binding.
+#
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: directory-sync
+  namespace: tectonic-system
+  labels:
+    tectonic-operators.coreos.com/managed-by: tectonic-utility-operator
+  annotations:
+    tectonic-operators.coreos.com/upgrade-strategy: Patch
+    tectonic-operators.coreos.com/upgrade-behaviour: CreateOrUpgrade
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: directory-sync
+  namespace: tectonic-system
+  labels:
+    tectonic-operators.coreos.com/managed-by: tectonic-utility-operator
+  annotations:
+    tectonic-operators.coreos.com/upgrade-strategy: Patch
+    tectonic-operators.coreos.com/upgrade-behaviour: CreateOrUpgrade
+spec:
+  selector:
+    matchLabels:
+      app: directory-sync
+  template:
+    metadata:
+      name: directory-sync
+      labels:
+        app: directory-sync
+    spec:
+      containers:
+      - name: directory-sync
+        image: quay.io/coreos/directory-sync:v0.0.2
+        command:
+        - directory-sync
+        - "--registry-kubeconfig=/etc/directory-sync/registry/kubeconfig"
+        - "--local-cluster-name=$(CLUSTER_NAME)"
+        env:
+        - name: CLUSTER_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: tectonic-config
+              key: clusterID
+        volumeMounts:
+        - name: credentials
+          mountPath: /etc/directory-sync/registry
+          readOnly: true
+        resources:
+          requests:
+            cpu: 100m
+            memory: 50Mi
+          limits:
+            cpu: 100m
+            memory: 50Mi
+      restartPolicy: Always
+      serviceAccount: directory-sync
+      volumes:
+      - name: credentials
+        secret:
+          secretName: directory-sync
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: directory-sync
+  labels:
+    tectonic-operators.coreos.com/managed-by: tectonic-utility-operator
+  annotations:
+    tectonic-operators.coreos.com/upgrade-strategy: Patch
+    tectonic-operators.coreos.com/upgrade-behaviour: CreateOrUpgrade
+roleRef:
+  # The directory syncer will eventually have to create arbitrary cluster roles
+  # for other users. To get around RBAC privilege escalation, it must have admin
+  # powers.
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount
+  namespace: tectonic-system
+  name: directory-sync
