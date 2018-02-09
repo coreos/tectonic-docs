@@ -23,7 +23,7 @@ Once enabled, the Open Cloud Services page will list the version deployed, and t
 
 ### Using kubectl
 
-To enable Open Cloud Services using kubectl, create a `Subscription` resource in the desired namespace.
+To enable Open Cloud Services using kubectl, create a `Subscription-v1` resource in the desired namespace.
 
 For example:
 
