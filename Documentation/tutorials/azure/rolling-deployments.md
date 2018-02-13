@@ -58,6 +58,9 @@ metadata:
     k8s-app: simple
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      k8s-app: simple
   revisionHistoryLimit: 2
   strategy:
     type: RollingUpdate
@@ -125,6 +128,9 @@ metadata:
     k8s-app: simple
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      k8s-app: simple
   revisionHistoryLimit: 2
   strategy:
     type: RollingUpdate

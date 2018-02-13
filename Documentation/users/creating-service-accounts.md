@@ -58,6 +58,9 @@ metadata:
  name: nginx-deployment
 spec:
  replicas: 3
+  selector:
+    matchLabels:
+      k8s-app: nginx
  template:
    metadata:
      labels:

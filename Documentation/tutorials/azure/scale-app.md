@@ -29,6 +29,9 @@ metadata:
     k8s-app: simple
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      k8s-app: simple
   strategy:
     type: RollingUpdate
     rollingUpdate:

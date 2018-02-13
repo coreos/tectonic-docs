@@ -19,7 +19,7 @@ kind: Deployment
 metadata:
   name: cookies
   labels:
-    k8s-app: simple
+    k8s-app: cookies
 spec:
   replicas: 3
   strategy:
@@ -27,6 +27,9 @@ spec:
     rollingUpdate:
       maxUnavailable: 0
       maxSurge: 1
+  selector:
+    matchLabels:
+      k8s-app: cookies
   template:
     metadata:
       labels:

@@ -87,6 +87,9 @@ metadata:
   labels:
     k8s-app: simple
 spec:
+  selector:
+    matchLabels:
+      k8s-app: simple
   replicas: 3
   template:
     metadata:

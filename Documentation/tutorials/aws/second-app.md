@@ -27,6 +27,11 @@ metadata:
   name: redis-master
   namespace: default
 spec:
+  selector:
+    matchLabels:
+      k8s-app: redis
+      role: master
+      tier: backend
   replicas: 1
   template:
     metadata:
@@ -78,6 +83,11 @@ metadata:
   namespace: default
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      k8s-app: redis
+      role: slave
+      tier: backend
   template:
     metadata:
       labels:
@@ -131,6 +141,10 @@ metadata:
   namespace: default
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      k8s-app: guestbook
+      tier: frontend
   template:
     metadata:
       labels:

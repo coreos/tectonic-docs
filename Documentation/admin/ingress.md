@@ -89,6 +89,9 @@ metadata:
     k8s-app: ingress
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      k8s-app: ingress
   template:
     metadata:
       labels:
