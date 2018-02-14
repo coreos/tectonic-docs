@@ -57,19 +57,19 @@ kind: Deployment
 metadata:
  name: nginx-deployment
 spec:
- replicas: 3
+  replicas: 3
   selector:
     matchLabels:
       k8s-app: nginx
- template:
-   metadata:
-     labels:
-       k8s-app: nginx
-   spec:
-     containers:
-     - name: nginx
-       image: nginx:1.7.9
-     serviceAccountName: example # note the name of the service account for future reference
+  template:
+    metadata:
+      labels:
+        k8s-app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+    serviceAccountName: example # note the name of the service account for future reference
 ```
 
 
