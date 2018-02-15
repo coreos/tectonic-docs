@@ -79,7 +79,7 @@ This example allows us to explore two useful Kubernetes concepts, `deployments` 
 Copy the following YAML into a file named `simple-deployment.yaml`.
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: simple-deployment
@@ -87,6 +87,9 @@ metadata:
   labels:
     k8s-app: simple
 spec:
+  selector:
+    matchLabels:
+      k8s-app: simple
   replicas: 3
   template:
     metadata:

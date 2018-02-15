@@ -142,7 +142,7 @@ Create a file named `simple-deployment.yaml` using the YAML content listed below
 <a name="simple-deployment"></a>`simple-deployment.yaml`:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: simple-deployment
@@ -151,6 +151,9 @@ metadata:
     k8s-app: simple
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      k8s-app: simple
   template:
     metadata:
       labels:

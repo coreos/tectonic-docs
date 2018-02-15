@@ -33,13 +33,16 @@ First, edit the `simple-deployment.yaml` file used in [Deploying an application 
 `simple-deployment.yaml`:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: simple-deployment
   labels:
     k8s-app: simple
 spec:
+  selector:
+    matchLabels:
+      k8s-app: simple
   replicas: 3
   revisionHistoryLimit: 2
   strategy:
@@ -102,13 +105,16 @@ to
 `simple-deployment.yaml`:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: simple-deployment
   labels:
     k8s-app: simple
 spec:
+  selector:
+    matchLabels:
+      k8s-app: simple
   replicas: 3
   revisionHistoryLimit: 2
   strategy:
