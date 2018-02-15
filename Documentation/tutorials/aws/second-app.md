@@ -21,12 +21,17 @@ Create the following six YAML files, saved to the `guestbook` directory.
 `guestbook/redis-master-deployment.yaml`
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: redis-master
   namespace: default
 spec:
+  selector:
+    matchLabels:
+      k8s-app: redis
+      role: master
+      tier: backend
   replicas: 1
   template:
     metadata:
@@ -71,13 +76,18 @@ spec:
 `guestbook/redis-slave-deployment.yaml`:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: redis-slave
   namespace: default
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      k8s-app: redis
+      role: slave
+      tier: backend
   template:
     metadata:
       labels:
@@ -124,13 +134,17 @@ spec:
 `guestbook/frontend-deployment.yaml`:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: frontend
   namespace: default
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      k8s-app: guestbook
+      tier: frontend
   template:
     metadata:
       labels:

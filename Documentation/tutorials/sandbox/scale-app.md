@@ -20,7 +20,7 @@ To control application scale in Tectonic Console, first create a new `cookies` d
 `cookies` deployment manifest
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: cookies
@@ -29,6 +29,9 @@ metadata:
     k8s-app: simple
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      k8s-app: simple
   strategy:
     type: RollingUpdate
     rollingUpdate:

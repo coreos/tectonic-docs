@@ -49,7 +49,7 @@ Go to *Workloads > Deployments*, and click *Create Deployment*.
 Enter the following YAML into the window and click *Create* to save changes and deploy the application.
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: simple-deployment
@@ -58,6 +58,9 @@ metadata:
     k8s-app: simple
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      k8s-app: simple
   revisionHistoryLimit: 2
   strategy:
     type: RollingUpdate
@@ -116,7 +119,7 @@ to
 The edited file will look like this:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: simple-deployment
@@ -125,6 +128,9 @@ metadata:
     k8s-app: simple
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      k8s-app: simple
   revisionHistoryLimit: 2
   strategy:
     type: RollingUpdate

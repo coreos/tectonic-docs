@@ -14,12 +14,12 @@ It is assumed that you have a functioning Tectonic cluster to try these changes.
 Start by copying the following YAML into a file named `cookies.yaml`:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: cookies
   labels:
-    k8s-app: simple
+    k8s-app: cookies
 spec:
   replicas: 3
   strategy:
@@ -27,6 +27,9 @@ spec:
     rollingUpdate:
       maxUnavailable: 0
       maxSurge: 1
+  selector:
+    matchLabels:
+      k8s-app: cookies
   template:
     metadata:
       labels:

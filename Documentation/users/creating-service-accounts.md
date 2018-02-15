@@ -52,21 +52,24 @@ Service accounts are configured much like user accounts, in that first a [Role][
 Give each application its own Service Account, rather than relying upon the default Service Account. A Service Account credentials can be mounted onto a pod by specifying its name in the pod spec. For example:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
  name: nginx-deployment
 spec:
- replicas: 3
- template:
-   metadata:
-     labels:
-       k8s-app: nginx
-   spec:
-     containers:
-     - name: nginx
-       image: nginx:1.7.9
-     serviceAccountName: example # note the name of the service account for future reference
+  replicas: 3
+  selector:
+    matchLabels:
+      k8s-app: nginx
+  template:
+    metadata:
+      labels:
+        k8s-app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+    serviceAccountName: example # note the name of the service account for future reference
 ```
 
 
