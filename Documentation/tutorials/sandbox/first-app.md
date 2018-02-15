@@ -3,6 +3,10 @@
 
 When Tectonic installation is complete, log in to Tectonic Console to set up cluster credentials, and deploy a simple application.
 
+This tutorial will reference "my-tectonic-console.com". Please use the URL appropriate to your environment.
+* For AWS and Microsoft Azure installations, Tectonic Console is available from "https://my-cluster.example.com".
+* For Sandbox installations, Tectonic Console is available from "https://console.tectonicsandbox.com".
+
 Applications may be deployed on Tectonic clusters both by using Tectonic Console, and by passing a YAML manifest file to the `kubectl create` CLI tool. Once deployed, scale and monitor the application using Tectonic Console.
 
 This tutorial will deploy a simple, stateless website for a local bakery called "The Cookie Shop" to illustrate how to:
@@ -20,10 +24,7 @@ In deploying this app, this tutorial will explore three useful Kubernetes concep
 
 To configure credentials for your cluster, populate a `kubeconfig` file with valid authentication credentials, then configure `kubectl` to use them to connect to a Tectonic Cluster.
 
-First, log in to Tectonic Console.
-
-Log in to Tectonic Console at `https://my-cluster.example.com`
-  (For Tectonic Sandbox, go to [console.tectonicsandbox.com/][console]. When prompted for a login, use "admin@example.com" and "sandbox" as the username and password.)
+First, log in to Tectonic Console with the username and password obtained during installation.
 
 Then, authenticate and initiate `kubectl` download:
 
@@ -56,7 +57,7 @@ $ cp path/to/file/kubectl-config $HOME/.kube/config # rename the file and copy i
 
 ### Sandbox only: configure kubectl
 
-Tectonic Sandbox users must configure `kubectl` to work locally on their machine. This section is not required for use with AWS or Microsoft Azure clusters.
+After downloading and moving `kubectl` and `kubectl-config`, Tectonic Sandbox users must also configure `kubectl` to work locally on their machine. This section is not required for use with AWS or Microsoft Azure clusters.
 
 1. Open a terminal.
 2. Navigate to the *tectonic-sandbox* directory.
@@ -65,38 +66,39 @@ Tectonic Sandbox users must configure `kubectl` to work locally on their machine
 
 ## Deploying an app with Tectonic Console
 
-This tutorial will deploy a simple, stateless website for a local bakery called "The Cookie Shop."
+As an example app, deploy a simple, stateless website for a local bakery called "The Cookie Shop."
 
-To deploy using Tectonic Console, copy and paste YAML file content into Tectonic Console to create Deployments, Services, and Ingress.
+To deploy using Tectonic Console, copy and paste YAML file content into Console to create Deployments, Services, and Ingress.
 
 In all examples, replace host: <MYHOST> with the URL for Tectonic Console.
 * Tectonic Sandbox: replace <MYHOST> with `console.tectonic.sandbox.com`
 * AWS or Microsoft Azure clusters: replace <MYHOST> with `my-cluster-example.com`
 
 First, deploy the sample app:
-1. In the console, go to *Workloads > Deployments*, and click *Create Deployment*.
+1. In Console, go to *Workloads > Deployments*, and click *Create Deployment*.
 2. A pane will open, showing a default YAML deployment file.
-3. Copy the contents of [simple-deployment.yaml](#simple-deployment), listed below, into the YAML pane, replacing its contents
+3. Copy the contents of [simple-deployment.yaml](#simple-deployment), listed below, into the YAML pane, replacing the pane's default content.
 4. Click *Create*.
 
-The Console will create your deployment, and display its *Overview* window.
+Tectonic will create your deployment, and display its *Overview* window.
 
 Then, add the service:
 1. Go to *Routing > Services*, and click *Create Service*.
 2. Copy the contents of [simple-service.yaml](#simple-service) for your platform, listed below, into the pane, replacing the default content.
 3. Click *Create*.
 
-Console will create the service, and display its *Overview* window.
+Tectonic will create the service, and display its *Overview* window.
+
+> NOTE: On AWS, Ingress is automatically generated when the Service is created. The following step, adding an Ingress resource, is not required for AWS clusters.
 
 Then, add the Ingress resource:
 1. Go to *Routing > Ingress*, and click *Create Ingress*.
 2. Copy the contents of [simple-ingress.yaml](#simple-ingress), for your platform, into the pane, replacing the default content.
 3. Click *Create*.
 
-> NOTE: On AWS, Ingress is automatically generated when the Service is created. Adding an Ingress resource is not required.
-
-Tectonic will create the Ingress, and display its *Overview* window. Copy the *Host* and *Path* and combine them into a URL. [Visit the URL][check-work] to check your work.
-  (For AWS, copy the *External Load Balancer* URL displayed into a browser to check your work. (It may take several minutes for AWS to update their ELB.))
+Tectonic will create the Ingress, and display its *Overview* window. Use the information provided to go visit the URL for the app, and check your work.
+* For Sandbox and Microsoft Azure, the URL will follow the format "https://<HOST>/<deployment-name". ("https://console.tectonicsandbox.com/simple-deployment/" for Sandbox.)
+* For AWS, use the listed *External Load Balancer* URL displayed to check your work. (It may take several minutes for AWS to update their ELB.)
 
 ## Deleting an application using kubectl
 
@@ -155,7 +157,7 @@ spec:
 
 The parameter `replicas: 3`, will create 3 running copies. `Image: quay.io/coreos/example-app:v1.0` defines the container image to run, hosted on [Quay.io][quay-repo].
 
-Use kubectl create to create the Deployment:
+Use `kubectl create` to create the Deployment:
 
 ```sh
 $ kubectl create -f simple-deployment.yaml
@@ -265,7 +267,7 @@ spec:
 
 To connect the Service to Ingress, the Service `metadata.name` and the Ingress `spec.rules.http.paths.backend.serviceName` must match.
 
-Then, use `kubectl create` to deploy ingress:
+Then, use `kubectl create` to deploy Ingress:
 
 ```sh
 $ kubectl create -f simple-ingress.yaml
@@ -279,7 +281,7 @@ This will deploy three replicas of the application. They'll be connected by a se
 
 ### View the deployment
 
-Visit [console.tectonicsandbox.com/simple-deployment/][check-work] to confirm that the application is up and running.
+Visit "my-tectonic-console.com/simple-deployment/" to confirm that the application is up and running.
 
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
@@ -335,7 +337,6 @@ containers:
 
 [QE]: https://coreos.com/quay-enterprise/
 [check-app]: check-logs.md
-[check-work]: https://console.tectonicsandbox.com/simple-deployment/
 [edit-service]: ../img/walkthrough/edit-service.png
 [installing]: install.md
 [k8s-deployment]: https://kubernetes.io/docs/user-guide/deployments/
@@ -347,4 +348,3 @@ containers:
 [rolling-deployments]: rolling-deployments.md
 [scale-app]: scale-app.md
 [simple-app-a]: ../img/walkthrough/simple-app-a.png
-[console]: https://console.tectonicsandbox.com
