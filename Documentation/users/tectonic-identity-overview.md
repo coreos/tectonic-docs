@@ -42,7 +42,7 @@ For more information, see [rbac-config][rbac-config].
 
 Tectonic Identity is built on top of [Dex][dex], an open-source OpenID Connect server.
 
-Dex runs natively on top of Tectonic clusters using [third-party resources][third-party], and drives API server authentication through the OpenID Connect plugin. Clients, such as Tectonic Console and kubectl, act on behalf users who can log in to Tectonic cluster through an identity provider, such as LDAP, that both Tectonic and Dex support.
+Dex runs natively on top of Tectonic clusters using [custom resource definitions][crds] ([since Tectonic 1.8.x][release-note-1.8.4], before: [third-party resources][third-party]), and drives API server authentication through the OpenID Connect plugin. Clients, such as Tectonic Console and kubectl, act on behalf users who can log in to Tectonic cluster through an identity provider, such as LDAP, that both Tectonic and Dex support.
 
 Dex server issues short-lived, signed tokens on behalf of users. This token response, called ID Token, is a signed JSON web token. ID Token contains names, emails, unique identifiers, and a set of groups that can be used to identify a user. Dex publishes public keys, and Tectonic API server uses these to verify ID Tokens. The username and group information of a user is used in conjunction with RBAC to enforce authorization policy.
 
@@ -54,5 +54,7 @@ Dex does not support hashing and instead strongly recommends that all administra
 [saml-integration]: saml-integration.md
 [dex]: https://github.com/coreos/dex/
 [rbac-config]: rbac-config.md
+[crds]:        https://github.com/coreos/dex/blob/master/Documentation/storage.md#kubernetes-custom-resource-definitions-crds
+[release-note-1.8.4]: https://coreos.com/tectonic/releases/#1.8.4-tectonic.1
 [third-party]: https://github.com/coreos/dex/blob/master/Documentation/storage.md#Kubernetes-third-party-resources
 [k8s-rbac]: https://kubernetes.io/docs/admin/authorization/rbac/
