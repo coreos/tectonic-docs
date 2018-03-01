@@ -82,7 +82,7 @@ The first node unsealed in a multi-node Vault cluster will become the active nod
 Repeat the unseal process by port-forwarding to each instance listed as sealed. This will make them available for failover if the active instance fails.
 
 ```
-$ kubectl -n default get vault example -o jsonpath='{.status.sealedNodes}'
+$ kubectl -n default get vault example -o jsonpath='{.status.nodes.sealed}'
 ```
 
 ## Working with Kubernetes Services and Secrets
