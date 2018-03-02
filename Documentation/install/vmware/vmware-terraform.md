@@ -64,7 +64,7 @@ Verify that the SSH key identity is available to the ssh-agent:
 $ ssh-add -L
 ```
 
-Reference the absolute path of the **_public_** component of the SSH key in `tectonic_vmware_ssh_authorized_key`.
+Reference the content of the **_public_** component of the SSH key in `tectonic_vmware_ssh_authorized_key`.
 
 Without this, terraform is not able to SSH copy the assets and start bootkube.
 Ensure the SSH known_hosts file does not contain old records for the API DNS name to avoid a key fingerprint mismatch.
