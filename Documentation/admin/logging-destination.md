@@ -13,6 +13,8 @@ There are currently 4 prebuilt Debian based Docker images in the [quay.io/coreos
 
 **Note**: there are Alpine based images which are automatically published along side the Debian images, but they cannot be used in conjunction with the systemd input plugin, because Alpine has no `libsystemd` package available.
 
+The source of these docker images can be found at [coreos/fluentd-kubernetes-daemonset][github-coreos-fluentd] on Github.
+
 To use one of these images, update the `image` field in your [fluentd-ds.yaml][fluentd-ds] manifest, and update your [fluentd-configmap.yaml][fluentd-config] `output.conf` with the correct match configuration for your configured output plugin.
 
 If you deploy Elasticsearch into your cluster, ensure the hostname and port of the service match the value in the `output.conf` section of your [fluentd-configmap.yaml][fluentd-config].
@@ -135,3 +137,4 @@ AWS Elasticsearch isn't officially supported at this time. AWS Elasticsearch fun
 [quay-fluentd-kubernetes]: https://quay.io/repository/coreos/fluentd-kubernetes?tab=tags
 [fluentd-docs-output]: http://docs.fluentd.org/v0.12/articles/output-plugin-overview
 [fluentd-match]: http://docs.fluentd.org/v0.12/articles/config-file#2-ldquomatchrdquo-tell-fluentd-what-to-do
+[github-coreos-fluentd]: https://github.com/coreos/fluentd-kubernetes-daemonset/tree/tectonic_logging
