@@ -13,7 +13,7 @@ There are currently 4 prebuilt Debian based Docker images in the [quay.io/coreos
 
 **Note**: there are Alpine based images which are automatically published along side the Debian images, but they cannot be used in conjunction with the systemd input plugin, because Alpine has no `libsystemd` package available.
 
-The source of these docker images can be found at [coreos/fluentd-kubernetes-daemonset][github-coreos-fluentd] on Github.
+For source information, use the tectonic_logging branch found at [coreos/fluentd-kubernetes-daemonset][github-coreos-fluentd] on Github.
 
 To use one of these images, update the `image` field in your [fluentd-ds.yaml][fluentd-ds] manifest, and update your [fluentd-configmap.yaml][fluentd-config] `output.conf` with the correct match configuration for your configured output plugin.
 
