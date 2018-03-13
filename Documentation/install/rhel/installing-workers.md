@@ -151,7 +151,13 @@ Clock synchronization is important for Tectonic, as it relies heavily on TLS cer
 
 ### Enable and start the service
 
-This process is the same as with all systemd hosts. The service as installed by the `tectonic-worker` RPM is called `kubelet`. It can be started with the command:
+This process is the same as with all systemd hosts. The service as installed by the `tectonic-worker` RPM is called `kubelet`. First, disable swapping on the RHEL operating system:
+
+```
+sudo swapoff -a
+```
+
+Then start the kubelet:
 
 ```
 $ sudo systemctl start kubelet.service
