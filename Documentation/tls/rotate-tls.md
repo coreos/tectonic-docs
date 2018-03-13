@@ -458,8 +458,6 @@ operations. Log out and back into Tectonic Console to verify everything is worki
 
 ## etcd
 
-__!!! WARNING: THIS SECTION IS A WORK IN PROGRESS !!!__
-
 There are several TLS certificates to be managed when administering an etcd
 cluster. This example will generate a new CA certificate and use this CA to generate new self-signed certificates for each of the components
 in the etcd cluster.
