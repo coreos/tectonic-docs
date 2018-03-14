@@ -16,7 +16,7 @@ $ kubectl get configmaps/tectonic-config -o yaml
 
 Upgrade each Node in the cluster one by one via SSH. In most cases, the worker Nodes will need to be accessed through a bastion host.
 
-Use kubectl or the Console to obtain a list of IP addresses for each node. For each, run these commands:
+Use kubectl or the Console to obtain a list of IP addresses for each Node. For each, run these commands:
 
 1. Update `/etc/kubernetes/kubelet.env` to match the version of the cluster
 2. Restart the Kubelet with `sudo systemctl restart kubelet.service`
