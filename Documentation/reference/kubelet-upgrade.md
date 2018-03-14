@@ -9,8 +9,13 @@ To upgrade the Kubelet manually, this version string can be updated by hand.
 When updating the Kubelet, first upgrade the cluster to the latest available version. Afterwards, find the current version of the cluster in order to match the Kubelet versions with it.
 
 ```
-$ kubectl get configmaps/tectonic-config -o yaml
+$ kubectl --namespace=tectonic-system get configmap/tectonic-config -o jsonpath="{..data.tectonicVersion}"
+1.8.4-tectonic.3
 ```
+
+On the above cluster, pay attention to the `1.8.4` part only, and cross reference that with the [available versions on Quay.io][hyperkube], like `v1.8.4_coreos.0`.
+
+[hyperkube]: https://quay.io/repository/coreos/hyperkube?tag=latest&tab=tags
 
 ## Upgrade each Node
 
