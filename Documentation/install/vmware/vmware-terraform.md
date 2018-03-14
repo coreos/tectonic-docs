@@ -12,7 +12,7 @@ Generally, the VMware platform templates adhere to the standards defined by the 
 4. In the *Virtual Machine Configuration* view select "vApp Options" tab and un-check "Enable vApp Options".
 5. Convert the Container Linux image into a Virtual Machine template.
 6. Pre-allocate IP addresses for the cluster and create DNS records.
-7. Configure an existing Load Balancer for Tectonic. For an example setup, see [Using F5 BIG-IP LTM with Tectonic][using-f5].  This LB should proxy all requests on port 80 to port 32001 at the worker nodes and 443 requests to 32000.
+7. Configure an existing Load Balancer for Tectonic. For an example setup, see [Using F5 BIG-IP LTM with Tectonic][using-f5]. This LB should proxy all requests on port 80 to port 32001 at the worker nodes and 443 requests to 32000.
 
 ### DNS and IP address allocation
 
@@ -33,7 +33,7 @@ Create required DNS records before beginning setup. The following table lists 3 
 |mycluster-etcd-1.mycompany.com | A | 192.168.246.11 |
 |mycluster-etcd-2.mycompany.com | A | 192.168.246.12 |
 
-See [Tectonic on Baremetal DNS documentation][baremetaldns] for general DNS Requirements.  If you do *not* use a load balancer to route traffic to the tectonic ingress - and instead round-robin DNS - you will need to set the `ingress_kind` for the tectonic module in `platforms/vmware/tectonic.tf` to `HostPort` instead of `NodePort`.
+See [Tectonic on Baremetal DNS documentation][baremetaldns] for general DNS Requirements. If you do *not* use a load balancer to route traffic to the tectonic ingress - and instead round-robin DNS - you will need to set the `ingress_kind` for the tectonic module in `platforms/vmware/tectonic.tf` to `HostPort` instead of `NodePort`.
 
 ### Create a CoreOS account
 
