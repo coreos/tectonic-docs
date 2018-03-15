@@ -33,7 +33,7 @@ Create required DNS records before beginning setup. The following table lists 3 
 |mycluster-etcd-1.mycompany.com | A | 192.168.246.11 |
 |mycluster-etcd-2.mycompany.com | A | 192.168.246.12 |
 
-See [Tectonic on Baremetal DNS documentation][baremetaldns] for general DNS Requirements. If you do *not* use a load balancer to route traffic to the tectonic ingress - and instead round-robin DNS - you will need to set the `ingress_kind` for the tectonic module in `platforms/vmware/tectonic.tf` to `HostPort` instead of `NodePort`.
+See [Tectonic on Baremetal DNS documentation][baremetaldns] for general DNS Requirements. If you round-robin DNS, and do not use a load balancer to route traffic to Tectonic ingress, you must set `ingress_kind` for the Tectonic module in `platforms/vmware/tectonic.tf` to `HostPort`, rather than `NodePort`.
 
 ### Create a CoreOS account
 
