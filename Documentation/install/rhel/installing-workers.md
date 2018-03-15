@@ -28,6 +28,10 @@ Deploy a Tectonic worker atop Red Hat Enterprise Linux using the process outline
 
 Deploy RHEL. Any standard deployment technique may be used, including an optical disk installation, a netbooted installation, or an image based deployment (standard for VMWare and OpenStack). Use a minimal install for the base environment. For more information, see the [Red Hat Enterprise Linux Install Documentation][rhel-install].
 
+### Enable IP forwarding
+
+Since Docker 1.13, Docker sets the iptables forwarding policy to `DROP` unless IP forwarding is enabled which can have adverse effects on certain pods. IP forwarding can be enabled by writing `net.ipv4.ip_forward = 1` to a file like `/etc/sysctl.d/50-docker-forward.conf` and rebooting. Run `sysctl -w net.ipv4.ip_forward=1` to enable it for the currently running system before Docker starts, or run `iptables -P FORWARD ACCEPT` to reset the policy after Docker has started without the sysctl setting in place.
+
 ### Enable "extras" repo
 
 Once basic installation of a host is complete, ensure that the additional Red Hat Enterprise Linux repository `extras` is included. Use `subscription-manager` to include the repo:
