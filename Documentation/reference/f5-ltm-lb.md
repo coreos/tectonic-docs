@@ -47,7 +47,7 @@ Create an F5 LTM Pool for the API Server:
 Create an F5 LTM Pool for Tectonic console:
 1. From *Local Traffic > Pools*, click *Create*.
 2. Enter *Name: tectonic_console_443*.
-3. Under *New Members* add the IP address of all WORKER nodes (for example: `192.168.1.112` and `192.168.1.113`) and set *Service Port* to *443 / HTTPS*.
+3. Under *New Members* add the IP address of all WORKER nodes (for example: `192.168.1.112` and `192.168.1.113`) and set *Service Port* to *443 / HTTPS*. Note for VMware users: the tectonic ingress service uses `nodePort`, not `hostPort` so set the Service Port to 32000 instead of 443.
 4. Click *Finish* (leaving the rest of the settings at their default).
 
 ## Create F5 Virtual Servers
