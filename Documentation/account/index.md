@@ -1,7 +1,5 @@
 # Getting started with CoreOS Tectonic
 
-The easiest way to learn about Tectonic is to [download and install Tectonic Sandbox][install-sandbox]. This allows you to deploy Tectonic on your local machine, and evaluate the full functionality of Tectonic and Tectonic Console.
-
 When you’re ready to create a production ready cluster, follow these instructions to create an account, and spin up a free 10-node cluster.
 
 ## Create a CoreOS account
@@ -46,4 +44,3 @@ Installation requires the CoreOS License and Pull Secret described above. Be cer
 [bare-tf]: ../install/bare-metal/index.md
 [account-login]: https://account.coreos.com/login
 [account-overview]: create-account.md#coreos-account-license-and-pull-secret
-[install-sandbox]: https://coreos.com/tectonic/sandbox

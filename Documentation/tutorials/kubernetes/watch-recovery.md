@@ -16,7 +16,7 @@ The same logic is applied to all desired states, with any impacted component rea
 
 ## Set up a test workload
 
-First, make sure you are running a sample app. Follow the [Tectonic Sandbox tutorials][first-app] to launch a simple app, or use one of your own.
+First, make sure you are running a sample app. Follow the [Tectonic on AWS tutorials][first-app] to launch a simple app, or use one of your own.
 
 The API server acts as the brains of the cluster and is run as a Deployment with multiple [Pods][pods] to ensure High Availability. Each Deployment runs on a master node. To demonstrate the automated recovery process of a Kubernetes cluster, we will first intentionally kill a copy of the API server on the running app, and then simulate a node failure. After each of these, we will watch as the cluster recovers.
 
@@ -102,18 +102,16 @@ $ ps aux | grep kube
 This guide served as a basic introduction to Kubernetes, and the power of Tectonic to manage your clusters. To dig more deeply into the sophistication of these systems, browse both the [Kubernetes][k8s-doc] and the [Tectonic][tectonic-doc] documentation.
 
 Suggested topics:
-* [Using Tectonic Sandbox to launch and evaluate a Kubernetes cluster locally][using-sandbox]
 * [Managing resources for containers][managing-resources]
 * [Managing memory requests for namespaces][managing-memory]
 * [Autoscaling the number of Pods][autoscaling-pods]
 
 
 [autoscaling-pods]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale
-[first-app]: ../sandbox/first-app.md
+[first-app]: ../aws/first-app.md
 [hardway]: https://github.com/kelseyhightower/kubernetes-the-hard-way
 [k8s-doc]: https://kubernetes.io/docs/home
 [pods]: https://coreos.com/kubernetes/docs/latest/pods.html
 [managing-resources]: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container
 [managing-memory]: https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace
 [tectonic-doc]: https://coreos.com/tectonic/docs/latest
-[using-sandbox]: https://coreos.com/tectonic/sandbox
