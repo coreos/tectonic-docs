@@ -10,11 +10,13 @@ First, add the required flags:
 
 ```
 $ sudo vim /etc/systemd/system/etcd-member.service.d/40-etcd-cluster.conf
+```
 
-  # Add the following flags:
+Add the following flags:
 
-  --trusted-ca-file=/etc/ssl/etcd/ca.crt \
-  --client-cert-auth=true \
+```
+--trusted-ca-file=/etc/ssl/etcd/ca.crt \
+--client-cert-auth=true \
 ```
 
 Then, reload and restart the unit:
