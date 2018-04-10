@@ -26,7 +26,7 @@ Next, navigate to the cluster state directory written to the extracted `tectonic
 ```bash
 # Replace <os> with darwin or linux
 # Replace <CLUSTERNAME> with a string like mytectonic_2017-05-03_11-41-02
-$ cd tectonic_1.7.14-tectonic.2/tectonic-installer/<os>/clusters/<CLUSTERNAME>
+$ cd tectonic_1.8.9-tectonic.2/tectonic-installer/<os>/clusters/<CLUSTERNAME>
 $ export PATH=$(pwd)/../..:$PATH	# Add Installer's terraform binary to PATH
 ```
 
