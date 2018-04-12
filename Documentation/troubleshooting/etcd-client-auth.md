@@ -34,3 +34,9 @@ $ ETCDCTL_API=3 etcdctl \
 --endpoints=https://127.0.0.1:2379 \
 get / --prefix --keys-only
 ```
+
+Once client auth is enabled on the etcd nodes, passing in an unauthenticated request will return:
+
+```
+Error: context deadline exceeded
+```
