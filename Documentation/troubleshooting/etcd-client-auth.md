@@ -29,5 +29,14 @@ $ sudo systemctl restart etcd-member
 Finally, confirm that each instance rejects unauthenticated requests:
 
 ```
-$ ETCDCTL_API=3 etcdctl \ --cacert /etc/ssl/etcd/ca.crt \ --endpoints=https://127.0.0.1:2379 \ get / --prefix --keys-only
+$ ETCDCTL_API=3 etcdctl \
+--cacert /etc/ssl/etcd/ca.crt \
+--endpoints=https://127.0.0.1:2379 \
+get / --prefix --keys-only
+```
+
+Once client auth is enabled on the etcd nodes, passing in an unauthenticated request will return:
+
+```
+Error: context deadline exceeded
 ```
