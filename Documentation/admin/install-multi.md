@@ -11,6 +11,34 @@ Use Tectonic's multi-cluster registry to:
 
 Use this guide to install and configure the registry.
 
+## Install the registry
+
+First, install the multi-cluster registry by downloading and applying the example manifest:
+* [multicluster.yaml][multicluster-manifest]
+
+Once downloaded, use `kubectl apply` to install the registry:
+
+```
+kubectl apply --record -f <url to multicluster.yaml>
+```
+
+Check that the sync software deployed successfully:
+
+```
+kubectl get deployments -n tectonic-system -l app=directory-sync
+NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+directory-sync   1         1         1            1           39s
+```
+
+After the sync software starts, it should load the cluster list into the replica cluster:
+
+```
+kubectl get clusters
+NAME                    AGE
+west-coast-production   10s
+east-coast-production   10s
+```
+
 ## Set up the directory cluster
 
 Select one of your clusters to be the "directory cluster", which is the cluster that is the source of truth for your policies. Other clusters will be configured to connect to this one. Check that kubectl is set up correctly and can talk to the cluster:
@@ -133,34 +161,6 @@ Upload the kubeconfig that was just downloaded as a secret, for the syncer to us
 kubectl -n tectonic-system create secret generic \
     directory-sync --from-file=kubeconfig=/path/to/sa-east-coast-production-token-<id>-<clustername>-kubeconfig
 secret "tectonic-multi-cluster-local-sync" created
-```
-
-## Install the registry
-
-Install the multi-cluster registry by downloading and applying the example manifest:
-* [multicluster.yaml][multicluster-manifest]
-
-Once downloaded, use `kubectl apply` to install the registry:
-
-```
-kubectl apply --record -f <url to multicluster.yaml>
-```
-
-Check that the sync software deployed successfully:
-
-```
-kubectl get deployments -n tectonic-system -l app=directory-sync
-NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-directory-sync   1         1         1            1           39s
-```
-
-After the sync software starts, it should load the cluster list into the replica cluster:
-
-```
-kubectl get clusters
-NAME                    AGE
-west-coast-production   10s
-east-coast-production   10s
 ```
 
 ## De-register a cluster
