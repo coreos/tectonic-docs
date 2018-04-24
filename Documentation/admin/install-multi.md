@@ -19,7 +19,7 @@ First, install the multi-cluster registry by downloading and applying the exampl
 Once downloaded, use `kubectl apply` to install the registry:
 
 ```
-kubectl apply --record -f <url to multicluster.yaml>
+kubectl apply --record -f <path/to/multicluster.yaml>
 ```
 
 Check that the sync software deployed successfully:
