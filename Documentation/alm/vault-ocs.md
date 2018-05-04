@@ -92,6 +92,6 @@ Use the Vault Service’s YAML manifest to obtain the clientSecret and serverSec
 For more information, see [Configuring Vault nodes][configure-vault].
 
 
-[configure-vault]: https://github.com/coreos-inc/vault-operator/blob/master/doc/user/vault.md#writing-secrets-to-the-active-node
+[configure-vault]: https://github.com/coreos/vault-operator/blob/master/doc/user/vault.md#writing-secrets-to-the-active-node
 [vault-cli]: https://www.vaultproject.io/docs/install/index.html
 [using-ocs]: using-ocs.md
