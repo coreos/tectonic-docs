@@ -170,9 +170,9 @@ Make sure a current version of either the Google Chrome or Mozilla Firefox web b
 Download [Tectonic Installer][latest-tectonic-release].
 
 ```sh
-wget https://releases.tectonic.com/releases/tectonic_1.8.9-tectonic.2.zip
-unzip tectonic_1.8.9-tectonic.2.zip
-cd tectonic_1.8.9-tectonic.2/tectonic-installer
+wget https://releases.tectonic.com/releases/tectonic_1.9.6-tectonic.1.zip
+unzip tectonic_1.9.6-tectonic.1.zip
+cd tectonic_1.9.6-tectonic.1/tectonic-installer
 ```
 
 Run the Tectonic Installer for your platform:
@@ -225,7 +225,7 @@ After the installer is complete, you'll have a Tectonic cluster and be able to a
 [copr-repo]: https://copr.fedorainfracloud.org/coprs/g/CoreOS/matchbox/
 [coreos-release]: https://coreos.com/releases/
 [daemonset]: http://kubernetes.io/docs/admin/daemons/
-[latest-tectonic-release]: https://releases.tectonic.com/releases/tectonic_1.8.9-tectonic.2.zip
+[latest-tectonic-release]: https://releases.tectonic.com/releases/tectonic_1.9.6-tectonic.1.zip
 [matchbox-config]: https://coreos.com/matchbox/docs/latest/config.html
 [matchbox-dnsmasq]: https://github.com/coreos/matchbox/tree/master/contrib/dnsmasq
 [matchbox]: https://coreos.com/matchbox
