@@ -142,7 +142,7 @@ Create a file named `simple-deployment.yaml` using the YAML content listed below
 <a name="simple-deployment"></a>`simple-deployment.yaml`:
 
 ```yaml
-apiVersion: apps/v1beta2
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: simple-deployment
