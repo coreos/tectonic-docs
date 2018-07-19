@@ -98,13 +98,6 @@ data:
     </match>
 
   general.conf: |
-    # Prevent fluentd from handling records containing its own logs. Otherwise
-    # it can lead to an infinite loop, when error in sending one message generates
-    # another message which also fails to be sent and so on.
-    <match fluent.**>
-      type null
-    </match>
-
     # Used for health checking
     <source>
       @type http
@@ -213,6 +206,14 @@ data:
     </source>
 
   kubernetes-filter.conf: |
+    # Prevent fluentd from handling records containing fluentd logs.
+    # Allowing this access can lead to an infinite loop, in which an
+    # error in sending one message generates another message which
+    # also fails to be sent, and so on.
+    <match kubernetes.var.log.containers.fluentd**>
+      type null
+    </match>
+
     # Query the API for extra metadata.
     <filter kubernetes.**>
       type kubernetes_metadata
@@ -255,25 +256,16 @@ data:
     </filter>
 
   apiserver-audit-input.conf: |
-    # Example:
-    # 2017-02-09T00:15:57.992775796Z AUDIT: id="90c73c7c-97d6-4b65-9461-f94606ff825f" ip="104.132.1.72" method="GET" user="kubecfg" as="<self>" asgroups="<lookup>" namespace="default" uri="/api/v1/namespaces/default/pods"
-    # 2017-02-09T00:15:57.993528822Z AUDIT: id="90c73c7c-97d6-4b65-9461-f94606ff825f" response="200"
+    # Audit logging must be enabled, otherwise this is skipped as the file is
+    # not present. This file will be present only on master nodes.
+    # Reference: https://kubernetes.io/docs/tasks/debug-application-cluster/audit/
     <source>
       type tail
-      format multiline
-      multiline_flush_interval 5s
-      format_firstline /^\S+\s+AUDIT:/
-      # Fields must be explicitly captured by name to be parsed into the record.
-      # Fields may not always be present, and order may change, so this just looks
-      # for a list of key="\"quoted\" value" pairs separated by spaces.
-      # Unknown fields are ignored.
-      # Note: We can't separate query/response lines as format1/format2 because
-      #       they don't always come one after the other for a given query.
-      format1 /^(?<time>\S+) AUDIT:(?: (?:id="(?<id>(?:[^"\\]|\\.)*)"|ip="(?<ip>(?:[^"\\]|\\.)*)"|method="(?<method>(?:[^"\\]|\\.)*)"|user="(?<user>(?:[^"\\]|\\.)*)"|groups="(?<groups>(?:[^"\\]|\\.)*)"|as="(?<as>(?:[^"\\]|\\.)*)"|asgroups="(?<asgroups>(?:[^"\\]|\\.)*)"|namespace="(?<namespace>(?:[^"\\]|\\.)*)"|uri="(?<uri>(?:[^"\\]|\\.)*)"|response="(?<response>(?:[^"\\]|\\.)*)"|\w+="(?:[^"\\]|\\.)*"))*/
-      time_format %FT%T.%L%Z
       path /var/log/kubernetes/kube-apiserver-audit.log
       pos_file /var/log/kube-apiserver-audit.log.pos
       tag kube-apiserver-audit
+      format json
+      read_from_head true
     </source>
 
   output.conf: |
