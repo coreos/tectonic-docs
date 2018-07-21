@@ -58,12 +58,12 @@ spec:
   nodeName:
   containers:
     - command:
-    - ./hyperkube
-    - scheduler
-    - --leader-elect=true
-    image: quay.io/coreos/hyperkube:v1.8.4_coreos.0
-    imagePullPolicy: IfNotPresent
-    name: kube-scheduler
+      - ./hyperkube
+      - scheduler
+      - --leader-elect=true
+      image: quay.io/coreos/hyperkube:v1.8.4_coreos.0
+      imagePullPolicy: IfNotPresent
+      name: kube-scheduler
 ```
 
 Then, get the name of the master node:
@@ -83,12 +83,12 @@ spec:
   nodeName: <master-node-name-returned-above>
   containers:
     - command:
-    - ./hyperkube
-    - scheduler
-    - --leader-elect=true
-  image: quay.io/coreos/hyperkube:v1.8.4_coreos.0
-  imagePullPolicy: IfNotPresent
-  name: kube-scheduler
+      - ./hyperkube
+      - scheduler
+      - --leader-elect=true
+     image: quay.io/coreos/hyperkube:v1.8.4_coreos.0
+     imagePullPolicy: IfNotPresent
+     name: kube-scheduler
 ```
 
 Use kubectl create to inject the pod into the cluster:
@@ -130,12 +130,12 @@ spec:
   nodeName:
   containers:
     - command:
-    - ./hyperkube
-    - controller-manager
-    - --leader-elect=true
-    image: quay.io/coreos/hyperkube:v1.8.4_coreos.0
-    imagePullPolicy: IfNotPresent
-    name: kube-controller-manager
+      - ./hyperkube
+      - controller-manager
+      - --leader-elect=true
+      image: quay.io/coreos/hyperkube:v1.8.4_coreos.0
+      imagePullPolicy: IfNotPresent
+      name: kube-controller-manager
 ```
 Get the name of the master node:
 
@@ -156,12 +156,12 @@ spec:
   nodeName: <master-node-name-returned-above>
   containers:
     - command:
-    - ./hyperkube
-    - controller-manager
-    - --leader-elect=true
-  image: quay.io/coreos/hyperkube:v1.8.4_coreos.0
-  imagePullPolicy: IfNotPresent
-  name: kube-controller-manager
+      - ./hyperkube
+      - controller-manager
+      - --leader-elect=true
+      image: quay.io/coreos/hyperkube:v1.8.4_coreos.0
+      imagePullPolicy: IfNotPresent
+      name: kube-controller-manager
 ```
 
 And finally, inject the pod into the cluster:
