@@ -2,8 +2,6 @@
 
 Use this guide to manually install a Tectonic cluster on an AWS account. To install Tectonic on AWS with a graphical installer instead, refer to the [AWS graphical installer documentation][aws-gui].
 
-Generally, the AWS platform templates adhere to the standards defined by the project [conventions][conventions] and [generic platform requirements][generic]. This document aims to document the implementation details specific to the AWS platform.
-
 ## Prerequsities
 
 * **CoreOS Account**: Register for a [CoreOS Account][account-login], which provides free access for up to 10 nodes on Tectonic. You must provide the account's License and Pull Secret (available from the account Overview page) during installation.
@@ -60,35 +58,13 @@ $ unzip tectonic_1.8.9-tectonic.3.zip
 $ cd tectonic_1.8.9-tectonic.3
 ```
 
-### Initialize and configure Terraform
-
-Add the `terraform` binary to our `PATH`. The platform should be `darwin` or `linux`.
+Add the installer to your path:
 
 ```bash
-$ export PATH=$(pwd)/tectonic-installer/darwin:$PATH # Put the `terraform` binary on the PATH
+$ export PATH=$(pwd)/tectonic-installer/tectonic:$PATH
 ```
 
-Download the Tectonic Terraform modules.
-
-```bash
-$ terraform init platforms/aws
-Downloading modules...
-Get: modules/aws/vpc
-Get: modules/aws/etcd
-Get: modules/aws/ignition
-Get: modules/aws/master-asg
-Get: modules/aws/ignition
-Get: modules/aws/worker-asg
-Get: modules/bootkube
-Get: modules/tectonic
-Get: modules/net/flannel-vxlan
-Get: modules/net/calico-network-policy
-
-Initializing provider plugins...
-   Checking for available provider plugins on https://releases.hashicorp.com...
-```
-
-Terraform will download any available plugins, and report when initialization is complete.
+## Configure cloud credentials
 
 Configure your AWS credentials. See the [AWS docs][env] for details.
 
@@ -103,24 +79,74 @@ Set your desired region:
 $ export AWS_REGION=
 ```
 
-Next, specify the cluster configuration.
+## Create a new cluster
+
+Tectonic is installed with a CLI tool called `tectonic`. Under the hood, it installs clusters by executing two different steps. First, a set of manifests that represents your cluster are generated, based on your configuration file. Second, those generated manifests are used to talk to AWS APIs to start the cluster infrastructure. The shorthand `install`, which we'll use below, executes these steps one after the other.
+
+First, create a new cluster workspace and give it a name:
+
+```bash
+$ tectonic cluster new example --template=aws
+Created cluster "example"
+Created configuration clusters/example/tectonic-install-config.yaml from "aws" template
+```
+
+Inside of the clusters directory, there is a new folder called `example` with a minimal AWS configuration.
 
 ## Customize the deployment
 
-Customizations to the base installation live in `examples/terraform.tfvars.aws`. Export a variable that will be your cluster identifier:
+Open `tectonic-install-config.yaml` and you should a minimal set of AWS configuration options:
 
-```bash
-$ export CLUSTER=my-cluster
+```yaml
+Version: 1.0
+Name: example
+Platform: aws
+DNS:
+  BaseDomain: tectonic.example.com
+Nodes:
+  Etcd:
+    Count: 3
+    aws:
+      instanceType: m3.medium
+      storageType: ssd
+      storageSize: 30gb
+  Masters:
+    count: 2
+    aws:
+      instanceType: m3.medium
+      storageType: ssd
+      storageSize: 30gb
+  Workers:
+    count: 5
+    aws:
+      instanceType: m3.medium
+      storageType: ssd
+      storageSize: 30gb
+Licensing:
+  LicensePath: /path/to/license
+  PullSecretPath: /path/to/pullsecret
+Credentials:
+  AdminEmail: admin@example.com
+  AdminPasswordHash: abc123abc123
 ```
 
-Create a build directory to hold your customizations and copy the example file into it:
+### Set DNS options
 
-```bash
-$ mkdir -p build/${CLUSTER}
-$ cp examples/terraform.tfvars.aws build/${CLUSTER}/terraform.tfvars
-```
+By default, Tectonic uses AWS Route53 for DNS. Configure the `BaseDomain` value with a domain that is already configured in Route 53. [Other DNS options (DOCS NEEDED)][other-dns] are also available.
 
-Edit the parameters with your AWS details, domain name, license, etc. [View all of the AWS specific options][aws-vars] and [the common Tectonic variables][vars].
+### Set Node options
+
+Tectonic has three different types of Nodes that make up the cluster. All will be provisioned automatically in AWS based on your desired `count` and instance parameters.
+
+| Type | Count | Description |
+|:-----|:------|:------------|
+| etcd | 1-9 <br/> 3 (default) | Nodes dedicated to running etcd, the multi-master brains of your cluster. |
+| masters | At least 1 <br/> 2 (default) | Nodes dedicated to running the cluster's control plane. At least two allows for high availability. API throughput is scaled here. |
+| worker | At least 1 <br/> 2 (default) | These nodes run your workloads. Tectonic will automatically spread out your apps over the available set of Nodes and automatically handle failover. |
+
+**COMING IN FUTURE**
+* Ability to set ignition profiles per node
+* Ability to label these nodes
 
 ### Add custom TLS certificates
 
@@ -129,6 +155,8 @@ By default, Tectonic will generate self-signed certificates at install time. To 
 For more information, see [Transport Layer Security (TLS) Certificates][tls-certs].
 
 ### Set Console login secrets
+
+**THESE NEED TO BE UPDATED**
 
 Set these sensitive values in the environment. The `tectonic_admin_password` will be encrypted before storage or transport:
 
@@ -144,34 +172,51 @@ $ export TF_VAR_tectonic_admin_password="pl41nT3xt"
 
 ## Deploy the cluster
 
-Test out the plan before deploying everything:
-
-```bash
-$ terraform plan -var-file=build/${CLUSTER}/terraform.tfvars platforms/aws
-```
-
-Next, deploy the cluster:
-
-```bash
-$ terraform apply -var-file=build/${CLUSTER}/terraform.tfvars platforms/aws
-```
+The cluster is now ready to be installed. Your configuration values will be checked prior to creating the infrastructure.
 
 This will run for a little bit. When complete, your Tectonic cluster will be ready.
 
+```bash
+$ tectonic install
+Cluster workspace is "example"
+Checking cluster configuration from clusters/example/tectonic-install-config.yaml
+Generating manifests
+  Operator manifests
+  Cluster certificate authority
+  TLS certificates for etcd
+  TLS certificates for control plane
+  ...
+Creating infrastructure
+  Running terraform init
+  Running terraform plan
+  ...
+Successfully booted Tectonic cluster "example". Access your cluster at https://tectonic.example.com. All configuration for your cluster was saved in clusters/example/. This directory contains sensitive credentials and should be protected. You can use the kubeconfig file there for root access to the cluster using kubectl.
+```
+
 ## Access the cluster
 
-The Tectonic Console will be up and running after the containers have downloaded. Access it at the DNS name `https://<tectonic_cluster_name>.<tectonic_base_domain>`, configured in the `terraform.tfvars` variables file.
+The Tectonic Console will be up and running after the containers have downloaded. Access it at the DNS name `https://tectonic.example.com`.
 
-Inside of the `/generated` folder you should find any credentials, including the CA if generated, and a `kubeconfig`. Use these credentials to control the cluster with `kubectl`:
+Inside of the `example` cluster folder you should find any credentials, including the CA if generated, and a `kubeconfig`. Use these credentials to control the cluster with `kubectl`:
 
 ```bash
-$ export KUBECONFIG=generated/auth/kubeconfig
+$ export KUBECONFIG=clusters/example/auth/kubeconfig
 $ kubectl cluster-info
 ```
 
 ## Work with the cluster
 
 For more information on working with installed clusters, see [Scaling Tectonic AWS clusters][scale-aws], and [Uninstalling Tectonic][uninstall].
+
+## Optional customizations
+
+### Swap modules
+
+Needs docs for PowerDNS, etc
+
+### Making manifest changes before installation
+
+Needs docs to change something
 
 ## Known issues and workarounds
 
