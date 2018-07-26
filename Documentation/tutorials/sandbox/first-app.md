@@ -1,16 +1,20 @@
 
 # Deploying an application on Tectonic
 
-When Tectonic Sandbox [installation][installing] is complete, the terminal will display instructions for accessing Tectonic Console and `kubectl`. Log in to the Console, then use these instructions to deploy your first application.
+When Tectonic installation is complete, log in to Tectonic Console to set up cluster credentials, and deploy a simple application.
 
-This tutorial will:
-* Deploy a simple application using Tectonic Console.
-* Deploy the same application with `kubectl run`.
-* Deploy the same application using YAML manifests.
+This tutorial will reference "my-tectonic-console.com". Please use the URL appropriate to your environment.
+* For AWS and Microsoft Azure installations, Tectonic Console is available from "https://my-cluster.example.com".
+* For Sandbox installations, Tectonic Console is available from "https://console.tectonicsandbox.com".
 
 Applications may be deployed on Tectonic clusters both by using Tectonic Console, and by passing a YAML manifest file to the `kubectl create` CLI tool. Once deployed, scale and monitor the application using Tectonic Console.
 
-This tutorial will explore three useful Kubernetes concepts, `deployments`, `services`, and `ingress`.
+This tutorial will deploy a simple, stateless website for a local bakery called "The Cookie Shop" to illustrate how to:
+* Set up credentials to work with a new Tectonic Kubernetes cluster.
+* Deploy a simple application using Tectonic Console.
+* Deploy the same application with `kubectl create`.
+
+In deploying this app, this tutorial will explore three useful Kubernetes concepts, `deployments`, `services`, and `ingress`.
 
 * [**Deployments:**][k8s-deployment] run multiple copies of a container across multiple nodes.
 * [**Services:**][k8s-service] provide an endpoint that load balances traffic to containers run by a deployment (usually internally).
@@ -18,19 +22,16 @@ This tutorial will explore three useful Kubernetes concepts, `deployments`, `ser
 
 ## Configuring credentials
 
-First, open Tectonic Console to download and configure `kubectl`.
+To configure credentials for your cluster, populate a `kubeconfig` file with valid authentication credentials, then configure `kubectl` to use them to connect to a Tectonic Cluster.
 
-Log in to Tectonic Console:
+First, log in to Tectonic Console with the username and password obtained during installation.
 
-1. Open a browser and visit [console.tectonicsandbox.com/][console].
-2. When prompted for a login, use "admin@example.com" and "sandbox" as the username and password.
+Then, authenticate and initiate `kubectl` download:
 
-Authenticate and initiate `kubectl` download:
-
-1. From Tectonic Console, click *Tectonic Admin > My Account* on the bottom left of the page.
+1. From Tectonic Console, click *username > My Account* on the bottom left of the page.
 2. Click KUBECTL: *Download Configuration*, and follow the onscreen instructions to authenticate.
 3. When the *Set Up kubectl* window opens, click *Verify Identity*.
-4. Enter username: *admin@example.com* and password: *sandbox*, and click *Login*.
+5. Enter the username and password again, and click *Login*.
 5. Copy the alphanumeric string on the *Login Successful* screen.
 6. Switch back to Tectonic Console, enter the string in the field provided, and click *Generate Configuration* to open the *Download kubectl Configuration* window.
 
@@ -54,44 +55,54 @@ $ mkdir -p ~/.kube/ # create the directory
 $ cp path/to/file/kubectl-config $HOME/.kube/config # rename the file and copy it into the directory
 ```
 
-Configure `kubectl`:
+### Sandbox only: configure kubectl
+
+After downloading and moving `kubectl` and `kubectl-config`, Tectonic Sandbox users must also configure `kubectl` to work locally on their machine. This section is not required for use with AWS or Microsoft Azure clusters.
 
 1. Open a terminal.
 2. Navigate to the *tectonic-sandbox* directory.
 3. If on Mac or Linux, run the following command: `export KUBECONFIG=$PWD/provisioning/etc/kubernetes/kubeconfig`
 4. If on Windows Powershell, run the following command: `$env:KUBECONFIG = "$PWD\provisioning\etc\kubernetes\kubeconfig"`
 
-### Deploying an app with Tectonic Console
+## Deploying an app with Tectonic Console
 
-This tutorial will deploy a simple, stateless website for a local bakery called "The Cookie Shop."
+As an example app, deploy a simple, stateless website for a local bakery called "The Cookie Shop."
 
-To deploy using Tectonic Console, copy and paste YAML file content into Tectonic Console to create Deployments, Services, and Ingress.
+To deploy using Tectonic Console, copy and paste YAML file content into Console to create Deployments, Services, and Ingress.
+
+In all examples, replace host: <MYHOST> with the URL for Tectonic Console.
+* Tectonic Sandbox: replace <MYHOST> with `console.tectonic.sandbox.com`
+* AWS or Microsoft Azure clusters: replace <MYHOST> with `my-cluster-example.com`
 
 First, deploy the sample app:
-1. In the console, go to *Workloads > Deployments*, and click *Create Deployment*.
+1. In Console, go to *Workloads > Deployments*, and click *Create Deployment*.
 2. A pane will open, showing a default YAML deployment file.
-3. Copy the contents of [simple-deployment.yaml](#simple-deployment), listed below, into the YAML pane, replacing its contents
+3. Copy the contents of [simple-deployment.yaml](#simple-deployment), listed below, into the YAML pane, replacing the pane's default content.
 4. Click *Create*.
 
-The Console will create your deployment, and display its *Overview* window.
+Tectonic will create your deployment, and display its *Overview* window.
 
 Then, add the service:
 1. Go to *Routing > Services*, and click *Create Service*.
-2. Copy the contents of [simple-service.yaml](#simple-service), listed below, into the pane, replacing the default content.
+2. Copy the contents of [simple-service.yaml](#simple-service) for your platform, listed below, into the pane, replacing the default content.
 3. Click *Create*.
 
-The Console will create the service, and display its *Overview* window.
+Tectonic will create the service, and display its *Overview* window.
+
+> NOTE: On AWS, Ingress is automatically generated when the Service is created. The following step, adding an Ingress resource, is not required for AWS clusters.
 
 Then, add the Ingress resource:
 1. Go to *Routing > Ingress*, and click *Create Ingress*.
-2. Copy the contents of [simple-ingress.yaml](#simple-ingress) into the pane, replacing the default content.
+2. Copy the contents of [simple-ingress.yaml](#simple-ingress), for your platform, into the pane, replacing the default content.
 3. Click *Create*.
 
-The Console will create the Ingress, and display its *Overview* window. Copy the *Host* and *Path* and combine them into a URL. [Visit the URL][check-work] to check your work.
+Tectonic will create the Ingress, and display its *Overview* window. Use the information provided to go visit the URL for the app, and check your work.
+* For Sandbox and Microsoft Azure, the URL will follow the format "https://<HOST>/<deployment-name". ("https://console.tectonicsandbox.com/simple-deployment/" for Sandbox.)
+* For AWS, use the listed *External Load Balancer* URL displayed to check your work. (It may take several minutes for AWS to update their ELB.)
 
-## Deploying an application from kubectl
+## Deleting an application using kubectl
 
-This example will use the simple app deployed above. To create an identical app, first delete the existing app using `kubectl delete`:
+The next example will use the simple app deployed above. To create an identical app, first delete the existing app using `kubectl delete`.
 
 ```sh
 $ kubectl delete deploy/simple-deployment svc/simple-service ing/simple-ingress
@@ -100,42 +111,22 @@ service "simple-service" deleted
 ingress "simple-ingress" deleted
 ```
 
-Use `kubectl run` to create both a Deployment and a Service object:
-
-```sh
-$ kubectl run simple-deployment --image=quay.io/coreos/example-app:v1.0 --port=80 --replicas=3 --labels="k8s-app=simple" --expose=true
-$ kubectl get svc,deploy
-NAME                    CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
-svc/kubernetes          10.3.0.1      <none>        443/TCP   2h
-svc/simple-deployment   10.3.105.68   <none>        80/TCP    13s
-
-NAME                       DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-deploy/simple-deployment   3         3         3            3           13s
-```
-
-Use `kubectl get svc,deploy` to review the running services and deployments just created.
-
-The app is now deployed, but not yet available to a browser interface. To expose the service, use the YAML manifests.
-
-First, use `kubectl get` to view the deployment above as a manifest:
-
-```sh
-$ kubectl get deployment/simple-deployment -o yaml
-```
-
-The output YAML demonstrates that the `kubectl run` command created a resource in the cluster (which may be returned as YAML or JSON). These files may be used to create new resources, and may be stored in git, making them easily versionable.
-
-Before moving on, remove the deployment just created using `kubectl delete`:
-
-```sh
-$ kubectl delete svc/simple-deployment deploy/simple-deployment
-```
-
-## Deploying an application from YAML
+## Deploying an application from kubectl
 
 The same application may also be deployed using `kubectl create` and YAML files.
 
-First, create three YAML files to define the Deployment, Service, and Ingress objects.
+For Microsoft Azure and Tectonic Sandbox:
+1. Create a simple Deployment.
+2. Create a simple Service.
+3. Create a simple Ingress.
+
+For AWS:
+1. Create a simple Deployment.
+2. Create a simple Service. (Creating the Service will connect to AWS Elastic Load Balancer for Ingress.)
+
+`simple-service.yaml` and `simple-ingress.yaml` will vary by platform. Please be certain to use the manifest appropriate to your platform: AWS, Microsoft Azure, or Tectonic Sandbox.
+
+### Create a platform-agnostic simple Deployment
 
 Create a file named `simple-deployment.yaml` using the YAML content listed below.
 
@@ -169,7 +160,19 @@ spec:
 
 The parameter `replicas: 3`, will create 3 running copies. `Image: quay.io/coreos/example-app:v1.0` defines the container image to run, hosted on [Quay.io][quay-repo].
 
-Copy the following into a file named `simple-service.yaml`. This file will be used to deploy the service.
+Use `kubectl create` to create the Deployment:
+
+```sh
+$ kubectl create -f simple-deployment.yaml
+deployment "simple-deployment" created
+$ kubectl get deployments
+NAME                          DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+deploy/simple-deployment      3         3         3            3           7m
+```
+
+### Create a simple Service for Sandbox and Microsoft Azure
+
+First, copy the following into a file named `simple-service.yaml`. This file will be used to deploy the service.
 
 <a name="simple-service"></a>`simple-service.yaml`:
 
@@ -190,7 +193,56 @@ spec:
 
 To connect the service to the containers run by the deployment, the deployment `containerPort` and the service `port` must match.
 
-Copy the following into a file named `simple-ingress.yaml`. This file will be used to create an Ingress resource to act as a local load balancer.
+Then, use `kubectl create` to deploy the service:
+
+```sh
+$ kubectl create -f simple-service.yaml
+service "simple-service" created
+$ kubectl get services -o wide
+NAME              CLUSTER-IP   EXTERNAL-IP    PORT(S)        AGE    SELECTOR
+simple-service    10.3.113.190 <pending>      80:30657/TCP   1d     k8s-app=simple
+```
+
+### Create a simple Service for AWS
+
+Creating a service for AWS both deploys the service, and configures Ingress.
+
+First, copy the following YAML into a file named `simple-service.yaml`.
+
+```yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: simple-service
+  namespace: default
+spec:
+  selector:
+    k8s-app: simple
+  ports:
+  - protocol: TCP
+    port: 80
+  type: LoadBalancer
+```
+
+To connect the Service to the containers run by the Deployment, the Deployment `containerPort` and the Service `port` must match.
+
+Then, use `kubectl create` to deploy the service:
+
+```sh
+$ kubectl create -f simple-service.yaml
+service "simple-service" created
+$ kubectl get services -o wide
+NAME                    CLUSTER-IP   EXTERNAL-IP                                                               PORT(S)        AGE       SELECTOR
+svc/simple-service     10.3.0.204   a9b5de374e28611e6945f02c590b59c5-2010998492.us-west-2.elb.amazonaws.com   80:32567/TCP   7m        app=simple
+```
+
+The manifest specifies the pods required for a replicated Deployment, and connects them to a Kubernetes [external load balancer service][k8s-svc-lb]. On AWS, this service connects to an [Elastic Load Balancer (ELB)][aws-elb] through which it is exposed to the internet.
+
+The `EXTERNAL-IP` column gives the DNS name of the externally routable port for the service.
+
+### Create simple Ingress for Sandbox and Microsoft Azure
+
+First, copy the following into a file named `simple-ingress.yaml`. This file will be used to create an Ingress resource to act as a local load balancer.
 
 <a name="simple-ingress"></a>`simple-ingress.yaml`:
 
@@ -207,7 +259,7 @@ metadata:
     ingress.kubernetes.io/use-port-in-redirects: "true"
 spec:
   rules:
-    - host: console.tectonicsandbox.com
+    - host: <MYHOST>
       http:
         paths:
           - path: /simple-deployment
@@ -218,33 +270,21 @@ spec:
 
 To connect the Service to Ingress, the Service `metadata.name` and the Ingress `spec.rules.http.paths.backend.serviceName` must match.
 
-Instantiate the cluster objects specified in the `simple-deployment.yaml`, `simple-service.yaml`, and `simple-ingress` manifests by passing the filepaths to `kubectl create`. Check that they were created successfully by listing out the objects afterwards:
-
-```sh
-$ kubectl create -f simple-deployment.yaml
-deployment "simple-deployment" created
-$ kubectl get deployments
-NAME                          DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-deploy/simple-deployment      3         3         3            3           7m
-```
-
-```sh
-$ kubectl create -f simple-service.yaml
-service "simple-service" created
-$ kubectl get services -o wide
-NAME              CLUSTER-IP   EXTERNAL-IP    PORT(S)        AGE    SELECTOR
-simple-service    10.3.113.190 <pending>      80:30657/TCP   1d     k8s-app=simple
-```
+Then, use `kubectl create` to deploy Ingress:
 
 ```sh
 $ kubectl create -f simple-ingress.yaml
 ingress "simple-deployment" created
 $ kubectl get ingress
 NAME                HOSTS                               ADDRESS   PORTS     AGE
-simple-deployment   console.tectonicsandbox.com                   80        24s
+simple-deployment   <MYHOST>                   80        24s
 ```
 
-This will deploy three replicas of the application. They'll be connected by a service, which is then exposed to the internet by the Ingress resource. Visit [console.tectonicsandbox.com/simple-deployment/][check-work] to confirm that the application is up and running.
+This will deploy three replicas of the application. They'll be connected by a service, which is then exposed to the internet by the Ingress resource.
+
+### View the deployment
+
+Visit "my-tectonic-console.com/simple-deployment/" to confirm that the application is up and running.
 
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
@@ -300,7 +340,6 @@ containers:
 
 [QE]: https://coreos.com/quay-enterprise/
 [check-app]: check-logs.md
-[check-work]: https://console.tectonicsandbox.com/simple-deployment/
 [edit-service]: ../img/walkthrough/edit-service.png
 [installing]: install.md
 [k8s-deployment]: https://kubernetes.io/docs/user-guide/deployments/
@@ -312,4 +351,3 @@ containers:
 [rolling-deployments]: rolling-deployments.md
 [scale-app]: scale-app.md
 [simple-app-a]: ../img/walkthrough/simple-app-a.png
-[console]: https://console.tectonicsandbox.com
