@@ -63,6 +63,18 @@ traceroute -T -p 443 <tectonic_cluster_name>.<tectonic_base_domain>
 
 This validates that the installer is able to establish a TCP connection with the Tectonic ingress ELB. This will validate DNS, IP routing and firewall rules between the installer and the Tectonic ingress ELB.
 
+* __module.dns.data.aws_route53_zone.tectonic: data.aws_route53_zone.tectonic: no matching Route53Zone found"__
+
+Deploying to an private Amazon Route 53 DNS zone using the `tectonic_aws_external_private_zone` parameter can result in failure to dectect the zone by the installer. This can be resolved by configuring Terraform Route 53 module with the `private_zone` parameter. 
+
+```
+# platform/aws/modules/dns/route53/tectonic.tf
+data "aws_route53_zone" "tectonic" {
+  name = "${var.base_domain}"
+  private_zone=true
+}
+```
+
 ## Domain name can't be changed
 
 The domain configured for Route 53 name service and the domain names selected for Tectonic and Controller DNS names during install cannot be easily changed later. If a cluster's domain name must change, set up a new cluster with the new domain name and migrate cluster work to it.
