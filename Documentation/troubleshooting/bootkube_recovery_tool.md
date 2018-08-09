@@ -88,11 +88,7 @@ Use the latest version of `bootkube` when using the `bootkube recover` command, 
 
 3. Change directory to navigate to the respective installer directory.
 
-4. Provide necessary permissions to the group `core` for the etcd backup file,  `backup.db`.
-
-    `$ sudo chown core:core /root/backup.db`
-
-5. Run `bootkube recover` with a flag corresponding to the current state of the cluster:  
+4. Run `bootkube recover` with a flag corresponding to the current state of the cluster:
 
     `$ sudo ./bootkube recover --recovery-dir=/home/core/recovered --etcd-backup-file=/root/backup.db --kubeconfig=/etc/kubernetes/kubeconfig`
 
@@ -129,7 +125,7 @@ Use the latest version of `bootkube` when using the `bootkube recover` command, 
       Writing asset: /home/core/recovered/auth/kubeconfig
       ```  
 
-6. Run `bootkube start` to reboot the cluster.
+5. Run `bootkube start` to reboot the cluster.
 
     `$ sudo ./bootkube start --asset-dir=/home/core/recovered`
 
@@ -198,7 +194,8 @@ Replace `FQDN` with the DNS record pointing to the etcd cluster, and set the pro
 If using self-hosted etcd, recovery is supported via reading from an etcd backup file:
 
 ```
-$ bootkube recover --recovery-dir=recovered --etcd-backup-file=backup --kubeconfig=/etc/kubernetes/kubeconfig
+$ sudo chown core:core /root/backup.db
+$ bootkube recover --recovery-dir=recovered --etcd-backup-file=/root/backup.db --kubeconfig=/etc/kubernetes/kubeconfig
 ```
 
 In addition to rebooting the control plane, this will also destroy and recreate the self-hosted etcd cluster by using the backup.
