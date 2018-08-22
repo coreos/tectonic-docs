@@ -12,7 +12,7 @@ To help you get up and running with Tectonic, we have designed these step-by-ste
  * 3.3. [Versioning an application][rolling-deploy]
  * 3.4. [Deleting an application][deleting-deployment]
 
-<a href="creating-aws.md" class="btn btn-primary btn-lg">Let's Get Started</a>
+<a href="creating-aws.html" class="btn btn-primary btn-lg">Let's Get Started</a>
 
 [creating-aws]: creating-aws.md
 [installing-tectonic]: installing-tectonic.md
