@@ -165,6 +165,6 @@ For a complete set of instructions, see [Tectonic Forum Issue #185][tectonic-185
 
 [vagrant]: https://www.vagrantup.com/downloads.html
 [virtualbox]: https://www.virtualbox.org/wiki/Downloads
-[sandbox-download-form]: https://coreos.com/tectonic/sandbox/
+[sandbox-download-form]: https://coreos.com/tectonic/releases/
 [first-app]: first-app.md
 [tectonic-185]: https://github.com/coreos/tectonic-forum/issues/185#issuecomment-327855946
